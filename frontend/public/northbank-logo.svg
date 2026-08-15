@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="56" viewBox="0 0 220 56">
+  <rect x="0" y="8" width="40" height="40" rx="10" fill="#C2703D"/>
+  <path d="M12 34 L20 18 L28 34" stroke="#ffffff" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="52" y="35" font-family="Helvetica Neue, Arial, sans-serif" font-size="22" font-weight="700" fill="#1a1a1a">Northbank</text>
+  <text x="52" y="35" font-family="Helvetica Neue, Arial, sans-serif" font-size="22" font-weight="400" fill="#C2703D" dx="108">Living</text>
+</svg>
