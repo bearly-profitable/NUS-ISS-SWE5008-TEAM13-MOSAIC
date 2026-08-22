@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { AnimatePresence } from "framer-motion";
-import { toast } from "sonner";
-import { Mail, Loader2, Sparkles, Pencil, Tag, ShieldCheck, ShieldAlert, ShieldX, ImageOff } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Mail, Loader2, Sparkles, Pencil, Tag, ShieldCheck, ShieldAlert, ShieldX } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ProcessPanel } from "@/components/ui/process-panel";
+import { useJob } from "@/hooks/use-job";
 import { useWorkspace } from "@/contexts/WorkspaceContext";
 import { SegmentEmailEditor } from "@/components/email-builder/SegmentEmailEditor";
 import { EmailPreview } from "@/components/email-builder/EmailPreview";
@@ -18,7 +18,10 @@ const VERDICT_META: Record<Verdict, { icon: typeof ShieldCheck; className: strin
 
 export default function EmailReview() {
   const { state, loading, error, refresh } = useWorkspace();
-  const [generating, setGenerating] = useState(false);
+  const { job, start, running } = useJob({
+    onDone: refresh,
+    successMessage: (j) => `Composed ${j.result?.count ?? 0} segment emails`,
+  });
   const [editingId, setEditingId] = useState<string | null>(null);
 
   const segments = state?.segments ?? [];
@@ -29,18 +32,7 @@ export default function EmailReview() {
 
   const editing = emails.find((e) => e.id === editingId) ?? null;
 
-  const handleGenerate = async () => {
-    setGenerating(true);
-    try {
-      const res = await generateEmails();
-      toast.success(`Composed ${res.emails.length} segment emails`);
-      await refresh();
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Email generation failed");
-    } finally {
-      setGenerating(false);
-    }
-  };
+  const handleGenerate = () => start(() => generateEmails());
 
   if (loading) return <div className="p-8 text-sm text-muted-foreground">Loading emails…</div>;
   if (error) return <div className="p-8 text-sm text-destructive">{error}</div>;
@@ -48,46 +40,29 @@ export default function EmailReview() {
   return (
     <div className="p-8 max-w-6xl mx-auto">
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="mb-6 flex items-start justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">Email Review</h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            One email per segment (max {state?.max_segments ?? 6}), composed to follow that segment's creative
-            direction. Every email is a real editable block layout — open the builder to change anything.
-          </p>
-        </div>
+        <h1 className="text-2xl font-bold tracking-tight">Email Review</h1>
         <Button
           onClick={handleGenerate}
-          disabled={generating || directions.length === 0}
+          disabled={running || directions.length === 0}
           className="gap-2 shrink-0"
         >
-          {generating ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
+          {running ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
           {emails.length ? "Regenerate all" : "Generate emails"}
         </Button>
       </motion.div>
 
-      {generating && (
-        <div className="glass-card p-4 mb-5 text-xs text-primary flex items-center gap-2">
-          <Loader2 className="h-3.5 w-3.5 animate-spin shrink-0" />
-          Composing one email per segment and running Guardian checks on each…
-        </div>
-      )}
+      <AnimatePresence>
+        {job && <ProcessPanel key="progress" job={job} title="Composing emails" />}
+      </AnimatePresence>
 
-      <div className="glass-card p-3 mb-5 flex items-start gap-2.5 text-[11px] text-muted-foreground">
-        <ImageOff className="h-3.5 w-3.5 shrink-0 mt-px" />
-        <span>
-          Hero images are intentionally left empty — no imagery is generated anywhere in this pipeline. Add one
-          yourself from the builder's upload or gallery if a segment needs it.
-        </span>
-      </div>
 
       {directions.length === 0 ? (
         <div className="glass-card p-8 text-center text-sm text-muted-foreground">
-          No creative direction yet — generate it in the Creative Review tab first. The composer needs a direction
-          to follow.
+          No creative direction yet — generate it in Creative Review first.
         </div>
       ) : emails.length === 0 ? (
         <div className="glass-card p-8 text-center text-sm text-muted-foreground">
-          No emails yet. Generate them to compose one per segment.
+          No emails yet.
         </div>
       ) : (
         <div className="grid grid-cols-2 gap-4">

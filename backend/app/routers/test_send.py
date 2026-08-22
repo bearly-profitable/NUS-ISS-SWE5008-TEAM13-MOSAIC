@@ -1,7 +1,10 @@
 """
-Sandboxed dispatch stub — per the proposal's assumptions, dispatch always
-goes to a sandboxed stub; no message ever reaches a real recipient. Backs
-frontend/src/services/emailApi.ts's sendTestEmail.
+Sandboxed dispatch stub, kept for the ported email builder's sendTestEmail
+(frontend/src/services/emailApi.ts) — it logs and discards.
+
+Real dispatch does *not* go through here. The Approval Queue sends via
+POST /api/emails/{id}/send in routers/workspace.py, which goes out through
+mailer.py and Resend to an actual inbox.
 """
 import logging
 

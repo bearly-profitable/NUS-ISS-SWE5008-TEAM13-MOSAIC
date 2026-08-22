@@ -77,9 +77,7 @@ export default function Logs() {
           </div>
           <div>
             <h1 className="text-2xl font-bold tracking-tight">Logs</h1>
-            <p className="text-sm text-muted-foreground">
-              Append-only. Your actions and every agent call, newest first — {entries.length} entries.
-            </p>
+            <p className="text-sm text-muted-foreground">{entries.length} entries</p>
           </div>
         </div>
         <Button variant="outline" size="sm" onClick={load} disabled={loading} className="gap-1.5 shrink-0">

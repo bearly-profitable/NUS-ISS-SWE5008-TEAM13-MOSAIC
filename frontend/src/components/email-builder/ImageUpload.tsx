@@ -1,20 +1,15 @@
 import { useRef, useState, useCallback, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { isImageFile, useFileDrop } from "@/hooks/use-file-drop";
 import { Upload, X, Images, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
-import { supabase } from "@/lib/supabase-client";
-import {
-  registerImageAsset,
-  listImageFolders,
-  type ImageFolder,
-} from "@/services/imageFoldersApi";
+import { uploadImageFile } from "@/lib/image-file-upload";
+import { listImageFolders, type ImageFolder } from "@/services/imageFoldersApi";
 import { FolderDestPicker } from "./FolderDestPicker";
 import { HeroGallery } from "./HeroGallery";
 
-const BUCKET = "email-images";
-const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 const MAX_IMG_RETRIES = 3;
 
 function retryImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
@@ -24,26 +19,6 @@ function retryImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
   img.dataset.retry = String(attempt + 1);
   const sep = img.src.includes("?") ? "&" : "?";
   img.src = img.src.replace(/[?&]_rt=\d+/, "") + `${sep}_rt=${Date.now()}`;
-}
-
-async function uploadToStorage(file: File, targetFolderId: string | null): Promise<string | null> {
-  const ext = file.name.split(".").pop() ?? "jpg";
-  const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-  const { error } = await supabase.storage.from(BUCKET).upload(path, file, {
-    contentType: file.type,
-    upsert: false,
-  });
-  if (error) return null;
-  const url = supabase.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
-  // Register in image_asset table — defaults to the currently viewed folder
-  registerImageAsset({
-    storagePath: path,
-    filename: file.name,
-    mimeType: file.type,
-    sizeBytes: file.size,
-    folderId: targetFolderId,
-  }).catch(() => { /* non-critical */ });
-  return url;
 }
 
 interface ImageUploadProps {
@@ -76,79 +51,31 @@ export function ImageUpload({ value, onChange }: ImageUploadProps) {
     setDestFolderName(name);
   }, []);
 
-  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    if (file.size > MAX_FILE_SIZE) {
-      toast.error(`File too large (${(file.size / 1024 / 1024).toFixed(1)}MB). Max is 10MB.`);
-      return;
-    }
-
+  const processFile = async (file: File) => {
     setUploading(true);
-    try {
-      const url = await uploadToStorage(file, destFolderId);
-      if (url) {
-        // Auto-compress GIF if over 5MB (Gmail won't load large GIFs)
-        const isGif = file.type === "image/gif" || file.name.toLowerCase().endsWith(".gif");
-        if (isGif && file.size > 5 * 1024 * 1024) {
-          toast.info("GIF is over 5MB — auto-compressing for email compatibility...", { duration: 4000 });
-          try {
-            const { ORCHESTRATOR_BASE } = await import("@/services/emailApi");
-            const resp = await fetch(`${ORCHESTRATOR_BASE}/api/gif-optimize`, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ imageUrl: url }),
-            });
-            if (resp.ok) {
-              const blob = await resp.blob();
-              const optimizedUrl = await uploadToStorage(
-                new File([blob], file.name, { type: "image/gif" }),
-                destFolderId,
-              );
-              if (optimizedUrl) {
-                onChange(optimizedUrl);
-                const savedMB = ((file.size - blob.size) / 1024 / 1024).toFixed(1);
-                toast.success(`GIF compressed (saved ${savedMB}MB). Email-safe!`);
-                setGalleryKey((k) => k + 1);
-                return;
-              }
-            }
-          } catch {
-            // Compression failed — use original (user was warned)
-          }
-          toast.warning("GIF compression failed — using original. It may not load in Gmail.", { duration: 6000 });
-        }
-        onChange(url);
-        toast.success(
-          destFolderName
-            ? `Image uploaded to "${destFolderName}"`
-            : "Image uploaded",
-        );
-        setGalleryKey((k) => k + 1);
-        return;
-      }
-    } catch {
-      // Fall through to base64
-    } finally {
-      setUploading(false);
+    const url = await uploadImageFile(file, { folderId: destFolderId, folderName: destFolderName });
+    setUploading(false);
+    if (url) {
+      onChange(url);
+      // Remount the gallery so the new file appears in it straight away.
+      setGalleryKey((k) => k + 1);
     }
-    // Fallback path: Supabase Storage upload failed (e.g. transient network
-    // error). Store the image as a base64 data: URI so the in-builder preview
-    // keeps working. On real email send (test or campaign), the resolver in
-    // `src/lib/email-image-urls.ts` will re-upload this blob to Supabase and
-    // rewrite it to a public https:// URL — so mobile Gmail still renders the
-    // image. We just warn the user about the local-only state.
-    const reader = new FileReader();
-    reader.onload = () => {
-      onChange(reader.result as string);
-      toast.warning(
-        "Supabase upload failed — image stored locally. It will be re-uploaded to public storage when you send.",
-        { duration: 6000 },
-      );
-    };
-    reader.readAsDataURL(file);
   };
+
+  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    // Clear the input so re-picking the same file after a failed upload still
+    // fires a change event.
+    e.target.value = "";
+    if (file) void processFile(file);
+  };
+
+  const { dragging, dropProps } = useFileDrop({
+    onFile: (file) => void processFile(file),
+    accept: isImageFile,
+    rejectMessage: "That isn't an image — drop a png, jpg, gif or webp",
+    disabled: uploading,
+  });
 
   const handleGallerySelect = useCallback((url: string) => {
     onChange(url);
@@ -256,13 +183,25 @@ export function ImageUpload({ value, onChange }: ImageUploadProps) {
               type="button"
               disabled={uploading}
               onClick={() => inputRef.current?.click()}
-              className="w-full flex flex-col items-center justify-center gap-2.5 py-6 rounded-xl border-2 border-dashed border-border/50 hover:border-primary/40 hover:bg-primary/[0.03] transition-all text-muted-foreground hover:text-foreground group disabled:opacity-60"
+              {...dropProps}
+              className={cn(
+                "w-full flex flex-col items-center justify-center gap-2.5 py-6 rounded-xl",
+                "border-2 border-dashed transition-all group disabled:opacity-60",
+                dragging
+                  ? "border-primary/70 bg-primary/[0.07] text-foreground scale-[1.01]"
+                  : "border-border/50 hover:border-primary/40 hover:bg-primary/[0.03] text-muted-foreground hover:text-foreground",
+              )}
             >
-              <div className="h-10 w-10 rounded-xl bg-muted/60 group-hover:bg-primary/10 flex items-center justify-center transition-colors">
+              <div
+                className={cn(
+                  "h-10 w-10 rounded-xl flex items-center justify-center transition-colors",
+                  dragging ? "bg-primary/15 text-primary" : "bg-muted/60 group-hover:bg-primary/10",
+                )}
+              >
                 {uploading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Upload className="h-5 w-5" />}
               </div>
               <p className="text-xs font-medium text-center">
-                {uploading ? "Uploading…" : "Click to upload (png, jpg, gif)"}
+                {uploading ? "Uploading…" : dragging ? "Drop to upload" : "Drop an image here, or click to browse"}
               </p>
               <p className="text-[10px] text-muted-foreground/70">
                 Saving to: <span className="font-medium">{destFolderName ?? "Unfiled"}</span>

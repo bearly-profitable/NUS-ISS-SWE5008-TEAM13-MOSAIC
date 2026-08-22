@@ -48,6 +48,11 @@
 
     --radius: 1.25rem;
 
+    /* Height of the floating bottom chrome. The dock and the Next button both
+       sit on `bottom-4` and both claim this, so their tops and bottoms line up
+       however their contents are laid out inside. */
+    --dock-height: 3.375rem;
+
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 234 10% 35%;
     --sidebar-primary: 243 75% 59%;
@@ -132,6 +137,120 @@
     -webkit-backdrop-filter: blur(20px) saturate(160%);
     border-right: none;
   }
+
+  /* ── Floating dock — the bottom nav, replacing the sidebar ──
+     Heavier blur and a brighter ground than .glass-card: it sits over
+     scrolling content rather than over the page background, so it needs to
+     stay legible as arbitrary text passes underneath it. */
+  .floating-dock {
+    height: var(--dock-height);
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(28px) saturate(190%);
+    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 9999px;
+    box-shadow:
+      0 12px 40px rgba(31, 30, 62, 0.13),
+      0  2px 10px rgba(31, 30, 62, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.60);
+    transition: box-shadow 0.25s ease, background 0.25s ease;
+  }
+
+  .floating-dock:hover {
+    background: rgba(255, 255, 255, 0.66);
+    box-shadow:
+      0 16px 52px rgba(31, 30, 62, 0.17),
+      0  3px 14px rgba(31, 30, 62, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.70);
+  }
+
+  /* ── Nav peek handle — brings a scrolled-away dock back up ── */
+  .nav-peek {
+    display: grid;
+    place-items: center;
+    height: 1.6rem;
+    width: 3.25rem;
+    border-radius: 9999px;
+    color: hsl(234 12% 42%);
+    background: rgba(255, 255, 255, 0.58);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow:
+      0 8px 24px rgba(31, 30, 62, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.60);
+    transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .nav-peek:hover {
+    background: rgba(255, 255, 255, 0.76);
+    color: hsl(243 70% 46%);
+    box-shadow:
+      0 12px 30px rgba(31, 30, 62, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.70);
+  }
+
+  /* ── Step Next — the single way forward through the pipeline ──
+     Same glass as the dock it sits beside: the two are a matched pair of
+     floating controls, and one of them shouting would break that. Only the
+     arrow chip carries the primary tint. */
+  .step-next {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    height: var(--dock-height);
+    padding: 0 0.5rem 0 1.15rem;
+    border-radius: 9999px;
+    color: hsl(var(--foreground));
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(28px) saturate(190%);
+    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow:
+      0 12px 40px rgba(31, 30, 62, 0.13),
+      0  2px 10px rgba(31, 30, 62, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.60);
+    transition: background 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+
+  .step-next:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.70);
+    border-color: rgba(99, 91, 233, 0.28);
+    box-shadow:
+      0 16px 52px rgba(31, 30, 62, 0.17),
+      0  3px 14px rgba(31, 30, 62, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.70);
+  }
+
+  .step-next:active:not(:disabled) { background: rgba(255, 255, 255, 0.48); }
+  .step-next:disabled { opacity: 0.75; cursor: default; }
+
+  .step-next:focus-visible {
+    outline: none;
+    border-color: rgba(99, 91, 233, 0.55);
+  }
+
+  .step-next-chip {
+    display: grid;
+    place-items: center;
+    height: 1.9rem;
+    width: 1.9rem;
+    border-radius: 9999px;
+    color: hsl(243 70% 46%);
+    background: rgba(99, 91, 233, 0.10);
+    border: 1px solid rgba(99, 91, 233, 0.20);
+    transition: background 0.18s ease;
+  }
+
+  .step-next:hover:not(:disabled) .step-next-chip { background: rgba(99, 91, 233, 0.16); }
+
+  /* The dock scrolls horizontally on narrow windows; its scrollbar would cut
+     across the pill, so it is hidden rather than styled. */
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
 
   .glass-header {
     background: rgba(255, 255, 255, 0.14);

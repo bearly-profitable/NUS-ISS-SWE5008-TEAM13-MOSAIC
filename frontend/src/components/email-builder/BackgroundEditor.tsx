@@ -228,7 +228,7 @@ export function BackgroundEditor({ value, onChange }: BackgroundEditorProps) {
 
       {/* M1 color quick-pick */}
       <div>
-        <Label className="text-xs mb-1.5 block">M1 Brand Colors</Label>
+        <Label className="text-xs mb-1.5 block">Company Brand Colors</Label>
         <div className="flex gap-1.5">
           {[
             { color: "#C2703D", label: "Orange" },

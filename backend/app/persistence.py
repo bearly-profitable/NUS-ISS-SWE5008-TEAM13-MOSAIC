@@ -11,6 +11,8 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 
+from postgrest.exceptions import APIError
+
 from app.config import WORKSPACE_ID
 from app.supabase_client import get_supabase
 
@@ -22,13 +24,29 @@ DEFAULT_BRAND_PALETTE = {
     "text": "#1f2937",
 }
 
-DEFAULT_OBJECTIVE = (
-    "Re-engage at-risk and price-sensitive customers with relevant plan "
-    "upgrades and bundle offers."
-)
+# The company profile is collected in step 1 (Company Info) and is the only
+# source of brand/campaign context in the app — every agent prompt, the email
+# footer links and the nav gating all read from here.
+DEFAULT_COMPANY_PROFILE = {
+    "name": "",
+    "website": "",
+    "description": "",
+    "campaign_intent": "",
+    # Column the operator nominated as the personalisation attribute, e.g.
+    # "first_name". Emails address the reader through it as a merge tag.
+    "dynamic_attribute": "",
+    # Brand assets chosen in Creative Review; the email composer centres them.
+    "logo_url": "",
+    "hero_image_url": "",
+    # Column profile of the uploaded CSV — see csv_ingest.profile_columns.
+    "columns": [],
+    "csv_filename": "",
+    "csv_row_count": 0,
+    "uploaded_at": None,
+}
 
 _BRAND_PALETTE_KEY = "brand_palette"
-_OBJECTIVE_KEY = "objective"
+_COMPANY_KEY = "company_profile"
 
 
 def _sb():
@@ -42,7 +60,7 @@ def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-# ── Settings (objective, brand palette) ───────────────────────────────────
+# ── Settings (brand palette, company profile) ─────────────────────────────
 
 
 def get_setting(key: str, default):
@@ -64,25 +82,42 @@ def set_brand_palette(palette: dict) -> None:
     set_setting(_BRAND_PALETTE_KEY, {**DEFAULT_BRAND_PALETTE, **palette})
 
 
-def get_objective() -> str:
-    value = get_setting(_OBJECTIVE_KEY, None)
-    if isinstance(value, dict):
-        value = value.get("text")
-    return value or DEFAULT_OBJECTIVE
+# ── Company profile (step 1) ──────────────────────────────────────────────
 
 
-def set_objective(objective: str) -> None:
-    set_setting(_OBJECTIVE_KEY, {"text": objective})
+def get_company_profile() -> dict:
+    stored = get_setting(_COMPANY_KEY, {}) or {}
+    return {**DEFAULT_COMPANY_PROFILE, **stored}
+
+
+def set_company_profile(patch: dict) -> dict:
+    """Merges into the stored profile — every caller only ever owns a few
+    fields (the upload owns `columns`, Creative Review owns the assets), so a
+    whole-object write would clobber the others."""
+    merged = {**get_company_profile(), **{k: v for k, v in patch.items() if v is not None}}
+    set_setting(_COMPANY_KEY, merged)
+    return merged
+
+
+def company_is_configured(profile: dict | None = None) -> bool:
+    """Gate for the rest of the pipeline: a named company with a stated
+    campaign intent and an uploaded audience."""
+    profile = profile if profile is not None else get_company_profile()
+    return bool(profile.get("name", "").strip() and profile.get("campaign_intent", "").strip())
+
+
 
 
 # ── Audience ──────────────────────────────────────────────────────────────
 
 
-def bulk_insert_customers(rows: list[dict]) -> None:
+def bulk_insert_customers(rows: list[dict], on_progress=None) -> None:
     sb = _sb()
     # Supabase/PostgREST has a practical payload-size sweet spot; chunk large loads.
     for i in range(0, len(rows), 500):
         sb.table("customer_profile").insert(rows[i : i + 500]).execute()
+        if on_progress:
+            on_progress(min(i + 500, len(rows)))
 
 
 def clear_customers() -> None:
@@ -124,12 +159,10 @@ def count_customers() -> int:
     return res.count or 0
 
 
-def page_customers(offset: int, limit: int, search: str | None = None) -> tuple[list[dict], int]:
-    """One page of the audience for the Audience tab's table."""
+def page_customers(offset: int, limit: int) -> tuple[list[dict], int]:
+    """One page of the audience for the Company Info tab's contact preview."""
     sb = _sb()
     query = sb.table("customer_profile").select("*", count="exact").eq("campaign_id", WORKSPACE_ID)
-    if search:
-        query = query.ilike("free_text", f"%{search}%")
     res = query.order("id").range(offset, offset + limit - 1).execute()
     return res.data, (res.count or 0)
 
@@ -301,16 +334,72 @@ def update_segment_email(email_id: str, patch: dict) -> dict | None:
     return fetch_segment_email(email_id)
 
 
-def insert_manipulation_scores(rows: list[dict]) -> None:
-    if rows:
-        _sb().table("manipulation_score").upsert(rows).execute()
+# ── Sends ─────────────────────────────────────────────────────────────────
+
+SEND_TABLE_MISSING = (
+    "The email_send table doesn't exist yet — run "
+    "supabase/migrations/0007_email_send.sql in the Supabase SQL Editor."
+)
 
 
-def fetch_manipulation_scores() -> list[dict]:
-    email_ids = [e["id"] for e in fetch_segment_emails()]
-    if not email_ids:
-        return []
-    return _sb().table("manipulation_score").select("*").in_("message_id", email_ids).execute().data
+def _table_missing(exc: APIError) -> bool:
+    return exc.code == "PGRST205" or "schema cache" in str(exc.message or exc)
+
+
+def insert_send(row: dict) -> None:
+    _sb().table("email_send").insert(row).execute()
+
+
+def fetch_sends() -> list[dict]:
+    """Delivery history for the whole workspace.
+
+    Tolerates the table being absent: this is read on every /api/state, and a
+    pending migration should not take down every tab in the console. The send
+    endpoint checks explicitly and says what to run.
+    """
+    try:
+        return (
+            _sb()
+            .table("email_send")
+            .select("*")
+            .eq("campaign_id", WORKSPACE_ID)
+            .order("created_at", desc=True)
+            .execute()
+            .data
+        )
+    except APIError as exc:
+        if _table_missing(exc):
+            return []
+        raise
+
+
+def sends_table_ready() -> bool:
+    try:
+        _sb().table("email_send").select("id").limit(1).execute()
+        return True
+    except APIError as exc:
+        if _table_missing(exc):
+            return False
+        raise
+
+
+def sample_contact_for_segment(segment_brief_id: str) -> dict | None:
+    """One real, still-opted-in contact from this segment.
+
+    Dispatch fills the email's merge tags from this row, so a `{{first_name}}`
+    lands as a name from the operator's own uploaded CSV rather than as
+    literal braces. Returns None for a segment with no reachable contacts.
+    """
+    res = (
+        _sb()
+        .table("customer_profile")
+        .select("*")
+        .eq("segment_brief_id", segment_brief_id)
+        .eq("consent_state", "active")
+        .limit(1)
+        .execute()
+    )
+    return res.data[0] if res.data else None
 
 
 # ── Approvals ─────────────────────────────────────────────────────────────

@@ -12,6 +12,7 @@ empty hero, and creative direction is expressed as colour/tone/style fields.
 """
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass
 
 import httpx
@@ -20,6 +21,41 @@ from app.config import get_settings
 from app.cost_meter import cost_meter
 
 settings = get_settings()
+
+# OpenAI-style strict structured output accepts only a small subset of JSON
+# Schema. Anything else is a hard 400 from the provider — which then falls
+# through to json_object mode and produces unshaped output. Keep the
+# expressive constraints in each field's `description` (the model still
+# honours them) and strip them from the wire format here, so agent schemas
+# stay readable at their definition site.
+_UNSUPPORTED_SCHEMA_KEYS = {
+    "pattern",
+    "format",
+    "minItems",
+    "maxItems",
+    "minLength",
+    "maxLength",
+    "minimum",
+    "maximum",
+    "default",
+    "examples",
+}
+
+
+def _strictify(node):
+    """Rewrites a JSON schema into the strict-mode subset: unsupported
+    keywords removed, `additionalProperties: false` on every object, and
+    every property listed in `required` (strict mode forbids optional
+    fields)."""
+    if isinstance(node, dict):
+        out = {k: _strictify(v) for k, v in node.items() if k not in _UNSUPPORTED_SCHEMA_KEYS}
+        if out.get("type") == "object":
+            out["additionalProperties"] = False
+            out["required"] = list((out.get("properties") or {}).keys())
+        return out
+    if isinstance(node, list):
+        return [_strictify(v) for v in node]
+    return node
 
 # Rough per-call cost estimates in USD — placeholders until real per-model
 # pricing is confirmed from OpenRouter's model pages / response usage data.
@@ -93,7 +129,11 @@ def generate_text(
     if response_schema:
         body["response_format"] = {
             "type": "json_schema",
-            "json_schema": {"name": "mosaic_artifact", "schema": response_schema, "strict": True},
+            "json_schema": {
+                "name": "mosaic_artifact",
+                "schema": _strictify(response_schema),
+                "strict": True,
+            },
         }
 
     with httpx.Client(timeout=_TIMEOUT) as client:
@@ -104,9 +144,24 @@ def generate_text(
         )
 
     if resp.status_code >= 400 and response_schema:
-        # Retry once without strict schema mode — some models on OpenRouter
-        # don't support json_schema yet.
+        # Retry in plain json_object mode — not every provider OpenRouter
+        # routes to supports strict schema mode.
+        #
+        # json_object mode has its own rule: the request is rejected unless
+        # the *messages* literally contain the word "json". Restating the
+        # schema in the prompt satisfies that and keeps the output shaped,
+        # since json_object alone enforces valid JSON but not our fields.
         body["response_format"] = {"type": "json_object"}
+        body["messages"] = messages + [
+            {
+                "role": "user",
+                "content": (
+                    "Reply with a single JSON object and nothing else — no prose, no code "
+                    "fence. It must match this JSON schema exactly:\n"
+                    + json.dumps(_strictify(response_schema))
+                ),
+            }
+        ]
         with httpx.Client(timeout=_TIMEOUT) as client:
             resp = client.post(
                 f"{settings.openrouter_base_url}/chat/completions",

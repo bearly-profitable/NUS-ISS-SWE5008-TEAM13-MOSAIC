@@ -34,6 +34,17 @@ class Settings(BaseSettings):
     # The Email Review tab shows one email per segment, capped at 6.
     max_segments: int = 6
 
+    # -- Resend (real dispatch) --
+    # Approved emails are sent for real. `resend_from` must sit on a domain
+    # verified in the Resend dashboard, otherwise Resend rejects the send with
+    # a 403 and only the account owner's own address can receive anything.
+    resend_api_key: str = ""
+    resend_from: str = "MOSAIC <mosaic@ongqq.site>"
+    resend_reply_to: str = ""
+    # Pre-filled in the Approval Queue's recipient field. Every send is still
+    # explicit — the operator confirms the address before dispatch.
+    default_recipient: str = "ongqingquan@gmail.com"
+
     # -- CORS --
     frontend_origin: str = "http://localhost:5173"
 
@@ -44,6 +55,10 @@ class Settings(BaseSettings):
     @property
     def supabase_configured(self) -> bool:
         return bool(self.supabase_url and self.supabase_service_role_key)
+
+    @property
+    def resend_configured(self) -> bool:
+        return bool(self.resend_api_key and self.resend_from)
 
 
 @lru_cache

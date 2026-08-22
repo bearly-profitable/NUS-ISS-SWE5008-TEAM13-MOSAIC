@@ -44,7 +44,6 @@ const BLOCKS: BlockDef[] = [
   // Utility
   { type: "social-links", label: "Social Links", icon: Share2,            color: "text-pink-500",    category: "utility" },
   { type: "footer",      label: "Footer",        icon: FileText,          color: "text-gray-500",    category: "utility" },
-  { type: "lang-toggle", label: "Language Toggle", icon: Languages,       color: "text-blue-500",    category: "utility" },
 ];
 
 const CATEGORIES: { id: BlockCategory | "all"; label: string }[] = [

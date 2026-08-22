@@ -1,5 +1,6 @@
 import logging
 
+import httpx
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -33,6 +34,31 @@ def postgrest_error_handler(_request: Request, exc: APIError):
             },
         )
     return JSONResponse(status_code=500, content={"detail": f"Database error: {message}"})
+
+
+@app.exception_handler(httpx.ConnectError)
+def connect_error_handler(_request: Request, exc: httpx.ConnectError):
+    """The Supabase host not resolving is the single most common cause here,
+    and a paused free-tier project is the usual reason — its subdomain is
+    withdrawn from DNS, so every call fails with getaddrinfo. Say that
+    outright instead of dumping an httpcore traceback into the console."""
+    message = str(exc)
+    host = settings.supabase_url.replace("https://", "").replace("http://", "").rstrip("/")
+    if "getaddrinfo" in message or "Name or service not known" in message:
+        return JSONResponse(
+            status_code=503,
+            content={
+                "detail": (
+                    f"Cannot resolve {host}. The Supabase project is most likely paused "
+                    "or deleted — open the Supabase dashboard and restore it, or update "
+                    "SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY in backend/.env."
+                )
+            },
+        )
+    return JSONResponse(
+        status_code=503,
+        content={"detail": f"Cannot reach Supabase at {host}: {message}"},
+    )
 
 app.add_middleware(
     CORSMiddleware,

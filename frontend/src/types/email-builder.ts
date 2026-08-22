@@ -322,7 +322,10 @@ export const PRELOADED_FOLDER_ID = "folder-preloaded-northbank";
 export const BLOCK_DEFAULTS: Record<BlockType, () => Omit<EmailBlock, "id">> = {
   header: () => ({
     type: "header",
-    content: { logoUrl: "/northbank-logo.svg", bgColor: "#ffffff" },
+    // No default logo: the workspace belongs to whichever company was set up
+    // in Company Info, so a manually added header starts empty and the
+    // operator points it at their own mark.
+    content: { logoUrl: "", bgColor: "#ffffff", logoHeight: "76", floating: "false" },
   }),
   "hero-image": () => ({
     type: "hero-image",
@@ -337,8 +340,9 @@ export const BLOCK_DEFAULTS: Record<BlockType, () => Omit<EmailBlock, "id">> = {
         textOverlays: [],
         shapeOverlays: [],
       } as HeroOverlayConfig),
-      heroLogoEnabled: "true",
-      heroLogoUrl: "/northbank-logo.svg",
+      // Same reason as `header` above — there is no house logo to default to.
+      heroLogoEnabled: "false",
+      heroLogoUrl: "",
       heroLogoX: "5",
       heroLogoY: "5",
       heroLogoSize: "15",
@@ -394,22 +398,22 @@ export const BLOCK_DEFAULTS: Record<BlockType, () => Omit<EmailBlock, "id">> = {
   "social-links": () => ({
     type: "social-links",
     content: {
-      facebook: "https://www.facebook.com/northbankliving",
-      twitter: "https://x.com/northbankliving",
-      instagram: "https://www.instagram.com/northbankliving",
-      linkedin: "https://sg.linkedin.com/company/northbank-living",
-      youtube: "https://www.youtube.com/@northbankliving",
+      facebook: "https://www.facebook.com/mosaicliving",
+      twitter: "https://x.com/mosaicliving",
+      instagram: "https://www.instagram.com/mosaicliving",
+      linkedin: "https://www.linkedin.com/company/mosaicliving",
+      youtube: "https://www.youtube.com/@mosaicliving",
     },
   }),
   footer: () => ({
     type: "footer",
     content: {
-      link1Label: "northbankliving.com",
-      link1Url: "https://www.northbankliving.com",
-      link2Label: "contact us",
-      link2Url: "https://www.northbankliving.com/support/contact-us",
-      link3Label: "unsubscribe",
-      link3Url: "https://www.northbankliving.com/preferences",
+      link1Label: "mosaicliving.com",
+      link1Url: "https://www.mosaicliving.com",
+      link2Label: "Contact us",
+      link2Url: "https://www.mosaicliving.com/contact",
+      link3Label: "Unsubscribe",
+      link3Url: "https://www.mosaicliving.com/preferences",
     },
   }),
   spacer: () => ({

@@ -22,6 +22,8 @@ class CreativeDirection(TypedDict):
     cta_style: str
     design_style: str
     palette: dict  # {primary, accent, background, text}
+    logo_url: str
+    hero_image_url: str
     rationale: str
 
 
@@ -51,10 +53,18 @@ class WorkspaceState(TypedDict, total=False):
 
     Agents never call each other directly — every stage reads/writes this
     typed state, and the Orchestrator persists each transition to the
-    Decision Ledger (see app/ledger.py)."""
+    Decision Ledger (see app/ledger.py).
 
-    objective: str
+    Company context (name, description, campaign intent, brand assets) is
+    deliberately *not* threaded through here: it is one stored profile that
+    every agent reads directly via app/brand.py, so a re-run of a single
+    stage can never work from a stale copy of it."""
+
     max_segments: int
+
+    # {segment_id: {logo_url, hero_image_url}} — preserves a per-segment
+    # asset override across a creative-direction regenerate.
+    existing_assets: dict
 
     segment_briefs: list[SegmentBrief]
     creative_directions: list[CreativeDirection]
