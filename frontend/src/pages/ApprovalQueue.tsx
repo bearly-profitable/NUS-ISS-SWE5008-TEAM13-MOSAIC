@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import {
   AlertTriangle,
   CheckCircle2,
+  ChevronDown,
   Loader2,
   Mail,
   RefreshCw,
@@ -11,6 +12,7 @@ import {
   XCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Collapsible, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Input } from "@/components/ui/input";
 import {
   Dialog,
@@ -29,12 +31,17 @@ import {
 } from "@/lib/email-image-urls";
 import { DEFAULT_BACKGROUND } from "@/types/email-builder";
 import { cn } from "@/lib/utils";
+import { ProcessPanel } from "@/components/ui/process-panel";
+import { useJob } from "@/hooks/use-job";
 import { useWorkspace } from "@/contexts/WorkspaceContext";
 import {
   readjudicateEmail,
   sendEmail,
+  startEval,
   type CheckCategory,
   type EmailSend,
+  type EvalAgentId,
+  type EvalRun,
   type GuardianCheck,
   type SegmentEmail,
 } from "@/services/workspaceApi";
@@ -67,6 +74,53 @@ const CATEGORY_BLURBS: Record<CheckCategory, string> = {
 };
 
 const CATEGORY_ORDER: CheckCategory[] = ["compliance", "content", "deliverability"];
+
+const AGENT_LABELS: Record<EvalAgentId, string> = {
+  segmentation: "Segmentation",
+  creative: "Creative",
+  composer: "Composer",
+  guardian: "Guardian",
+};
+
+const AGENT_RUBRIC: Record<EvalAgentId, { name: string; kind: string; weight: number; earned: number | null }[]> = {
+  segmentation: [
+    { name: "Silhouette", kind: "Code", weight: 38.5, earned: null },
+    { name: "Coverage", kind: "Code", weight: 17.5, earned: null },
+    { name: "HDBSCAN confidence", kind: "Code", weight: 14, earned: null },
+    { name: "Faithfulness", kind: "LLM Judge", weight: 15, earned: null },
+    { name: "Specificity", kind: "LLM Judge", weight: 15, earned: null },
+  ],
+  creative: [
+    { name: "Tonality length", kind: "Code", weight: 8, earned: null },
+    { name: "Language length", kind: "Code", weight: 8, earned: null },
+    { name: "CTA length", kind: "Code", weight: 8, earned: null },
+    { name: "Design length", kind: "Code", weight: 8, earned: null },
+    { name: "Accent hex", kind: "Code", weight: 8, earned: null },
+    { name: "Segment fit", kind: "LLM Judge", weight: 20, earned: null },
+    { name: "Brand fit", kind: "LLM Judge", weight: 20, earned: null },
+    { name: "No dark patterns", kind: "LLM Judge", weight: 20, earned: null },
+  ],
+  composer: [
+    { name: "Has citation", kind: "Code", weight: 10, earned: null },
+    { name: "Citations in catalogue", kind: "Code", weight: 10, earned: null },
+    { name: "Subject length", kind: "Code", weight: 10, earned: null },
+    { name: "Preheader length", kind: "Code", weight: 10, earned: null },
+    { name: "Follows direction", kind: "LLM Judge", weight: 20, earned: null },
+    { name: "Segment fit", kind: "LLM Judge", weight: 20, earned: null },
+    { name: "Grounded", kind: "LLM Judge", weight: 20, earned: null },
+  ],
+  guardian: [
+    { name: "Check pass rate", kind: "Code", weight: 70, earned: null },
+    { name: "Email PASS rate", kind: "Code", weight: 30, earned: null },
+  ],
+};
+
+const AGENT_ORDER: EvalAgentId[] = ["segmentation", "creative", "composer", "guardian"];
+
+function formatPts(value: number | null | undefined) {
+  if (value == null) return "—";
+  return Number.isInteger(value) ? String(value) : value.toFixed(1);
+}
 
 type Action = "recheck" | "send";
 
@@ -116,6 +170,11 @@ export default function ApprovalQueue() {
   const [recipient, setRecipient] = useState("");
   const [busy, setBusy] = useState<Action | null>(null);
   const [confirming, setConfirming] = useState(false);
+  const { job, start: startScore, running: scoring } = useJob({
+    onDone: refresh,
+    successMessage: (j) =>
+      j.result?.overall != null ? `Scored — overall ${j.result.overall}` : "Scored",
+  });
 
   const dispatch = state?.dispatch;
 
@@ -163,17 +222,6 @@ export default function ApprovalQueue() {
 
   if (loading) return <div className="p-8 text-sm text-muted-foreground">Loading approval queue…</div>;
   if (error) return <div className="p-8 text-sm text-destructive">{error}</div>;
-
-  if (items.length === 0) {
-    return (
-      <div className="p-8 max-w-6xl mx-auto">
-        <h1 className="text-2xl font-bold tracking-tight mb-2">Approval Queue</h1>
-        <div className="glass-card p-8 text-center text-sm text-muted-foreground">
-          Nothing to approve yet — compose emails in Email Review first.
-        </div>
-      </div>
-    );
-  }
 
   /**
    * Runs one action, then reloads the workspace, then reports.
@@ -285,6 +333,21 @@ export default function ApprovalQueue() {
         </div>
       </motion.div>
 
+      <AnimatePresence>
+        {job && <ProcessPanel key="eval-progress" job={job} title="Scoring the four agents" />}
+      </AnimatePresence>
+
+      <EvalScorecard
+        run={state?.eval ?? null}
+        scoring={scoring}
+        onScore={() => startScore(() => startEval())}
+      />
+
+      {items.length === 0 ? (
+        <div className="glass-card p-8 text-center text-sm text-muted-foreground">
+          Nothing to approve yet — compose emails in Email Review first.
+        </div>
+      ) : (
       <div className="grid grid-cols-[240px_1fr] gap-5 items-start">
         {/* ── Queue rail ── */}
         <div className="space-y-2 sticky top-4">
@@ -369,6 +432,7 @@ export default function ApprovalQueue() {
           )}
         </AnimatePresence>
       </div>
+      )}
 
       <Dialog open={confirming} onOpenChange={setConfirming}>
         <DialogContent className="max-w-md">
@@ -395,6 +459,125 @@ export default function ApprovalQueue() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+    </div>
+  );
+}
+
+function formatScore(value: number | null | undefined) {
+  return value == null ? "—" : value.toFixed(1);
+}
+
+function Delta({ value }: { value: number | null | undefined }) {
+  if (value == null) return null;
+  const tone = value > 0 ? "text-success" : value < 0 ? "text-destructive" : "text-muted-foreground";
+  return (
+    <span className={cn("text-[10px] tabular-nums", tone)}>
+      {value > 0 ? "+" : ""}
+      {value.toFixed(1)}
+    </span>
+  );
+}
+
+function EvalScorecard({
+  run,
+  scoring,
+  onScore,
+}: {
+  run: EvalRun | null;
+  scoring: boolean;
+  onScore: () => void;
+}) {
+  const [detailOpen, setDetailOpen] = useState(false);
+  const when = run?.created_at
+    ? new Date(run.created_at).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" })
+    : null;
+
+  return (
+    <div className="glass-card p-5 mb-5">
+      <div className="flex items-start justify-between gap-3 mb-4">
+        <div className="min-w-0">
+          <div className="text-xs font-bold">Model scores</div>
+          <div className="text-[11px] text-muted-foreground mt-0.5">
+            {run?.id
+              ? `${run.rubric_version}${when ? ` · ${when}` : ""}${run.judge_model ? ` · ${run.judge_model}` : ""}`
+              : "Not scored yet — grades the four agents against the current campaign."}
+          </div>
+        </div>
+        <div className="flex items-center gap-3 shrink-0">
+          <div className="text-right">
+            <div className="text-lg font-bold tabular-nums leading-none">
+              {formatScore(run?.overall ?? null)}
+              {run?.delta?.overall != null && (
+                <span className="ml-1.5 text-xs font-medium">
+                  <Delta value={run.delta.overall} />
+                </span>
+              )}
+            </div>
+            <div className="text-[9px] text-muted-foreground uppercase tracking-wide">overall</div>
+          </div>
+          <Button size="sm" variant="outline" onClick={onScore} disabled={scoring} className="h-7 gap-1.5 text-xs">
+            {scoring ? <Loader2 className="h-3 w-3 animate-spin" /> : <RefreshCw className="h-3 w-3" />}
+            Score models
+          </Button>
+        </div>
+      </div>
+      <Collapsible open={detailOpen} onOpenChange={setDetailOpen}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
+          {AGENT_ORDER.map((id) => {
+            const agent = run?.agents?.[id];
+            const rows = agent?.breakdown ?? run?.rubric?.[id] ?? AGENT_RUBRIC[id];
+            return (
+              <div key={id} className="rounded-lg border border-border/50 px-4 py-3">
+                <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-foreground/70">
+                  {AGENT_LABELS[id]}
+                </div>
+                <div className="mt-1.5 flex items-baseline gap-1.5">
+                  <span className="text-base font-bold tabular-nums">{formatScore(agent?.score ?? null)}</span>
+                  <Delta value={run?.delta?.[id]} />
+                </div>
+                {!agent?.available && (
+                  <div className="text-[10px] text-muted-foreground mt-1.5">No artifacts yet</div>
+                )}
+                <AnimatePresence initial={false}>
+                  {detailOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="mt-3 pt-1 border-t border-border/50 divide-y divide-border/40">
+                        {rows.map((row) => (
+                          <div key={row.name} className="flex items-baseline justify-between gap-4 py-2.5">
+                            <div className="min-w-0 text-xs leading-relaxed">
+                              <span className="text-foreground/85">{row.name}</span>
+                              <span className="text-muted-foreground"> – {row.kind}</span>
+                            </div>
+                            <div className="shrink-0 text-xs tabular-nums text-foreground/85">
+                              {formatPts(row.earned)}{" "}
+                              <span className="text-muted-foreground">(max {formatPts(row.weight)})</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
+        <CollapsibleTrigger asChild>
+          <button
+            type="button"
+            className="mt-3 flex items-center gap-1.5 text-[11px] text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {detailOpen ? "Hide scoring detail" : "Show scoring detail"}
+            <ChevronDown className={cn("h-3.5 w-3.5 transition-transform duration-200", detailOpen && "rotate-180")} />
+          </button>
+        </CollapsibleTrigger>
+      </Collapsible>
     </div>
   );
 }

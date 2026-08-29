@@ -23,6 +23,7 @@ from app import brand, csv_ingest, mailer, persistence, storage
 from app.activity import list_activity, log_activity
 from app.config import WORKSPACE_ID, get_settings
 from app.cost_meter import cost_meter
+from app.eval import EVAL_STEPS, latest_eval_payload, run_evaluation
 from app.ledger import list_entries
 from app.orchestrator.agents.creative_direction import company_assets, run_creative_direction
 from app.orchestrator.agents.email_composer import run_email_composer
@@ -139,6 +140,7 @@ def get_state():
         "brand_palette": persistence.get_brand_palette(),
         "max_segments": settings.max_segments,
         "spend_usd": cost_meter.total_for(),
+        "eval": latest_eval_payload(),
         "dispatch": {
             "configured": settings.resend_configured,
             "from_address": settings.resend_from,
@@ -578,6 +580,30 @@ def readjudicate_email(email_id: str):
         metadata={"verdict": verdict["verdict"]},
     )
     return verdict
+
+
+@router.post("/api/eval")
+def start_eval():
+    """Score the four decision agents against current workspace artifacts.
+    Does not regenerate anything. Same runner as `python -m app.eval`."""
+    _require_supabase()
+    _require_company()
+
+    def work(on_step):
+        return run_evaluation(on_step)
+
+    def done(result):
+        overall = (result.get("scores") or {}).get("overall")
+        log_activity(
+            "eval.run",
+            detail=f"Scored agents — overall {overall if overall is not None else 'n/a'} ({result.get('rubric_version')})",
+            target_type="eval",
+            target_id=result.get("id"),
+            metadata={"overall": overall, "rubric_version": result.get("rubric_version")},
+        )
+        return {"overall": overall, "id": result.get("id")}
+
+    return _start_job("eval.run", EVAL_STEPS, work, done)
 
 
 # ── Stage 4: Approvals & dispatch ─────────────────────────────────────────

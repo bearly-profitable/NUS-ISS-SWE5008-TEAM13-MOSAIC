@@ -213,6 +213,8 @@ export interface WorkspaceState {
   brand_palette: BrandPalette;
   max_segments: number;
   spend_usd: number;
+  /** Latest scoring pass of the four decision agents. Rubric is always present; id is null until first run. */
+  eval: EvalRun | null;
   dispatch: DispatchConfig;
 }
 
@@ -303,8 +305,37 @@ export interface Job {
   status: "running" | "done" | "failed";
   steps: JobStep[];
   error: string | null;
-  result: { count?: number } | null;
+  result: { count?: number; overall?: number; id?: string } | null;
   started_at: string;
+}
+
+export type EvalAgentId = "segmentation" | "creative" | "composer" | "guardian";
+
+export interface EvalRubricRow {
+  name: string;
+  kind: "Code" | "LLM Judge";
+  weight: number;
+  earned?: number | null;
+}
+
+export interface EvalAgentScore {
+  score: number | null;
+  available: boolean;
+  metrics: Record<string, unknown>;
+  notes: string[];
+  items: Record<string, unknown>[];
+  breakdown?: EvalRubricRow[];
+}
+
+export interface EvalRun {
+  id: string | null;
+  created_at: string | null;
+  rubric_version: string;
+  judge_model: string | null;
+  overall: number | null;
+  agents: Partial<Record<EvalAgentId, EvalAgentScore>>;
+  delta: Partial<Record<EvalAgentId | "overall", number | null>> | null;
+  rubric?: Record<EvalAgentId, EvalRubricRow[]>;
 }
 
 /** Returns a job id — segmentation runs on the server and reports steps. */
@@ -345,6 +376,10 @@ export const readjudicateEmail = (emailId: string) =>
     `/api/emails/${emailId}/adjudicate`,
     { method: "POST" },
   );
+
+/** Grades current artifacts. Returns a job id — the judge calls take a while. */
+export const startEval = () =>
+  request<{ job_id: string; steps: string[] }>("/api/eval", { method: "POST" });
 
 export const approveEmail = (targetId: string) =>
   request<Approval>("/api/approvals", {

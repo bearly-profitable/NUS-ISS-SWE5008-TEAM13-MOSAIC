@@ -423,3 +423,45 @@ def fetch_approvals() -> list[dict]:
 
 def delete_approval_for(target_id: str) -> None:
     _sb().table("approval").delete().eq("campaign_id", WORKSPACE_ID).eq("target_id", target_id).execute()
+
+
+# ── Eval runs ───────────────────────────────────────────────────────────────
+
+EVAL_TABLE_MISSING = (
+    "The eval_run table doesn't exist yet — run "
+    "supabase/migrations/0008_eval_run.sql in the Supabase SQL Editor."
+)
+
+
+def insert_eval_run(row: dict) -> dict:
+    try:
+        _sb().table("eval_run").insert(row).execute()
+    except APIError as exc:
+        if _table_missing(exc):
+            raise RuntimeError(EVAL_TABLE_MISSING) from exc
+        raise
+    return row
+
+
+def fetch_eval_runs(limit: int = 8) -> list[dict]:
+    """Newest first. Missing table → empty list so /api/state still loads."""
+    try:
+        return (
+            _sb()
+            .table("eval_run")
+            .select("*")
+            .eq("campaign_id", WORKSPACE_ID)
+            .order("created_at", desc=True)
+            .limit(limit)
+            .execute()
+            .data
+        )
+    except APIError as exc:
+        if _table_missing(exc):
+            return []
+        raise
+
+
+def fetch_latest_eval_run() -> dict | None:
+    rows = fetch_eval_runs(limit=1)
+    return rows[0] if rows else None

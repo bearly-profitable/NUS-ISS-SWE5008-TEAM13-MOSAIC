@@ -60,6 +60,27 @@ def connect_error_handler(_request: Request, exc: httpx.ConnectError):
         content={"detail": f"Cannot reach Supabase at {host}: {message}"},
     )
 
+@app.exception_handler(httpx.ReadError)
+@app.exception_handler(httpx.TransportError)
+def httpx_transport_error_handler(_request: Request, exc: httpx.TransportError):
+    """Windows + a shared HTTP/2 pool used to surface as WinError 10035
+    (WSAEWOULDBLOCK) on every overlapping request. The client now uses
+    HTTP/1.1 per thread; this handler still turns a leftover transport
+    failure into something the Console can show."""
+    message = str(exc)
+    if "10035" in message:
+        return JSONResponse(
+            status_code=503,
+            content={
+                "detail": (
+                    "Lost the connection to Supabase mid-request (Windows socket 10035). "
+                    "Retry the action — a one-off is common during a large CSV upload."
+                )
+            },
+        )
+    return JSONResponse(status_code=503, content={"detail": f"Cannot reach Supabase: {message}"})
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[settings.frontend_origin],
