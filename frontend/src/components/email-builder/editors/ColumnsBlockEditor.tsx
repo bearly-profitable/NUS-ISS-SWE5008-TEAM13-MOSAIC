@@ -219,7 +219,7 @@ export function ColumnsBlockEditor({ content, onUpdate }: Props) {
                 </div>
                 <div>
                   <Label className="text-[10px] text-muted-foreground/60 uppercase tracking-wider">Image</Label>
-                  <ImageUpload value={content[`${prefix}ImageUrl`] || ""} onChange={(url) => onUpdate(`${prefix}ImageUrl`, url)} />
+                  <ImageUpload value={content[`${prefix}ImageUrl`] || ""} onChange={(url) => onUpdate(`${prefix}ImageUrl`, url)} purpose="block" />
                 </div>
                 {content[`${prefix}ImageUrl`] && (
                   <div>

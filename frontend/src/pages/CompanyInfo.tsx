@@ -7,9 +7,11 @@ import {
   ChevronLeft,
   ChevronRight,
   CircleDashed,
+  Database,
   FileSpreadsheet,
   Loader2,
   Plus,
+  RotateCcw,
   ShieldOff,
   Sparkles,
   Tag,
@@ -23,6 +25,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ProcessPanel } from "@/components/ui/process-panel";
+import { ConfirmDeleteDialog } from "@/components/ui/confirm-delete-dialog";
 import { useJob } from "@/hooks/use-job";
 import { isCsvFile, useFileDrop } from "@/hooks/use-file-drop";
 import { useStepGate } from "@/hooks/use-step-gate";
@@ -31,6 +34,8 @@ import { cn } from "@/lib/utils";
 import {
   getAudience,
   getCompany,
+  loadSampleAudience,
+  resetWorkspace,
   updateCompany,
   uploadAudience,
   type CsvColumn,
@@ -211,6 +216,40 @@ export default function CompanyInfo() {
     [start],
   );
 
+  // The example base replaces the audience exactly as an upload does, so it
+  // rides the same job and the same ProcessPanel.
+  const loadSample = useCallback(() => {
+    void start(() => loadSampleAudience());
+  }, [start]);
+
+  // Reset gets its own job: it clears the form this page is holding, which
+  // the audience job's onDone must not do.
+  const { job: resetJob, start: startReset, running: resetting } = useJob({
+    onDone: async () => {
+      setDraft(EMPTY_DRAFT);
+      setOffers([]);
+      // Mark the emptied form as saved, or the autosave would immediately
+      // write the cleared fields back and re-create a company row.
+      revision.current += 1;
+      savedRevision.current = revision.current;
+      setSaveState("idle");
+      setOffset(0);
+      await fetchPage(0);
+      await refresh();
+    },
+    successMessage: () => "Workspace reset",
+  });
+
+  // Any job that rewrites the audience underneath the page — uploading,
+  // loading the example, or resetting — locks the others out.
+  const busy = running || resetting;
+
+  // Two irreversible actions, two confirmations. Loading the example only
+  // asks once there is an audience to overwrite — on a first run there is
+  // nothing to lose and the extra click is noise.
+  const [confirmReset, setConfirmReset] = useState(false);
+  const [confirmLoad, setConfirmLoad] = useState(false);
+
   const handleFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     // Reset the input so re-picking the same file after a failed parse still
@@ -223,7 +262,7 @@ export default function CompanyInfo() {
     onFile: upload,
     accept: isCsvFile,
     rejectMessage: "That isn't a CSV — export your customer list as .csv and drop it again",
-    disabled: running,
+    disabled: busy,
   });
 
   const saveCompany = useCallback(async (): Promise<boolean> => {
@@ -296,6 +335,29 @@ export default function CompanyInfo() {
           </p>
         </div>
         <div className="flex flex-col items-end gap-1.5 shrink-0 pt-1 max-w-xs">
+          <div className="flex items-center gap-1.5">
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-7 gap-1.5 text-xs"
+              disabled={busy}
+              onClick={() => (audienceCount > 0 ? setConfirmLoad(true) : loadSample())}
+              title="Load the bundled 1,000-contact example customer base"
+            >
+              <Database className="h-3.5 w-3.5" /> Load example
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-7 gap-1.5 text-xs text-muted-foreground hover:text-destructive"
+              disabled={busy}
+              onClick={() => setConfirmReset(true)}
+              title="Clear everything and start over"
+            >
+              {resetting ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <RotateCcw className="h-3.5 w-3.5" />}
+              Reset
+            </Button>
+          </div>
           <SaveIndicator state={saveState} />
           {loaded && missing.length > 0 && (
             <div className="glass-badge glass-badge-muted rounded-2xl px-3 py-1.5 text-[11px] flex items-start gap-1.5 text-right">
@@ -307,7 +369,8 @@ export default function CompanyInfo() {
       </motion.div>
 
       <AnimatePresence>
-        {job && <ProcessPanel key="progress" job={job} title="Uploading your customer base" />}
+        {job && <ProcessPanel key="progress" job={job} title="Loading your customer base" />}
+        {resetJob && <ProcessPanel key="reset" job={resetJob} title="Resetting the workspace" />}
       </AnimatePresence>
 
       {/* ── 1. Customer base ── */}
@@ -320,7 +383,7 @@ export default function CompanyInfo() {
         <input ref={fileRef} type="file" accept=".csv,text/csv" onChange={handleFile} className="hidden" />
         <button
           type="button"
-          disabled={running}
+          disabled={busy}
           onClick={() => fileRef.current?.click()}
           {...dropProps}
           className={cn(
@@ -624,6 +687,24 @@ export default function CompanyInfo() {
           </div>
         </motion.div>
       )}
+
+      <ConfirmDeleteDialog
+        open={confirmLoad}
+        onOpenChange={setConfirmLoad}
+        title="Replace your customer base?"
+        description={`The example base will replace your ${audienceCount.toLocaleString()} current contacts, and the segments built from them will be cleared. Your company info and offers are kept.`}
+        confirmLabel="Load example"
+        onConfirm={loadSample}
+      />
+
+      <ConfirmDeleteDialog
+        open={confirmReset}
+        onOpenChange={setConfirmReset}
+        title="Reset the entire workspace?"
+        description="Deletes your contacts, segments, creative direction, emails, approvals, send history and company info, and empties both logs. This cannot be undone."
+        confirmLabel="Reset everything"
+        onConfirm={() => void startReset(() => resetWorkspace())}
+      />
     </div>
   );
 }

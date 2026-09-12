@@ -19,6 +19,7 @@ export function HeaderBlockEditor({ content, onUpdate }: Props) {
           <ImageUpload
             value={content.logoUrl || ""}
             onChange={(url) => onUpdate("logoUrl", url)}
+            purpose="logo"
           />
         </div>
       </div>

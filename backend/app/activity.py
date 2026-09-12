@@ -72,3 +72,16 @@ def list_activity(limit: int = 200) -> list[dict]:
     except Exception as exc:
         logger.warning("Could not read activity_log: %s", exc)
         return []
+
+
+def clear_activity() -> None:
+    """Wipes the user-action feed. Only a full workspace reset calls this —
+    the log is append-only in every other code path."""
+    _fallback_entries.clear()
+    supabase = get_supabase()
+    if supabase is None:
+        return
+    # activity_log has no campaign_id, so scope by a filter that matches
+    # every row — PostgREST rejects a delete with no filter at all.
+    supabase.table("activity_log").delete().neq("id", "").execute()
+

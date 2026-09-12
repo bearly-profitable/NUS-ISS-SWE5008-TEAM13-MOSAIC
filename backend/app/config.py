@@ -17,10 +17,14 @@ class Settings(BaseSettings):
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
-    # -- OpenRouter (text + embeddings only; image generation was removed) --
+    # -- OpenRouter (text, embeddings, and manually-triggered image gen) --
     openrouter_api_key: str = ""
     openrouter_base_url: str = "https://openrouter.ai/api/v1"
     openrouter_text_model: str = "openai/gpt-5.6-luna"
+    # Imagery is never produced as part of a pipeline run — no agent calls
+    # this model. It fires only when the operator reviews a prompt in the
+    # image field and presses Generate. See routers/image_gen.py.
+    openrouter_image_model: str = "openai/gpt-image-2.5-flare"
     # Embeddings support on OpenRouter is less standardised than chat —
     # confirm this model id is actually servable via /embeddings before the
     # Segmentation agent goes live; see openrouter_client.py's embed_text().

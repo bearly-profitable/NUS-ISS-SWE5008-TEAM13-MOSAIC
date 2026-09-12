@@ -2,7 +2,6 @@ import type { EmailBlock, EmailBackground, IconGridItem } from "@/types/email-bu
 import { DEFAULT_BACKGROUND } from "@/types/email-builder";
 import { DIN_FONT_FAMILY_STACK, dinRoundProEmailFontFaceCss } from "@/lib/din-font";
 import { getPatternTileSvg } from "./background-patterns";
-import { ORCHESTRATOR_BASE } from "@/services/emailApi";
 
 // â”€â”€ Simple markdown â†’ HTML (handles bold, italic, links, lists, paragraphs) â”€â”€
 function markdownToHtml(md: string, color = "#374151", fontSize = 14): string {
@@ -644,15 +643,6 @@ function renderVideo(content: Record<string, string>): string {
 </table>`;
 }
 
-function getEmailAssetBaseUrl(): string {
-  const configuredBase = ORCHESTRATOR_BASE.replace(/\/+$/, "");
-  if (configuredBase) return configuredBase;
-  if (typeof window !== "undefined" && window.location.origin) {
-    return window.location.origin.replace(/\/+$/, "");
-  }
-  return "";
-}
-
 function renderCountdown(content: Record<string, string>): string {
   const bgColor = (content.bgColor || "#C2703D").replace("#", "");
   const textColor = (content.textColor || "#ffffff").replace("#", "");
@@ -668,17 +658,13 @@ function renderCountdown(content: Record<string, string>): string {
 </table>`;
   }
 
-  // Build the live countdown GIF URL
-  const params = new URLSearchParams({
-    end: target.toISOString(),
-    bg: bgColor,
-    text: textColor,
-    v: String(target.getTime()),
-    ...(label ? { label } : {}),
-  });
-  const gifUrl = `${getEmailAssetBaseUrl()}/api/countdown-gif?${params.toString()}`;
-
-  // Static fallback values (snapshot at export time) â€” always visible as baseline
+  // Snapshot the remaining time at build time and render it as an HTML table.
+  // A *ticking* countdown in an inbox needs an animated GIF re-rendered on every
+  // open by a publicly reachable image service, and we do not run one: there is
+  // no such route on the orchestrator, and its base URL is a loopback address no
+  // recipient's mail client could fetch anyway. A frozen-but-correct countdown
+  // beats a broken-image box, and this markup draws in every client, Outlook
+  // included.
   const diff = Math.max(0, target.getTime() - Date.now());
   const days = Math.floor(diff / 86400000);
   const hours = Math.floor((diff % 86400000) / 3600000);
@@ -700,26 +686,13 @@ function renderCountdown(content: Record<string, string>): string {
       <div style="font-size:10px;font-weight:500;margin-top:4px;text-transform:uppercase;letter-spacing:0.05em;color:#${textColor}">${lbl}</div>
     </td>`;
 
-  const staticFallback = `${labelHtml}
-    <table cellpadding="0" cellspacing="4" align="center"><tr>
-      ${unitCell(days, "Days")}${unitCell(hours, "Hours")}${unitCell(mins, "Mins")}
-    </tr></table>`;
-
-  // Most inboxes strip JS/event handlers, so non-Outlook clients get the GIF directly.
-  // Outlook (mso) gets a static fallback because desktop Outlook often does not animate GIFs.
   return `
 <table width="100%" cellpadding="0" cellspacing="0" class="email-countdown-bg" style="background-color:#${bgColor}">
   <tr><td class="email-padded-cell" style="padding:24px 32px;text-align:center">
-    <!--[if !mso]><!-->
-    <div style="max-width:480px;margin:0 auto">
-      <img src="${gifUrl}" alt="${label || "Countdown"}" width="480" height="120"
-        style="display:block;margin:0 auto;max-width:100%;height:auto;border:0"
-      >
-    </div>
-    <!--<![endif]-->
-    <!--[if mso]>
-    ${staticFallback}
-    <![endif]-->
+    ${labelHtml}
+    <table cellpadding="0" cellspacing="4" align="center"><tr>
+      ${unitCell(days, "Days")}${unitCell(hours, "Hours")}${unitCell(mins, "Mins")}
+    </tr></table>
   </td></tr>
 </table>`;
 }

@@ -205,6 +205,10 @@ def upsert_offers(rows: list[dict]) -> None:
         _sb().table("offer_catalogue").upsert(rows).execute()
 
 
+def clear_offers() -> None:
+    _sb().table("offer_catalogue").delete().eq("campaign_id", WORKSPACE_ID).execute()
+
+
 def delete_offer(offer_id: str) -> None:
     _sb().table("offer_catalogue").delete().eq("id", offer_id).eq("campaign_id", WORKSPACE_ID).execute()
 
@@ -421,6 +425,10 @@ def fetch_approvals() -> list[dict]:
     )
 
 
+def clear_approvals() -> None:
+    _sb().table("approval").delete().eq("campaign_id", WORKSPACE_ID).execute()
+
+
 def delete_approval_for(target_id: str) -> None:
     _sb().table("approval").delete().eq("campaign_id", WORKSPACE_ID).eq("target_id", target_id).execute()
 
@@ -465,3 +473,45 @@ def fetch_eval_runs(limit: int = 8) -> list[dict]:
 def fetch_latest_eval_run() -> dict | None:
     rows = fetch_eval_runs(limit=1)
     return rows[0] if rows else None
+
+
+# ── Reset ─────────────────────────────────────────────────────────────────
+#
+# One table per function, each tolerating its own table being absent: a
+# workspace reset should still clear everything it *can* when a migration is
+# outstanding, rather than aborting half-done on the first missing table.
+
+
+def _delete_all(table: str, *, scoped: bool = True) -> None:
+    query = _sb().table(table).delete()
+    if scoped:
+        query = query.eq("campaign_id", WORKSPACE_ID)
+    else:
+        # No campaign_id column — match every row instead. PostgREST refuses
+        # an unfiltered delete outright, so this filters on something that is
+        # always true.
+        query = query.neq("id", "")
+    try:
+        query.execute()
+    except APIError as exc:
+        if not _table_missing(exc):
+            raise
+
+
+def clear_sends() -> None:
+    _delete_all("email_send")
+
+
+def clear_eval_runs() -> None:
+    _delete_all("eval_run")
+
+
+def clear_settings() -> None:
+    """Drops the company profile and brand palette back to their defaults.
+
+    Deletes the rows rather than writing empty ones, so `get_setting` falls
+    through to DEFAULT_COMPANY_PROFILE / DEFAULT_BRAND_PALETTE and a reset
+    workspace is byte-identical to one that has never been touched.
+    """
+    _sb().table("app_setting").delete().in_("key", [_COMPANY_KEY, _BRAND_PALETTE_KEY]).execute()
+

@@ -2,13 +2,15 @@ import { useRef, useState, useCallback, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { isImageFile, useFileDrop } from "@/hooks/use-file-drop";
-import { Upload, X, Images, Loader2 } from "lucide-react";
+import { Upload, X, Images, Loader2, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { uploadImageFile } from "@/lib/image-file-upload";
 import { listImageFolders, type ImageFolder } from "@/services/imageFoldersApi";
 import { FolderDestPicker } from "./FolderDestPicker";
 import { HeroGallery } from "./HeroGallery";
+import { ImageGenerator } from "./ImageGenerator";
+import type { ImagePurpose } from "@/services/imageGenApi";
 
 const MAX_IMG_RETRIES = 3;
 
@@ -24,12 +26,20 @@ function retryImageLoad(e: React.SyntheticEvent<HTMLImageElement>) {
 interface ImageUploadProps {
   value: string;
   onChange: (url: string) => void;
+  /** What this slot is for -- steers the drafted prompt and default ratio. */
+  purpose?: ImagePurpose;
+  /** Pulls that segment's creative direction into the drafted prompt. */
+  segmentId?: string | null;
 }
 
-export function ImageUpload({ value, onChange }: ImageUploadProps) {
+export function ImageUpload({ value, onChange, purpose = "hero", segmentId = null }: ImageUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
-  const [sourceTab, setSourceTab] = useState<"upload" | "gallery">(() => (value ? "gallery" : "upload"));
+  // Generate is never the landing tab: opening this panel should not put the
+  // operator one stray click away from spending on a render.
+  const [sourceTab, setSourceTab] = useState<"upload" | "gallery" | "generate">(() =>
+    value ? "gallery" : "upload",
+  );
   // Key to force gallery remount after upload so it refreshes
   const [galleryKey, setGalleryKey] = useState(0);
 
@@ -132,6 +142,7 @@ export function ImageUpload({ value, onChange }: ImageUploadProps) {
             [
               { id: "upload" as const, icon: Upload, label: "Upload" },
               { id: "gallery" as const, icon: Images, label: "Gallery" },
+              { id: "generate" as const, icon: Sparkles, label: "Generate" },
             ] as const
           ).map(({ id, icon: Icon, label }) => (
             <button
@@ -139,7 +150,7 @@ export function ImageUpload({ value, onChange }: ImageUploadProps) {
               type="button"
               onClick={() => setSourceTab(id)}
               className={cn(
-                "relative flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-colors duration-150 flex-1 justify-center",
+                "relative flex items-center gap-1.5 px-3 py-2 rounded-xl text-[13px] font-medium transition-colors duration-150 flex-1 justify-center",
                 sourceTab === id
                   ? "text-label-1"
                   : "text-label-3 hover:text-foreground/65",
@@ -208,6 +219,20 @@ export function ImageUpload({ value, onChange }: ImageUploadProps) {
               </p>
             </button>
           </div>
+        )}
+
+        {/* Generate panel — every call in here is operator-triggered */}
+        {sourceTab === "generate" && (
+          <ImageGenerator
+            purpose={purpose}
+            segmentId={segmentId}
+            folderId={destFolderId}
+            onUse={(url) => {
+              onChange(url);
+              // Remount the gallery so a kept render appears in it straight away.
+              setGalleryKey((k) => k + 1);
+            }}
+          />
         )}
 
         {/* Gallery panel — uses shared HeroGallery */}

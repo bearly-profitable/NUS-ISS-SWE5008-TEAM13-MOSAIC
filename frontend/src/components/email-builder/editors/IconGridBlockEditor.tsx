@@ -93,7 +93,7 @@ export function IconGridBlockEditor({ content, onUpdate }: Props) {
               </div>
               {isExpanded && (
                 <div className="px-2.5 pb-2.5 space-y-2 border-t border-border/40">
-                  <ImageUpload value={item.imageUrl} onChange={(url) => updateItem(i, "imageUrl", url)} />
+                  <ImageUpload value={item.imageUrl} onChange={(url) => updateItem(i, "imageUrl", url)} purpose="block" />
                   {/* Size slider */}
                   <div>
                     <div className="flex items-center justify-between mb-1">

@@ -15,7 +15,7 @@ export function ImageTextBlockEditor({ content, onUpdate }: Props) {
       <div>
         <FieldLabel>Image</FieldLabel>
         <div className="mt-1.5">
-          <ImageUpload value={content.imageUrl || ""} onChange={(url) => onUpdate("imageUrl", url)} />
+          <ImageUpload value={content.imageUrl || ""} onChange={(url) => onUpdate("imageUrl", url)} purpose="block" />
         </div>
       </div>
       <div className="flex gap-2.5">

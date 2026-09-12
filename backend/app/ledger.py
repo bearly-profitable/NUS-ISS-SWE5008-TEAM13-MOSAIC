@@ -70,3 +70,18 @@ def list_entries(campaign_id: str | None = None) -> list[dict]:
     if campaign_id:
         rows = [r for r in rows if r.get("campaign_id") == campaign_id]
     return rows
+
+
+def clear_entries(campaign_id: str) -> None:
+    """Empties the Decision Ledger for one workspace.
+
+    The ledger is append-only by design — this exists solely for the reset
+    button, which puts the app back to a first-run state, and is the only
+    caller permitted to remove an entry.
+    """
+    _fallback_entries.clear()
+    supabase = get_supabase()
+    if supabase is None:
+        return
+    supabase.table("ledger_entry").delete().eq("campaign_id", campaign_id).execute()
+

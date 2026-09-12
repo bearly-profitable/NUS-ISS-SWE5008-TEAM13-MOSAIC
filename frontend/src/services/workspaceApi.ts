@@ -293,6 +293,23 @@ export const uploadAudience = async (file: File) => {
   return (await res.json()) as { job_id: string; steps: string[] };
 };
 
+/**
+ * Loads the bundled 1,000-row example customer base.
+ *
+ * Replaces the audience exactly as an upload does — same job, same steps —
+ * so the demo path and the real path can't drift apart.
+ */
+export const loadSampleAudience = () =>
+  request<{ job_id: string; steps: string[] }>("/api/audience/load-sample", { method: "POST" });
+
+/**
+ * Wipes the workspace back to a first-run state: audience, segments, emails,
+ * approvals, sends, company info, and both logs. Irreversible, so every
+ * caller must confirm with the operator first.
+ */
+export const resetWorkspace = () =>
+  request<{ job_id: string; steps: string[] }>("/api/reset", { method: "POST" });
+
 export interface JobStep {
   label: string;
   state: "pending" | "running" | "done" | "failed";

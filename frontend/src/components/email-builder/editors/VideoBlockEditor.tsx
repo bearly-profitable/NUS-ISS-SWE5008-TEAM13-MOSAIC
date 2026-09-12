@@ -95,7 +95,7 @@ export function VideoBlockEditor({ content, onUpdate }: Props) {
       <div>
         <FieldLabel>Thumbnail</FieldLabel>
         <div className="mt-1.5">
-          <ImageUpload value={content.thumbnailUrl || ""} onChange={(url) => onUpdate("thumbnailUrl", url)} />
+          <ImageUpload value={content.thumbnailUrl || ""} onChange={(url) => onUpdate("thumbnailUrl", url)} purpose="block" />
         </div>
         <div className="mt-1 flex items-center gap-1.5 text-[10px] text-muted-foreground">
           {generating ? (

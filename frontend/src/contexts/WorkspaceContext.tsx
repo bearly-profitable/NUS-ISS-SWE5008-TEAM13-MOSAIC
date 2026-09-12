@@ -22,6 +22,16 @@ interface WorkspaceContextValue {
   loading: boolean;
   error: string | null;
   refresh: () => Promise<void>;
+  /**
+   * Merges a server echo into the cached state without a round trip.
+   *
+   * `refresh()` refetches the whole console — twelve queries and ~47 KB, most
+   * of it emails — which costs about two seconds. That is the right price for
+   * a generate, and far too high for a mutation whose response already
+   * contains the updated rows. Use this when the server handed back exactly
+   * what changed, and `refresh()` when it didn't.
+   */
+  apply: (patch: Partial<WorkspaceState>) => void;
 }
 
 const WorkspaceContext = createContext<WorkspaceContextValue | null>(null);
@@ -42,11 +52,18 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
+  const apply = useCallback((patch: Partial<WorkspaceState>) => {
+    setState((prev) => (prev ? { ...prev, ...patch } : prev));
+  }, []);
+
   useEffect(() => {
     void refresh();
   }, [refresh]);
 
-  const value = useMemo(() => ({ state, loading, error, refresh }), [state, loading, error, refresh]);
+  const value = useMemo(
+    () => ({ state, loading, error, refresh, apply }),
+    [state, loading, error, refresh, apply],
+  );
 
   return <WorkspaceContext.Provider value={value}>{children}</WorkspaceContext.Provider>;
 }

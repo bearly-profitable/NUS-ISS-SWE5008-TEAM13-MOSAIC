@@ -6,13 +6,18 @@ Ledger) happen in one place instead of being duplicated per-agent.
 OpenRouter's chat/completions endpoint is OpenAI-compatible, so this talks to
 it over plain REST (httpx) rather than pulling in a provider SDK.
 
-Image generation was removed in the workspace revamp — this module is text
-and embeddings only. Emails are assembled from typed EmailBlock[] with an
-empty hero, and creative direction is expressed as colour/tone/style fields.
+Image generation lives here too, but no agent calls it: `generate_image` is
+reachable only from the manual endpoint the operator drives by hand after
+reviewing a prompt. Pipeline runs still compose emails from typed
+EmailBlock[] with whatever hero the operator chose, and creative direction
+stays colour/tone/style fields — nothing here ever fires on its own.
 """
 from __future__ import annotations
 
+import base64
+import binascii
 import json
+import re
 from dataclasses import dataclass
 
 import httpx
@@ -62,6 +67,9 @@ def _strictify(node):
 # Nothing gates on these; they only feed the Logs tab's spend readout.
 _ESTIMATED_TEXT_CALL_USD = 0.002
 _ESTIMATED_EMBED_CALL_USD = 0.0002
+# Image models cost orders of magnitude more per call than text, which is a
+# large part of why generation is operator-triggered rather than automatic.
+_ESTIMATED_IMAGE_CALL_USD = 0.04
 
 _TIMEOUT = httpx.Timeout(120.0, connect=10.0)
 
@@ -207,3 +215,190 @@ def embed_text(
     data = resp.json()
     cost_meter.record(stage=stage, agent=agent, cost_usd=_ESTIMATED_EMBED_CALL_USD * len(texts))
     return [item["embedding"] for item in data["data"]]
+
+
+# --------------------------------------------------------------------------
+# Image generation — manual only.
+#
+# Nothing in the orchestrator graph reaches this. It is called from one
+# operator-driven endpoint (routers/image_gen.py) after the user has read and
+# edited the prompt, so an image is never produced as a side effect of
+# generating segments, direction or copy.
+# --------------------------------------------------------------------------
+
+# What the Generate panel offers. Kept server-side as well as in the UI so a
+# hand-rolled request can't smuggle an arbitrary string into the provider
+# payload.
+IMAGE_ASPECT_RATIOS = ("1:1", "3:2", "2:3", "16:9", "9:16", "4:3", "3:4")
+IMAGE_QUALITIES = ("auto", "low", "medium", "high")
+IMAGE_BACKGROUNDS = ("auto", "transparent", "opaque")
+
+# The longest prompt worth sending. Past this the provider truncates anyway,
+# and the operator has lost track of what they're approving.
+MAX_IMAGE_PROMPT_CHARS = 4000
+
+_DATA_URI_RE = re.compile(r"^data:(?P<mime>[\w.+-]+/[\w.+-]+)?;base64,(?P<payload>.+)$", re.DOTALL)
+
+
+@dataclass
+class GenerateImageResult:
+    data: bytes
+    mime_type: str
+    model_version: str
+    # This call's estimated cost, not the running workspace total that
+    # GenerateTextResult carries -- the Generate panel shows it beside a
+    # single render, where a cumulative figure would read as a lie.
+    cost_usd: float
+
+
+def _decode_data_uri(uri: str) -> tuple[bytes, str] | None:
+    match = _DATA_URI_RE.match(uri.strip())
+    if not match:
+        return None
+    try:
+        return base64.b64decode(match.group("payload")), match.group("mime") or "image/png"
+    except (binascii.Error, ValueError):
+        return None
+
+
+def _image_from_images_endpoint(payload: dict) -> tuple[bytes, str] | None:
+    """Reads OpenAI-shaped `/images/generations` output: a `data` array whose
+    entries carry either inline base64 or a URL to fetch."""
+    items = payload.get("data")
+    if not isinstance(items, list) or not items:
+        return None
+    first = items[0]
+    if not isinstance(first, dict):
+        return None
+
+    b64 = first.get("b64_json")
+    if isinstance(b64, str) and b64:
+        decoded = _decode_data_uri(b64) if b64.startswith("data:") else None
+        if decoded:
+            return decoded
+        try:
+            return base64.b64decode(b64), "image/png"
+        except (binascii.Error, ValueError):
+            return None
+
+    url = first.get("url")
+    if isinstance(url, str) and url:
+        if url.startswith("data:"):
+            return _decode_data_uri(url)
+        # Hosted result — pull the bytes now so the caller only ever deals in
+        # bytes, and so the image lands in our own bucket before the
+        # provider's short-lived URL expires.
+        with httpx.Client(timeout=_TIMEOUT) as client:
+            fetched = client.get(url)
+        if fetched.status_code >= 400:
+            return None
+        return fetched.content, fetched.headers.get("content-type", "image/png").split(";")[0]
+    return None
+
+
+def _image_from_chat_completion(payload: dict) -> tuple[bytes, str] | None:
+    """Reads the chat-completions image shape, where the picture comes back
+    as a data URI on `message.images[].image_url.url`."""
+    try:
+        message = payload["choices"][0]["message"]
+    except (KeyError, IndexError, TypeError):
+        return None
+    for image in message.get("images") or []:
+        url = (image or {}).get("image_url", {}).get("url") if isinstance(image, dict) else None
+        if isinstance(url, str):
+            decoded = _decode_data_uri(url)
+            if decoded:
+                return decoded
+    return None
+
+
+def generate_image(
+    prompt: str,
+    *,
+    aspect_ratio: str = "3:2",
+    quality: str = "auto",
+    background: str = "auto",
+    stage: str = "Imagery",
+    agent: str = "Image Generator",
+) -> GenerateImageResult:
+    """Renders one image from an operator-approved prompt and returns its raw
+    bytes — hosting is the caller's job (see storage.upload_image).
+
+    OpenRouter exposes image models two ways and which one a given model
+    answers on varies, so this tries the OpenAI-compatible
+    `/images/generations` endpoint first and falls back to `/chat/completions`
+    with `modalities`. Streaming is deliberately off: the caller has to hold
+    the complete bytes to upload them, so a stream would buy nothing but
+    partial-failure states.
+    """
+    prompt = (prompt or "").strip()
+    if not prompt:
+        raise ValueError("An image prompt is required.")
+    if len(prompt) > MAX_IMAGE_PROMPT_CHARS:
+        raise ValueError(
+            f"That prompt is {len(prompt)} characters — the limit is {MAX_IMAGE_PROMPT_CHARS}."
+        )
+    if aspect_ratio not in IMAGE_ASPECT_RATIOS:
+        raise ValueError(f"Unsupported aspect ratio “{aspect_ratio}”.")
+    if quality not in IMAGE_QUALITIES:
+        raise ValueError(f"Unsupported quality “{quality}”.")
+    if background not in IMAGE_BACKGROUNDS:
+        raise ValueError(f"Unsupported background “{background}”.")
+
+    model = settings.openrouter_image_model
+    headers = _headers()
+
+    with httpx.Client(timeout=_TIMEOUT) as client:
+        resp = client.post(
+            f"{settings.openrouter_base_url}/images/generations",
+            headers=headers,
+            json={
+                "model": model,
+                "prompt": prompt,
+                "aspect_ratio": aspect_ratio,
+                "quality": quality,
+                "background": background,
+                "stream": False,
+            },
+        )
+
+        image = None
+        if resp.status_code < 400:
+            try:
+                image = _image_from_images_endpoint(resp.json())
+            except ValueError:
+                image = None
+
+        if image is None:
+            # Either the endpoint isn't served for this model, or it answered
+            # in the chat shape. Retry the documented chat-modalities form
+            # before giving up, so swapping the model id doesn't break this.
+            fallback = client.post(
+                f"{settings.openrouter_base_url}/chat/completions",
+                headers=headers,
+                json={
+                    "model": model,
+                    "messages": [{"role": "user", "content": prompt}],
+                    "modalities": ["image", "text"],
+                    "stream": False,
+                },
+            )
+            if fallback.status_code >= 400:
+                # Report whichever failure is more informative — the first
+                # call's body, unless it succeeded and only parsing failed.
+                failed = resp if resp.status_code >= 400 else fallback
+                raise OpenRouterCallError(failed.status_code, failed.text)
+            try:
+                image = _image_from_chat_completion(fallback.json())
+            except ValueError:
+                image = None
+            if image is None:
+                raise OpenRouterCallError(
+                    502, f"{model} returned no image data. Response: {fallback.text[:300]}"
+                )
+
+    data, mime = image
+    cost_meter.record(stage=stage, agent=agent, cost_usd=_ESTIMATED_IMAGE_CALL_USD)
+    return GenerateImageResult(
+        data=data, mime_type=mime, model_version=model, cost_usd=_ESTIMATED_IMAGE_CALL_USD
+    )

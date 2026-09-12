@@ -7,7 +7,7 @@ from fastapi.responses import JSONResponse
 from postgrest.exceptions import APIError
 
 from app.config import get_settings
-from app.routers import misc, test_send, workspace
+from app.routers import image_gen, misc, test_send, workspace
 
 logging.basicConfig(level=logging.INFO)
 
@@ -89,6 +89,7 @@ app.add_middleware(
 )
 
 app.include_router(workspace.router)
+app.include_router(image_gen.router)
 app.include_router(test_send.router)
 app.include_router(misc.router)
 

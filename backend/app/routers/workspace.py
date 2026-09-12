@@ -15,15 +15,17 @@ import logging
 import threading
 import uuid
 from datetime import datetime, timezone
+from pathlib import Path
 
 from fastapi import APIRouter, File, HTTPException, UploadFile
 from pydantic import BaseModel
 
 from app import brand, csv_ingest, mailer, persistence, storage
-from app.activity import list_activity, log_activity
+from app.activity import clear_activity, list_activity, log_activity
 from app.config import WORKSPACE_ID, get_settings
 from app.cost_meter import cost_meter
 from app.eval import EVAL_STEPS, latest_eval_payload, run_evaluation
+from app.ledger import clear_entries as clear_ledger
 from app.ledger import list_entries
 from app.orchestrator.agents.creative_direction import company_assets, run_creative_direction
 from app.orchestrator.agents.email_composer import run_email_composer
@@ -246,27 +248,20 @@ UPLOAD_STEPS = [
 ]
 
 
-@router.post("/api/audience/upload")
-async def upload_audience(file: UploadFile = File(...)):
-    """Replaces the workspace audience with an uploaded CSV.
+# The bundled 1,000-row example base (backend/data/mosaic_customers.csv), as
+# offered by the "Load example" button. Fabricated data for a fictional
+# retailer — see app/synthetic_data.py, which generated it — so trying the
+# app end to end never requires a real customer list.
+SAMPLE_CSV_PATH = Path(__file__).resolve().parents[2] / "data" / "mosaic_customers.csv"
 
-    The file is read here, on the request, and only the parsed bytes are
-    handed to the worker — an UploadFile is closed once the response returns,
-    so a background thread reading from it would race the client.
+
+def _ingest_audience(raw: bytes, filename: str):
+    """Starts the parse/profile/insert job for one CSV's bytes.
+
+    Shared by the upload endpoint and the sample loader so the example base
+    goes through exactly the same ingest as a real file — a demo that took a
+    shortcut here would stop being evidence the upload works.
     """
-    _require_supabase()
-    if not (file.filename or "").lower().endswith((".csv", ".txt")):
-        raise HTTPException(status_code=400, detail="Upload a .csv file.")
-
-    raw = await file.read()
-    if not raw:
-        raise HTTPException(status_code=400, detail="That file is empty.")
-    if len(raw) > MAX_UPLOAD_BYTES:
-        raise HTTPException(
-            status_code=413,
-            detail=f"That file is {len(raw) / 1024 / 1024:.1f} MB — the limit is {MAX_UPLOAD_BYTES // 1024 // 1024} MB.",
-        )
-    filename = file.filename or "customers.csv"
 
     def work(on_step):
         on_step(0, f"Reading {filename}")
@@ -317,6 +312,110 @@ async def upload_audience(file: UploadFile = File(...)):
         return {"count": count}
 
     return _start_job("audience.upload", UPLOAD_STEPS, work, done)
+
+
+@router.post("/api/audience/upload")
+async def upload_audience(file: UploadFile = File(...)):
+    """Replaces the workspace audience with an uploaded CSV.
+
+    The file is read here, on the request, and only the parsed bytes are
+    handed to the worker — an UploadFile is closed once the response returns,
+    so a background thread reading from it would race the client.
+    """
+    _require_supabase()
+    if not (file.filename or "").lower().endswith((".csv", ".txt")):
+        raise HTTPException(status_code=400, detail="Upload a .csv file.")
+
+    raw = await file.read()
+    if not raw:
+        raise HTTPException(status_code=400, detail="That file is empty.")
+    if len(raw) > MAX_UPLOAD_BYTES:
+        raise HTTPException(
+            status_code=413,
+            detail=f"That file is {len(raw) / 1024 / 1024:.1f} MB — the limit is {MAX_UPLOAD_BYTES // 1024 // 1024} MB.",
+        )
+    return _ingest_audience(raw, file.filename or "customers.csv")
+
+
+@router.post("/api/audience/load-sample")
+def load_sample_audience():
+    """Loads the bundled example customer base, replacing whatever is there.
+
+    Same job, same steps and same replace-the-audience semantics as an
+    upload — the only difference is where the bytes come from.
+    """
+    _require_supabase()
+    try:
+        raw = SAMPLE_CSV_PATH.read_bytes()
+    except OSError as exc:
+        raise HTTPException(
+            status_code=500,
+            detail=f"The bundled example CSV is missing from the backend ({SAMPLE_CSV_PATH.name}).",
+        ) from exc
+    return _ingest_audience(raw, SAMPLE_CSV_PATH.name)
+
+
+# ── Reset ─────────────────────────────────────────────────────────────────
+
+
+# Order matters: children before parents, so nothing is orphaned if a later
+# delete fails. segment_brief cascades to creative_direction, segment_email,
+# proxy_check_result and manipulation_score, but the rows above it have no
+# foreign key to hang from.
+RESET_STEPS = [
+    "Clearing generated work",
+    "Clearing the audience",
+    "Clearing company info",
+    "Clearing the logs",
+]
+
+
+@router.post("/api/reset")
+def reset_workspace():
+    """Puts the workspace back to a first-run state.
+
+    Irreversible, and there is no export first — the console asks for
+    confirmation before calling this. Each table is cleared independently and
+    a missing one is skipped rather than aborting the rest (see
+    persistence._delete_all), so an outstanding migration leaves the
+    workspace emptied rather than half-emptied.
+
+    The Decision Ledger and activity log go too. They are append-only in
+    every other code path, and this is the sole exception: a reset that left
+    the previous run's audit trail behind would attribute it to the next one.
+    """
+    _require_supabase()
+
+    def work(on_step):
+        on_step(0, "Removing emails, approvals, sends and eval runs")
+        persistence.clear_approvals()
+        persistence.clear_sends()
+        persistence.clear_eval_runs()
+        # Cascades through creative_direction, segment_email,
+        # proxy_check_result and manipulation_score.
+        persistence.clear_segments()
+
+        on_step(1, "Removing contacts")
+        persistence.clear_customers()
+
+        on_step(2, "Removing company info and offers")
+        persistence.clear_offers()
+        persistence.clear_settings()
+
+        on_step(3, "Emptying the ledger and activity log")
+        clear_ledger(WORKSPACE_ID)
+        clear_activity()
+        # Process-local, so it survives the database wipe unless cleared here.
+        cost_meter.reset()
+        return True
+
+    def done(_result):
+        # Logged after the wipe, so the fresh log opens by saying why it is
+        # empty rather than looking like data was lost.
+        log_activity("workspace.reset", detail="Reset the workspace to a first-run state")
+        return {"reset": True}
+
+    return _start_job("workspace.reset", RESET_STEPS, work, done)
 
 
 # ── Stage 1: Segments ─────────────────────────────────────────────────────

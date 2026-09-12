@@ -37,5 +37,12 @@ class CostMeter:
     def breakdown(self, scope: str = "workspace") -> list[dict]:
         return list(self._spend[scope].calls)
 
+    def reset(self) -> None:
+        """Zeroes the tally — only the workspace reset calls this, so the
+        Logs tab's spend readout matches the emptied workspace instead of
+        still showing what the discarded run cost."""
+        with self._lock:
+            self._spend.clear()
+
 
 cost_meter = CostMeter()

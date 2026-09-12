@@ -8,14 +8,12 @@ import {
   Check,
   RotateCcw,
   Image as ImageIcon,
-  Undo2,
   Upload,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { ImageUpload } from "@/components/email-builder/ImageUpload";
 import { ProcessPanel } from "@/components/ui/process-panel";
 import { useJob } from "@/hooks/use-job";
 import { isImageFile, useFileDrop } from "@/hooks/use-file-drop";
@@ -56,74 +54,21 @@ function Swatch({ color }: { color: string }) {
 }
 
 /**
- * Logo / hero picker. Nothing is AI-generated — this is a file the user
- * uploads, which ImageUpload puts in the email-images bucket and hands back
- * as a public URL.
+ * What to print under a brand-asset tile.
  *
- * `inheritedFrom` names where the image came from when the field itself is
- * empty: a segment with no override shows the company asset, and clearing an
- * override falls back to it rather than to nothing.
+ * A hosted image has a filename worth showing; a `data:` URI has no path at
+ * all, and splitting one on "/" printed a slab of raw base64 under the tile.
+ * Anything unnamed gets a plain description instead.
  */
-function AssetField({
-  label,
-  value,
-  inherited,
-  inheritedFrom,
-  onChange,
-}: {
-  label: string;
-  value: string;
-  inherited?: string;
-  inheritedFrom?: string;
-  onChange: (url: string) => void;
-}) {
-  const [open, setOpen] = useState(false);
-  const shown = value || inherited || "";
-  const isInherited = !value && Boolean(inherited);
-
-  return (
-    <div>
-      <div className="flex items-center justify-between mb-1.5">
-        <Label className="text-[10px] font-semibold text-muted-foreground/80">{label}</Label>
-        <div className="flex items-center gap-2">
-          {value && (
-            <button
-              onClick={() => onChange("")}
-              className="text-[10px] text-muted-foreground hover:text-foreground inline-flex items-center gap-1"
-              title={inheritedFrom ? `Fall back to the ${inheritedFrom}` : "Clear"}
-            >
-              <Undo2 className="h-3 w-3" /> {inheritedFrom ? "Reset" : "Clear"}
-            </button>
-          )}
-          <button
-            onClick={() => setOpen((o) => !o)}
-            className="text-[10px] text-primary font-semibold inline-flex items-center gap-1"
-          >
-            <ImageIcon className="h-3 w-3" /> {open ? "Close" : shown ? "Change" : "Upload"}
-          </button>
-        </div>
-      </div>
-
-      <div className="flex items-center gap-2">
-        <div className="h-12 w-20 rounded-lg border border-border/60 bg-muted/40 overflow-hidden shrink-0 flex items-center justify-center">
-          {shown ? (
-            <img src={shown} alt="" className="max-h-full max-w-full object-contain" />
-          ) : (
-            <ImageIcon className="h-4 w-4 text-muted-foreground/40" />
-          )}
-        </div>
-        <span className="text-[10px] text-muted-foreground truncate min-w-0" title={shown}>
-          {shown ? (isInherited ? `From ${inheritedFrom}` : shown.split("/").pop()) : "Not set"}
-        </span>
-      </div>
-
-      {open && (
-        <div className="mt-2">
-          <ImageUpload value={value} onChange={onChange} />
-        </div>
-      )}
-    </div>
-  );
+function assetCaption(url: string): string {
+  if (!url) return "";
+  // A blob: URL is the local preview of a file still uploading, and a data:
+  // URI has no path at all — splitting either on "/" prints a uuid or a slab
+  // of base64 under the tile.
+  if (url.startsWith("blob:")) return "Uploading…";
+  if (url.startsWith("data:")) return "Uploaded image";
+  const name = url.split("?")[0].split("/").pop() ?? "";
+  return name || "Linked image";
 }
 
 // One frame for both tiles, so the two columns are the same height and line
@@ -162,32 +107,90 @@ function BrandAssetTile({
   onChange: (url: string) => Promise<void>;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [uploading, setUploading] = useState(false);
+  const [busy, setBusy] = useState(false);
+  // What the tile shows while a save is in flight. `null` hands display back
+  // to the saved value. Without this the tile kept rendering the old image
+  // until the server round trip returned, which read as the whole panel
+  // hanging for a couple of seconds on every add and remove.
+  const [optimistic, setOptimistic] = useState<string | null>(null);
+  // Object URL for the picked file, so the tile fills in the instant you
+  // choose one rather than after the upload. Revoked as soon as it stops
+  // being displayed — these leak until the tab closes otherwise.
+  const preview = useRef<string | null>(null);
+
+  const shown = optimistic ?? value;
+
+  const dropPreview = useCallback(() => {
+    if (preview.current) URL.revokeObjectURL(preview.current);
+    preview.current = null;
+  }, []);
+
+  useEffect(() => dropPreview, [dropPreview]);
+
+  // Hand display back to the prop once it has caught up, rather than clearing
+  // on save — clearing early blinks the previous image back for a frame.
+  useEffect(() => {
+    if (optimistic !== null && value === optimistic) {
+      setOptimistic(null);
+      dropPreview();
+    }
+  }, [value, optimistic, dropPreview]);
+
+  const save = useCallback(
+    async (url: string) => {
+      setBusy(true);
+      try {
+        await onChange(url);
+        setOptimistic(url);
+        toast.success(
+          url
+            ? `${asset.label} saved — it will be used in every email`
+            : `${asset.label} removed — emails will leave it out`,
+        );
+      } catch (err) {
+        toast.error(err instanceof Error ? err.message : "Could not save the asset");
+        setOptimistic(null);
+        dropPreview();
+      } finally {
+        setBusy(false);
+      }
+    },
+    [onChange, dropPreview, asset.label],
+  );
 
   const upload = useCallback(
     async (file: File) => {
-      setUploading(true);
+      dropPreview();
+      preview.current = URL.createObjectURL(file);
+      setOptimistic(preview.current);
+      setBusy(true);
       const url = await uploadImageFile(file, { notify: false });
-      setUploading(false);
-      if (url) await onChange(url);
+      if (!url) {
+        // uploadImageFile has already explained itself in a toast.
+        setOptimistic(null);
+        dropPreview();
+        setBusy(false);
+        return;
+      }
+      await save(url);
     },
-    [onChange],
+    [save, dropPreview],
   );
 
   const { dragging, dropProps } = useFileDrop({
     onFile: (file) => void upload(file),
     accept: isImageFile,
     rejectMessage: "That isn't an image — drop a png, jpg, gif or webp",
-    disabled: uploading,
+    disabled: busy,
   });
 
   return (
     <div>
       <div className="flex items-baseline justify-between gap-2 mb-1.5">
         <span className="text-[11px] font-semibold">{asset.label}</span>
-        {value && !uploading && (
+        {shown && !busy && (
           <button
-            onClick={() => void onChange("")}
+            onClick={() => void save("")}
             className="text-[10px] text-muted-foreground hover:text-destructive transition-colors"
           >
             Remove
@@ -209,7 +212,7 @@ function BrandAssetTile({
 
       <button
         type="button"
-        disabled={uploading}
+        disabled={busy}
         onClick={() => inputRef.current?.click()}
         {...dropProps}
         className={cn(
@@ -218,36 +221,36 @@ function BrandAssetTile({
           ASSET_FRAME,
           dragging
             ? "border-primary/70 bg-primary/[0.07]"
-            : value
+            : shown
               ? "border-transparent bg-muted/40 hover:border-primary/30"
               : "border-border/60 hover:border-primary/40 hover:bg-primary/[0.03]",
         )}
       >
-        {value && <img src={value} alt="" className="max-h-full max-w-full object-contain p-2" />}
+        {shown && <img src={shown} alt="" className="max-h-full max-w-full object-contain p-2" />}
 
         {/* Empty, mid-upload, or hovering over an existing image all resolve
             to the same centred prompt — one place to look, whatever the state. */}
         <div
           className={cn(
             "absolute inset-0 flex flex-col items-center justify-center gap-1.5 transition-opacity duration-200",
-            value && !dragging && !uploading
+            shown && !dragging && !busy
               ? "opacity-0 group-hover:opacity-100 bg-background/80 backdrop-blur-[2px]"
               : "opacity-100",
           )}
         >
-          {uploading ? (
+          {busy ? (
             <Loader2 className="h-4 w-4 animate-spin text-primary" />
           ) : (
             <Upload className={cn("h-4 w-4", dragging ? "text-primary" : "text-muted-foreground/50")} />
           )}
           <span className="text-[10px] font-medium text-muted-foreground">
-            {uploading ? "Uploading…" : dragging ? "Drop to upload" : value ? "Replace" : "Drop or click to upload"}
+            {busy ? "Saving…" : dragging ? "Drop to upload" : shown ? "Replace" : "Drop or click to upload"}
           </span>
         </div>
       </button>
 
-      <p className="text-[10px] text-muted-foreground/60 truncate mt-1.5" title={value || undefined}>
-        {value ? value.split("/").pop() : asset.where}
+      <p className="text-[10px] text-muted-foreground/60 truncate mt-1.5" title={assetCaption(shown) || asset.where}>
+        {shown ? assetCaption(shown) : asset.where}
       </p>
     </div>
   );
@@ -297,14 +300,10 @@ function BrandAssets({
 function DirectionCard({
   segmentName,
   direction,
-  companyLogo,
-  companyHero,
   onSaved,
 }: {
   segmentName: string;
   direction: CreativeDirection;
-  companyLogo: string;
-  companyHero: string;
   onSaved: () => Promise<void>;
 }) {
   const [draft, setDraft] = useState(direction);
@@ -375,32 +374,6 @@ function DirectionCard({
         ))}
       </div>
 
-      <div className="pt-3 border-t border-border/60 space-y-3">
-        <div className="text-[10px] text-muted-foreground/70">
-          Override the brand assets for this segment only — otherwise it uses the company's.
-        </div>
-        <AssetField
-          label="Logo"
-          value={draft.logo_url === companyLogo ? "" : draft.logo_url}
-          inherited={companyLogo}
-          inheritedFrom="company logo"
-          onChange={(url) => {
-            setDraft((d) => ({ ...d, logo_url: url }));
-            void save({ logo_url: url || companyLogo });
-          }}
-        />
-        <AssetField
-          label="Hero image"
-          value={draft.hero_image_url === companyHero ? "" : draft.hero_image_url}
-          inherited={companyHero}
-          inheritedFrom="company hero"
-          onChange={(url) => {
-            setDraft((d) => ({ ...d, hero_image_url: url }));
-            void save({ hero_image_url: url || companyHero });
-          }}
-        />
-      </div>
-
       <div className="pt-3 border-t border-border/60">
         <Label className="text-[10px] font-semibold text-muted-foreground/80">Accent colour for this segment</Label>
         <div className="flex items-center gap-2 mt-1.5">
@@ -430,7 +403,7 @@ function DirectionCard({
 }
 
 export default function CreativeReview() {
-  const { state, loading, error, refresh } = useWorkspace();
+  const { state, loading, error, refresh, apply } = useWorkspace();
   const { job, start, running } = useJob({
     onDone: refresh,
     successMessage: (j) => `Creative direction ready for ${j.result?.count ?? 0} segments`,
@@ -451,13 +424,12 @@ export default function CreativeReview() {
   const handleGenerate = () => start(() => generateCreative());
 
   const saveAsset = async (patch: { logo_url?: string; hero_image_url?: string }) => {
-    try {
-      await updateCompany(patch);
-      await refresh();
-      toast.success("Brand asset saved — it will be used in every email");
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Could not save the asset");
-    }
+    // No refresh() here. The PUT already returns the updated company, so
+    // refetching the whole console — segments, emails, verdicts, the lot — to
+    // learn one URL we were just handed added about two seconds to every
+    // add and remove. Merge the echo instead.
+    const { company, offers } = await updateCompany(patch);
+    apply({ company, offers });
   };
 
   const handleSavePalette = async () => {
@@ -562,8 +534,6 @@ export default function CreativeReview() {
                 key={seg.id}
                 segmentName={seg.name || seg.id}
                 direction={direction}
-                companyLogo={companyLogo}
-                companyHero={companyHero}
                 onSaved={refresh}
               />
             );

@@ -250,6 +250,7 @@ export function SegmentEmailEditor({ email, segmentName, onClose, onSaved }: Seg
                 viewport={viewport}
                 onBlockClick={setExpandedBlockId}
                 selectedBlockId={expandedBlockId}
+                onReorder={setBlocks}
               />
             </div>
           </ResizablePanel>
