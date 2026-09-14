@@ -8,3 +8,4 @@ langgraph>=0.2
 numpy>=1.26
 scikit-learn>=1.5
 hdbscan>=0.8.38
+pytest>=8.0

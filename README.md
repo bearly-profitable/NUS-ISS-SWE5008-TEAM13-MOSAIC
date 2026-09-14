@@ -7,8 +7,7 @@
 **A multi-agent system for hyper-personalised email marketing.**
 
 Four agents discover micro-segments in your own customer data, write a distinct
-creative direction and email for each one, adjudicate every message against nine
-pre-flight checks — and then stop, because a human presses send.
+creative direction and email for each one, adjudicate every message against the Guardian's pre-flight checks — and then stop, because a human presses send.
 
 NUS-ISS · Graduate Certificate in Architecting AI Systems (SWE5008) · Practice Module · **Team 13**
 
@@ -148,7 +147,7 @@ at the next stage.
 
 ---
 
-## Stage 5 — nine checks stand between a draft and an inbox
+## Stage 5 — pre-flight checks stand between a draft and an inbox
 
 ![Guardian](docs/media/guardian.jpg)
 
@@ -163,7 +162,8 @@ a hardcoded pass, and the Approval Queue re-adjudicates after every edit in the 
 | | Unsubscribe route | `block` | Does the footer carry an opt-out? |
 | | PII leakage | `block` | Any identifier in the body belonging to someone else? |
 | | Protected-attribute proxy | `revise` | Did this segment correlate with a held-out attribute? |
-| **Content** | Offer grounding | `block` | Is every claim cited to a real catalogue entry? |
+| **Content** | Instruction injection | `block` | Jailbreak / “ignore previous instructions” phrasing in the copy? |
+| | Offer grounding | `block` | Is every claim cited to a real catalogue entry? |
 | | Personalisation tags | `block` | Does every merge tag resolve? |
 | **Deliverability** | Subject line | `revise` | Length, emptiness, spam triggers |
 | | Link integrity | `revise` | Any placeholder or dead destination? |
@@ -175,7 +175,7 @@ customer's identifiers is a data incident, and an unresolved `first_name` tag re
 literally to a real person. **REVISE** is a quality problem the operator may knowingly ship
 over. **PASS** is clear to send.
 
-The check set is versioned (`guardian-v3`); the console ignores verdicts written by an
+The check set is versioned (`guardian-v4`); the console ignores verdicts written by an
 older version rather than rendering checks it no longer understands.
 
 ### The human gate
@@ -244,6 +244,27 @@ real people, and no fabricated endorsements or testimonials.
 
 ---
 
+## CI — MLOps and LLMSecOps
+
+Every push and pull request runs [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
+No job calls OpenRouter or Supabase: the gate is deterministic and free.
+
+| Job | What it locks |
+|-----|----------------|
+| **No committed secrets** | Tracked `.env` / `.env.local` files fail the build. |
+| **Guardian corpus** | Fixture emails in [`backend/tests/fixtures/llmsecops/`](backend/tests/fixtures/llmsecops/) are run through the real `run_checks` / `verdict_for` path. PII, missing unsubscribe, unresolved merge tags, and instruction-injection phrasing must **BLOCK**. An offer id that is not in the catalogue must fail grounding. A clean email must **PASS**. |
+| **Contracts** | Eval-v1 weights sum to 100 per agent. Segment / creative / composer JSON schemas still require their artifact fields. Prompt versions (`seg-v3`, `direction-v2`, `email-v2`, `guardian-v4`) are pinned. Protected-attribute column names stay excluded from clustering. |
+| **Console lint** | `npm run lint` in `frontend/` (reported; pre-existing builder warnings are not a merge gate). |
+
+Run the same suite locally from `backend/`:
+
+```bash
+pip install -r requirements.txt
+python -m pytest -q
+```
+
+---
+
 ## Architecture
 
 ```
@@ -261,6 +282,7 @@ MOSAIC/
 │       ├── csv_ingest.py     Schema inference + protected-column profiling
 │       ├── persistence.py    Supabase reads and writes
 │       └── config.py         Settings (.env)
+│   └── tests/                CI corpus: Guardian fixtures + eval/schema pins
 ├── frontend/                 React 18 + Vite + TypeScript + Tailwind + shadcn/ui
 │   └── src/
 │       ├── pages/            One per pipeline tab, plus Settings and Logs

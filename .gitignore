@@ -13,6 +13,7 @@ backend/.venv/
 backend/__pycache__/
 backend/**/__pycache__/
 backend/.env
+backend/.pytest_cache/
 
 # OS / editor
 .DS_Store

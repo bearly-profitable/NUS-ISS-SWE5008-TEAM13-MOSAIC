@@ -1,0 +1,22 @@
+{
+  "id": "email-merge-tag",
+  "segment_brief_id": "seg-test",
+  "subject": "Your member rewards this month",
+  "preheader": "Offers matched to how you shop",
+  "cited_offer_ids": ["offer-demo"],
+  "blocks": [
+    {
+      "type": "text",
+      "content": {
+        "text": "Hello {{unknown_column}}, your rebate is waiting."
+      }
+    },
+    {
+      "type": "footer",
+      "content": {
+        "text": "Unsubscribe at any time",
+        "link": "https://mosaic.example.invalid/unsubscribe"
+      }
+    }
+  ]
+}

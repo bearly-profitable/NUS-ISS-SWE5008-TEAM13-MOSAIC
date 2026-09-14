@@ -1,0 +1,15 @@
+{
+  "id": "email-no-unsub",
+  "segment_brief_id": "seg-test",
+  "subject": "Your member rewards this month",
+  "preheader": "Offers matched to how you shop",
+  "cited_offer_ids": ["offer-demo"],
+  "blocks": [
+    {
+      "type": "text",
+      "content": {
+        "text": "Members on this plan keep the welcome rebate on every renewal."
+      }
+    }
+  ]
+}

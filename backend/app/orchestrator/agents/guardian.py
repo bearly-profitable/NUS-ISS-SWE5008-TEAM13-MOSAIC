@@ -42,7 +42,7 @@ from app.persistence import (
 # Bumped whenever the check set changes. The console ignores verdicts written
 # by an older version rather than rendering checks it no longer understands —
 # see routers/workspace.py's _latest_verdicts.
-GUARDIAN_VERSION = "guardian-v3"
+GUARDIAN_VERSION = "guardian-v4"
 
 BLOCK = "block"
 REVISE = "revise"
@@ -61,6 +61,17 @@ _MARKDOWN_LINK_RE = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
 # Anything an unsubscribe link plausibly says. Matched against the footer's
 # link labels and URLs.
 _UNSUBSCRIBE_WORDS = ("unsubscribe", "opt out", "opt-out", "preferences", "manage subscription")
+
+# Instruction-like phrasing that should never appear in outbound copy —
+# either a jailbreak that leaked from ingested free text, or a model that
+# started talking to itself. Matched as lowercase substrings.
+_INJECTION_PHRASES = (
+    "ignore previous instructions",
+    "ignore all previous instructions",
+    "disregard your instructions",
+    "reveal your system prompt",
+    "jailbreak",
+)
 
 # Words that materially raise a spam score in the subject line. Deliberately
 # short: this is a deliverability signal, not a tone police.
@@ -256,6 +267,22 @@ def _proxy_check(segment_id: str) -> dict:
     )
 
 
+def _injection_check(email: dict) -> dict:
+    """Generated copy must not carry jailbreak / instruction-override phrasing
+    that leaked from untrusted customer free text or a confused model turn."""
+    text = _visible_text(email).lower()
+    hits = [p for p in _INJECTION_PHRASES if p in text]
+    return _check(
+        "No instruction injection",
+        CONTENT,
+        not hits,
+        "No instruction-like artifacts in the copy"
+        if not hits
+        else f"Instruction-like phrasing in the copy: {hits[0]}",
+        BLOCK,
+    )
+
+
 # ── Content ───────────────────────────────────────────────────────────────
 
 
@@ -418,6 +445,7 @@ def run_checks(email: dict) -> list[dict]:
         _unsubscribe_check(email),
         _pii_check(email),
         _proxy_check(segment_id),
+        _injection_check(email),
         _grounding_check(email),
         _merge_tag_check(email),
         _subject_check(email),
