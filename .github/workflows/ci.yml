@@ -53,3 +53,7 @@ jobs:
       - name: Lint (non-blocking — pre-existing builder warnings)
         run: npm run lint
         continue-on-error: true
+      - name: Production build
+        # Guards the deploy path: Railway runs this exact command, and a build
+        # that only fails there is a failed deploy, not a failed check.
+        run: npm run build

@@ -360,6 +360,21 @@ produces output.
 Long-running stages return a job id; the console polls `/api/jobs/{id}` and renders the
 agent's own progress steps ([progress.py](backend/app/progress.py)).
 
+### Deploying it
+
+Both halves deploy to Railway as two services off this one repo, each with its own
+**Root Directory** — `backend` builds from [backend/Dockerfile](backend/Dockerfile)
+(Python 3.12 slim, healthchecked on `/api/health`), `frontend` builds with Nixpacks and
+is served as a static SPA by `serve -s dist`. Supabase, OpenRouter and Resend stay where
+they are.
+
+Two things bite if you skip them: the backend's `FRONTEND_ORIGIN` must list the Console's
+deployed domain or every call fails CORS, and `VITE_ORCH_API_BASE` is inlined at **build**
+time, so changing it needs a redeploy rather than a restart. The backend also stays at one
+replica — [progress.py](backend/app/progress.py) keeps job progress in process memory.
+
+Full walkthrough: [docs/deploy-railway.md](docs/deploy-railway.md).
+
 ---
 
 ## Where the build differs from the proposal

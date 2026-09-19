@@ -17,3 +17,6 @@ backend/.pytest_cache/
 
 # OS / editor
 .DS_Store
+
+# Runtime logs
+*.log

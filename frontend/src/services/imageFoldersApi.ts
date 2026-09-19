@@ -1,10 +1,13 @@
 /**
  * Image Folders API client — typed fetch wrappers for gallery folder management.
  */
+import { ORCHESTRATOR_BASE } from "@/services/emailApi";
 
-const base: string =
-  (import.meta as unknown as Record<string, Record<string, string>>).env?.VITE_ORCH_API_BASE ??
-  "http://localhost:3010";
+// Same origin as every other call — these routes live on the Orchestrator
+// (see backend/app/routers/misc.py). The old localhost:3010 fallback pointed
+// at a port nothing has ever listened on, which turned a missing
+// VITE_ORCH_API_BASE into a connection error instead of a same-origin 404.
+const base: string = ORCHESTRATOR_BASE.replace(/\/+$/, "");
 
 const jsonHeaders: Record<string, string> = {
   "Content-Type": "application/json",

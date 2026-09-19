@@ -50,6 +50,9 @@ class Settings(BaseSettings):
     default_recipient: str = "ongqingquan@gmail.com"
 
     # -- CORS --
+    # Comma-separated: the Console is served from a different origin in every
+    # environment (localhost in dev, the static service's domain on Railway),
+    # and a preview deploy adds another. "*" allows any origin.
     frontend_origin: str = "http://localhost:5173"
 
     @property
@@ -63,6 +66,17 @@ class Settings(BaseSettings):
     @property
     def resend_configured(self) -> bool:
         return bool(self.resend_api_key and self.resend_from)
+
+    @property
+    def cors_origins(self) -> list[str]:
+        """FRONTEND_ORIGIN parsed into the list CORSMiddleware wants.
+
+        Trailing slashes are stripped because a browser's Origin header never
+        carries one — "https://app.up.railway.app/" in the env var would
+        otherwise silently match nothing and every call would fail CORS.
+        """
+        origins = [o.strip().rstrip("/") for o in self.frontend_origin.split(",")]
+        return [o for o in origins if o] or ["http://localhost:5173"]
 
 
 @lru_cache

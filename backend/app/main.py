@@ -83,7 +83,7 @@ def httpx_transport_error_handler(_request: Request, exc: httpx.TransportError):
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.frontend_origin],
+    allow_origins=settings.cors_origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -94,10 +94,23 @@ app.include_router(test_send.router)
 app.include_router(misc.router)
 
 
+@app.get("/")
+def root():
+    """The Orchestrator has no UI — say so rather than 404ing, because this
+    is the first URL anyone opens after a deploy."""
+    return {
+        "service": "MOSAIC Orchestrator",
+        "health": "/api/health",
+        "docs": "/docs",
+    }
+
+
 @app.get("/api/health")
 def health():
     return {
         "status": "ok",
         "openrouter_configured": settings.openrouter_configured,
         "supabase_configured": settings.supabase_configured,
+        "resend_configured": settings.resend_configured,
+        "cors_origins": settings.cors_origins,
     }
