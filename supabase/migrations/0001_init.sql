@@ -3,11 +3,10 @@
 -- -> paste this whole file -> Run.
 --
 -- Covers two things:
---   1. The email builder's own tables (ported unchanged from CampaignOS,
---      see EMAIL_BUILDER_PORTING_GUIDE.md §5), extended with campaign_id /
---      segment_brief_id so an assembled segment email links back to the
---      campaign that produced it (MOSAIC_APPLICATION_PLAN.md §4).
---   2. The campaign pipeline tables from MOSAIC_APPLICATION_PLAN.md §6
+--   1. The email builder's own tables (ported unchanged from CampaignOS),
+--      extended with campaign_id / segment_brief_id so an assembled segment
+--      email links back to the campaign that produced it.
+--   2. The campaign pipeline tables
 --      (Segmentation -> Creative -> Copy -> Guardian -> Approval -> Ledger).
 --
 -- RLS note: this app does not use Supabase Auth (see
@@ -79,7 +78,7 @@ create table if not exists email_template_version (
 );
 
 -- ─────────────────────────────────────────────────────────────
--- Campaign pipeline tables (MOSAIC_APPLICATION_PLAN.md §6)
+-- Campaign pipeline tables
 -- ─────────────────────────────────────────────────────────────
 
 create table if not exists brand_guideline_pack (

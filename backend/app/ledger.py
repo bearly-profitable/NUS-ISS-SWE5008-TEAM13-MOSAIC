@@ -1,7 +1,7 @@
 """
 Append-only Decision Ledger writer.
 
-Writes to the `ledger_entry` table (see MOSAIC_APPLICATION_PLAN.md §6) when
+Writes to the `ledger_entry` table (see supabase/migrations/0001_init.sql) when
 Supabase is configured; otherwise falls back to an in-process list plus a log
 line, so the rest of the Orchestrator can run before the DB is wired up.
 Every entry carries the prompt/model versions live at generation time —

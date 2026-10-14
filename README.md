@@ -7,7 +7,8 @@
 **A multi-agent system for hyper-personalised email marketing.**
 
 Four agents discover micro-segments in your own customer data, write a distinct
-creative direction and email for each one, adjudicate every message against the Guardian's pre-flight checks — and then stop, because a human presses send.
+creative direction and email for each one, adjudicate every message against ten
+pre-flight checks — and then stop, because a person presses send.
 
 NUS-ISS · Graduate Certificate in Architecting AI Systems (SWE5008) · Practice Module · **Team 13**
 
@@ -15,194 +16,321 @@ NUS-ISS · Graduate Certificate in Architecting AI Systems (SWE5008) · Practice
 
 ---
 
+## Practice module deliverables
+
+| Deliverable | Where |
+|---|---|
+| **Group project report** | [docs/Team13_MOSAIC_Group_Report.docx](docs/Team13_MOSAIC_Group_Report.docx) · [PDF](docs/Team13_MOSAIC_Group_Report.pdf) |
+| **Presentation slides** | [docs/Team13_MOSAIC_Presentation.pptx](docs/Team13_MOSAIC_Presentation.pptx) |
+| Project proposal | [TEAM_13_Project_Proposal.docx](TEAM_13_Project_Proposal.docx) |
+| Progress report 1 (22 Aug 2026) | [frontend/public/Team 13_22 Aug 2026.pdf](<frontend/public/Team 13_22 Aug 2026.pdf>) |
+| System architecture (logical, physical, deployment, data) | [§3 below](#3-system-architecture) · report §3 |
+| Agent design documentation | [§4 below](#4-agent-roles-and-design) · report §4 |
+| Explainable and Responsible AI report | [§5 below](#5-explainable-and-responsible-ai) · report §5 |
+| AI security risk register | [§6 below](#6-ai-security-risk-register) · report §6 |
+| MLSecOps / LLMSecOps pipeline | [§7 below](#7-mlsecops--llmsecops-pipeline) · [.github/workflows/ci.yml](.github/workflows/ci.yml) · report §7 |
+| Testing artifacts | [backend/tests/](backend/tests/) · [docs/ci-negative-test.md](docs/ci-negative-test.md) · report §8 |
+| UI prototype | the Campaign Console in [frontend/](frontend/) · [screenshots](#9-the-console) |
+| Intro video (58 s) | [docs/media/mosaic-intro.mp4](docs/media/mosaic-intro.mp4) |
+
+**Contents:** [1 Problem](#1-the-problem) · [2 System overview](#2-system-overview) ·
+[3 Architecture](#3-system-architecture) · [4 Agents](#4-agent-roles-and-design) ·
+[5 Responsible AI](#5-explainable-and-responsible-ai) · [6 Risk register](#6-ai-security-risk-register) ·
+[7 MLSecOps](#7-mlsecops--llmsecops-pipeline) · [8 Testing and evaluation](#8-testing-and-evaluation) ·
+[9 Console](#9-the-console) · [10 Running it](#10-running-it) · [11 Changes from the proposal](#11-where-the-build-differs-from-the-proposal) ·
+[12 Limitations and next steps](#12-limitations-and-next-steps) · [Team 13](#team-13)
+
+---
+
 ## Watch the intro
 
 [![MOSAIC intro video](docs/media/poster.jpg)](docs/media/mosaic-intro.mp4)
 
-**▶ [docs/media/mosaic-intro.mp4](docs/media/mosaic-intro.mp4)** — 58 seconds, 1920×1080.
-Ten scenes, in the order the console itself works.
-
-The video is a [Remotion](https://remotion.dev) project in [video/](video/) and is
-rendered from source, not edited by hand — every stage name, check name, field name and
-rubric weight on screen is taken from the code it describes. Re-render it with
-`cd video && npm install && npm run render`. See [video/README.md](video/README.md).
+**▶ [docs/media/mosaic-intro.mp4](docs/media/mosaic-intro.mp4)** — 58 seconds, 1920×1080, ten scenes in
+the order the console works. It is a [Remotion](https://remotion.dev) project in [video/](video/),
+rendered from source rather than edited by hand: `cd video && npm install && npm run render`.
 
 ---
 
-## The problem
+## 1. The problem
 
-A retailer with 200,000 contacts runs a campaign as three or four creative variants.
-New, lapsed, high-value, everyone else. One hero image and one body of copy per variant,
-and "personalisation" means dropping a first name into a fixed sentence.
+A retailer with 200,000 contacts runs a campaign as three or four creative variants — new,
+lapsed, high-value, everyone else. One hero image and one body of copy per variant, and
+"personalisation" means dropping a first name into a fixed sentence.
 
 The reason is cost, not preference. Every extra variant needs its own brief, design pass,
-copy pass, render test and QA sign-off — the fifth variant costs about what the first one
-did, so teams stop at four. A customer who buys on durability and a customer who buys on
-trend both sit inside "high value" and the campaign speaks to neither.
+copy pass, render test and QA sign-off, so the fifth variant costs about what the first did
+and teams stop at four. A customer who buys on durability and a customer who buys on
+discount both sit inside "high value", and the campaign speaks to neither.
 
-MOSAIC treats campaign production as a **generation and assurance** problem rather than
-an authoring one.
+MOSAIC treats campaign production as a **generation and assurance** problem rather than an
+authoring one.
 
 ### Why four agents instead of one big prompt
 
-| | |
-|---|---|
-| **Cost** | Expensive, high-variance work (segment discovery, creative direction, long copy) runs **once per segment** — O(k). Cheap deterministic work runs per recipient — O(n). n ≫ k, and that split is what makes the whole thing affordable. |
-| **Separation of duties** | The Guardian sits *outside* the generators and can veto their output. A generator never grades its own compliance. |
-| **Different work, different tools** | Clustering, brand-voice copywriting, block assembly and policy adjudication want different models and different evaluation methods. One context window would be a step backwards. |
-| **Contained failures** | A bad creative direction re-runs one agent. A failed offer citation re-runs one email. Nothing else is thrown away. |
+| | One large prompt | Rules-based platform | MOSAIC |
+|---|---|---|---|
+| New creative per segment | yes | no — routes copy a human wrote | yes |
+| Auditability | low | high | high — typed artifact + ledger row per stage |
+| Who checks compliance | the generator itself | rules on human copy | a separate Guardian with a veto |
+| Failure containment | re-run everything | — | re-run one stage or one email |
+| Cost profile | model call per recipient, O(n) | low | model work per segment, O(k) |
 
-A single large prompt produces reasonable output and nothing anyone can audit. A
-rules-based marketing platform is fully auditable but can only route content a human
-already wrote — which is the constraint being removed.
+Expensive, high-variance work (segment discovery, creative direction, copy) runs **once per
+segment**. Cheap deterministic work (merge tags, the cited offer) runs per recipient. n ≫ k,
+and that split is what makes per-segment creative affordable. The Guardian sits *outside* the
+generators and is owned by the team member who did not build them.
+
+**Stakeholders:** campaign marketer (primary user, signs off every send), brand lead,
+data protection officer (PDPA consent), legal (claims, unsubscribe), platform engineering
+(cost, reliability) and customers, who are not users but carry most of the downside.
 
 ---
 
-## The pipeline
+## 2. System overview
 
-![Five steps, four agents, one human gate](docs/media/pipeline.jpg)
+![High-level workflow](docs/media/architecture/fig-workflow.png)
 
-Five console tabs, each owning one stage, each **locked until the previous stage has
-produced a reviewable artifact**. The nav and the route guard read the same definition
-([`frontend/src/lib/pipeline.ts`](frontend/src/lib/pipeline.ts)), and the backend enforces
-the same order independently ([`backend/app/routers/workspace.py`](backend/app/routers/workspace.py)),
+Five console tabs, each owning one stage, each **locked until the previous stage has produced
+a reviewable artifact**. The nav and route guard read one definition
+([`frontend/src/lib/pipeline.ts`](frontend/src/lib/pipeline.ts)) and the API enforces the same
+order independently ([`backend/app/routers/workspace.py`](backend/app/routers/workspace.py)),
 so a pasted URL can never skip a step.
 
-| # | Tab | Stage | What it produces | Code |
-|---|-----|-------|------------------|------|
-| 1 | Company Info | Intake | Company profile, brand assets, offer catalogue, uploaded contacts | [csv_ingest.py](backend/app/csv_ingest.py), [brand.py](backend/app/brand.py) |
-| 2 | Segments | Segmentation & Insight | One `SegmentBrief` per cluster — name, motivation, tone, size, confidence, feature contributions | [segmentation.py](backend/app/orchestrator/agents/segmentation.py) |
-| 3 | Creative Review | Creative Direction | One `CreativeDirection` per segment — tonality, language, CTA style, design style, palette | [creative_direction.py](backend/app/orchestrator/agents/creative_direction.py) |
-| 4 | Email Review | Composition | One `SegmentEmail` per segment — subject, preheader, typed blocks, cited offers | [email_composer.py](backend/app/orchestrator/agents/email_composer.py) |
-| 5 | Approval Queue | Adjudication → human gate → dispatch | A `GuardianVerdict` per email, then an approval, then a real send | [guardian.py](backend/app/orchestrator/agents/guardian.py), [mailer.py](backend/app/mailer.py) |
-
-**Agents never call each other.** Every stage reads and writes a typed shared blackboard
-(`WorkspaceState` in [state.py](backend/app/orchestrator/state.py)) threaded through a
-LangGraph graph ([graph.py](backend/app/orchestrator/graph.py)), and each stage is also
-exported on its own so a tab can re-run just its step without re-running everything
-upstream. Every transition appends to the **Decision Ledger**
-([ledger.py](backend/app/ledger.py)) — insert-only, carrying the prompt and model versions
-live at generation time.
+| # | Tab | Stage | Produces | Code |
+|---|-----|-------|----------|------|
+| 1 | Company Info | Intake | Company profile, offer catalogue, profiled customer list | [csv_ingest.py](backend/app/csv_ingest.py), [brand.py](backend/app/brand.py) |
+| 2 | Segments | Segmentation & Insight | `SegmentBrief` per cluster + proxy-test result | [segmentation.py](backend/app/orchestrator/agents/segmentation.py) |
+| 3 | Creative Review | Creative Direction | `CreativeDirection` per segment | [creative_direction.py](backend/app/orchestrator/agents/creative_direction.py) |
+| 4 | Email Review | Composition | `SegmentEmail` per segment — typed blocks, cited offers | [email_composer.py](backend/app/orchestrator/agents/email_composer.py) |
+| 5 | Approval Queue | Adjudication → human gate → dispatch | `GuardianVerdict`, then a real send | [guardian.py](backend/app/orchestrator/agents/guardian.py), [mailer.py](backend/app/mailer.py) |
 
 ---
 
-## The agents
+## 3. System architecture
 
-| Agent | Owner | Autonomy | Tools |
-|-------|-------|----------|-------|
-| **Orchestrator** | OQQ | Least autonomous by design — plans over a fixed action space, owns shared state and the Ledger, enforces stage order and the approval gate | LangGraph runtime, ledger store, cost meter |
-| **Segmentation & Insight** | OQQ | Infers the feature schema from the uploaded CSV itself, decides cluster count and granularity, emits a confidence score and a plain-language rationale per cluster | Supabase profile queries, embeddings, HDBSCAN, PCA / StandardScaler, z-scored feature contributions, protected-attribute proxy test |
-| **Creative Direction** | ABP | Writes a short direction per segment under a hard JSON schema, picks an on-brand accent from the stored palette | LLM (structured output), brand profile, palette store |
-| **Email Composer & Assembly** | OQQ | Model writes only content under word caps; **code** assembles the layout, applies the direction and pins logo and hero. Must cite a real catalogue offer or the Guardian blocks it | LLM (structured output), offer catalogue, block assembler, builder-compatible `EmailBlock[]` |
-| **Compliance & Brand Guardian** | ABP | Adjudicates every message, can veto any generator, re-runs on every edit. No agent can override it | Consent stats, proxy-check results, offer catalogue, PII scanner, merge-tag resolver, link and image checkers |
+### 3.1 Logical architecture
 
----
+![Logical architecture](docs/media/architecture/fig-logical.png)
 
-## Stage 2 — segments that explain themselves
+Five layers, dependencies pointing down only. The console never touches the database for
+pipeline state; agents never call each other; every model call goes through one client
+([`openrouter_client.py`](backend/app/openrouter_client.py)) that enforces the JSON schema,
+falls back across providers, meters cost and tags versions.
 
-![Segmentation](docs/media/segments.jpg)
+### 3.2 Physical architecture and deployment
 
-Sanitised free text is embedded, concatenated with engineered numeric and categorical
-features, and clustered with **HDBSCAN**. The model is only allowed to *name* what the
-numbers already found — the brief schema caps it to a 2–4 word name, one sentence of
-motivation, one phrase of tone.
+![Physical architecture](docs/media/architecture/fig-physical.png)
 
-Nothing is hardcoded to a particular CSV. The feature schema is inferred per run
-([`_feature_schema`](backend/app/orchestrator/agents/segmentation.py)): numeric columns
-with real spread are standardised, low-cardinality columns are one-hot encoded at a `0.3`
-weight so a wide categorical block cannot dominate Euclidean distance, embeddings are
-weighted `0.5` so they sit alongside the engineered features rather than swamp them, and
-constant columns, row keys and anything above 25 categories are dropped.
+| Component | Technology | Hosting |
+|---|---|---|
+| Campaign Console | React 18 · Vite · TypeScript · Tailwind · shadcn/ui | Railway (Nixpacks), static SPA via `serve -s dist` |
+| MOSAIC Orchestrator | Python 3.12 · FastAPI · LangGraph · scikit-learn · HDBSCAN | Railway (Dockerfile, `python:3.12-slim`), healthcheck `/api/health` |
+| Database + storage | Supabase Postgres, public `email-images` bucket | Supabase cloud |
+| Models | OpenRouter — `openai/gpt-5.6-luna`, `openai/text-embedding-3-small` | external API |
+| Dispatch | Resend, verified sending domain | external API |
 
-**Protected attributes never enter the feature matrix.** Age, gender and the rest are held
-out entirely, then read back afterwards to test whether a discovered segment ended up
-correlating with them anyway. A flagged segment surfaces on the Segments tab with the
-attribute and the deviation, and the Guardian carries that flag forward into every email
-from that segment.
+- **Two services, one repo**, each with its own Railway root directory. Full walkthrough:
+  [docs/deploy-railway.md](docs/deploy-railway.md).
+- **One replica, on purpose** — job progress lives in process memory
+  ([progress.py](backend/app/progress.py)); scaling out needs a shared job store first.
+- **Secrets stay server-side.** `VITE_*` variables ship to the browser, so they never hold a
+  key; CI fails if a `.env` file is tracked.
+- `VITE_ORCH_API_BASE` is inlined at **build** time, and the backend's `FRONTEND_ORIGIN` must
+  list the console's domain or every call fails CORS.
 
-HDBSCAN is allowed to leave contacts as noise rather than forcing everyone into a cluster.
+### 3.3 Agent communication — a typed blackboard
 
----
+![Blackboard communication](docs/media/architecture/fig-blackboard.png)
 
-## Stages 3–4 — direction, then composition
+The Orchestrator threads a typed `WorkspaceState` ([state.py](backend/app/orchestrator/state.py))
+through a LangGraph graph ([graph.py](backend/app/orchestrator/graph.py)): segmentation →
+creative direction → composer → guardian. Each agent reads upstream artifacts and writes its
+own; every artifact is persisted, so any tab can re-run just its own stage. Model output is
+typed at the boundary with strict `json_schema` (retried once in `json_object` mode if a
+provider rejects strict mode). Every transition appends to the **Decision Ledger**
+([ledger.py](backend/app/ledger.py)) — insert-only, with prompt and model versions.
 
-![Composition](docs/media/compose.jpg)
+Long stages run as jobs: the API returns a job id immediately, a worker thread reports named
+steps, and the console polls `GET /api/jobs/{id}`.
 
-Creative direction is a **written direction, not a picture**: tonality, language style,
-CTA style, design and shape language, palette, rationale. Each field is capped to a
-phrase, because these render on compact cards.
+![Sequence of one stage run](docs/media/architecture/fig-sequence.png)
 
-The composer emits a real `EmailBlock[]` in exactly the shape
-[frontend/src/types/email-builder.ts](frontend/src/types/email-builder.ts) defines, so the
-Email Review tab hands it straight to the drag-and-drop builder with no translation layer.
-The split of responsibility is deliberate:
+### 3.4 Data model
 
-- the **model** writes only content, under hard word limits;
-- the **code** assembles the layout, applies the segment's palette and shape language, and pins the logo and hero.
+![Data model](docs/media/architecture/fig-datamodel.png)
 
-A bad model response can shorten the copy. It cannot produce an unrenderable or off-brand
-template. Grounding is enforced rather than trusted: any cited offer id that is not a real
-`offer_catalogue` row is dropped on the way out, and an empty citation list is a hard BLOCK
-at the next stage.
+Customer attributes are stored as three JSONB groups (structured, behavioural,
+psychographic) so any uploaded CSV fits without a schema change. Migrations
+`0001`–`0008` in [supabase/migrations/](supabase/migrations/) are applied in order.
 
----
+### 3.5 Key technology choices
 
-## Stage 5 — pre-flight checks stand between a draft and an inbox
-
-![Guardian](docs/media/guardian.jpg)
-
-These emails are dispatched for real, so every check is one that would actually stop an
-operator pressing send. Each runs against *this workspace's own data* — the uploaded
-contacts, the offer catalogue, the company profile, the email's current blocks. Nothing is
-a hardcoded pass, and the Approval Queue re-adjudicates after every edit in the builder.
-
-| Group | Check | Severity | Asks |
-|-------|-------|----------|------|
-| **Compliance** | Consent | `block` | Are these contacts opted in? |
-| | Unsubscribe route | `block` | Does the footer carry an opt-out? |
-| | PII leakage | `block` | Any identifier in the body belonging to someone else? |
-| | Protected-attribute proxy | `revise` | Did this segment correlate with a held-out attribute? |
-| **Content** | Instruction injection | `block` | Jailbreak / “ignore previous instructions” phrasing in the copy? |
-| | Offer grounding | `block` | Is every claim cited to a real catalogue entry? |
-| | Personalisation tags | `block` | Does every merge tag resolve? |
-| **Deliverability** | Subject line | `revise` | Length, emptiness, spam triggers |
-| | Link integrity | `revise` | Any placeholder or dead destination? |
-| | Image sources | `revise` | Public `https`, or a `data:` URI Gmail will strip? |
-
-Severity drives the verdict. **BLOCK** means the message must never reach an inbox —
-sending without consent or without an opt-out route is unlawful, leaking another
-customer's identifiers is a data incident, and an unresolved `first_name` tag renders
-literally to a real person. **REVISE** is a quality problem the operator may knowingly ship
-over. **PASS** is clear to send.
-
-The check set is versioned (`guardian-v4`); the console ignores verdicts written by an
-older version rather than rendering checks it no longer understands.
-
-### The human gate
-
-Dispatch is reachable only behind an explicit approval **plus** a non-BLOCK verdict. There
-is no configuration flag that turns the gate off. Approved mail goes out through Resend
-([mailer.py](backend/app/mailer.py)) to an address the operator confirms at the point of
-sending, and the outcome is written back to `email_send` and the Ledger.
+| Decision | Choice | Why |
+|---|---|---|
+| Coordination | Blackboard with typed artifacts | each stage reviewable, re-runnable and auditable; lineage comes for free |
+| Graph shape | Strictly sequential | each tab reviews the previous output; the direction is the composer's input |
+| Clustering | HDBSCAN, leaf selection | no fixed k; contacts may stay as noise; membership confidence |
+| Guardian | Deterministic rule engine | fast, free on every edit, testable in CI, explainable per check |
+| Layout | Code assembles `EmailBlock[]` | a bad model response can shorten copy, never break the template |
+| Model access | OpenRouter behind one client | one chokepoint for schema, cost and version tags |
 
 ---
 
-## Evaluation — the agents get graded too
+## 4. Agent roles and design
 
-![Sidecar evaluation](docs/media/eval.jpg)
+| Agent | Owner | Version | Model | Tools | Autonomy |
+|-------|-------|---------|-------|-------|----------|
+| **Orchestrator** | OQQ | — | — | LangGraph, job runner, ledger, cost meter | least autonomous by design: fixed stage order, owns state and the gate |
+| **Segmentation & Insight** | OQQ | `seg-v3` | HDBSCAN + `text-embedding-3-small`; `gpt-5.6-luna` names clusters | column profiler, PCA, z-scored contributions, proxy test | decides features, cluster count and noise from the data |
+| **Creative Direction** | ABP | `direction-v2` | `gpt-5.6-luna`, strict schema | brand profile, palette store, hex validator | chooses tone, language, CTA, design language, accent |
+| **Email Composer & Assembly** | OQQ | `email-v2` | `gpt-5.6-luna`, word-capped schema | offer catalogue, block assembler, merge-tag layer | chooses copy and which real offers to cite; code owns layout |
+| **Compliance & Brand Guardian** | ABP | `guardian-v4` | none — rule engine | consent stats, PII scan, proxy results, catalogue, link/image checks | veto over every generator; nothing overrides BLOCK |
+| Evaluator (sidecar) | OQQ | `eval-v1` | `gpt-5.6-luna` as judge | code metrics, rubric | grades saved artifacts only |
 
-A sidecar rubric (`eval-v1`) scores all four decision agents against the artifacts
-**already saved** — never against a fresh, friendlier run.
+Autonomy is **bounded on purpose**: each agent makes one real, data-driven decision and emits
+a schema-typed artifact; none runs an open-ended tool loop. The operator is the outer loop —
+review, edit, regenerate, re-check.
 
-| Agent | Deterministic code metrics | LLM-as-judge |
-|-------|---------------------------|--------------|
-| Segmentation | Silhouette 38.5 · Coverage 17.5 · HDBSCAN confidence 14 | Faithfulness 15 · Specificity 15 |
-| Creative | Five field-length / hex-format checks, 8 each | Segment fit 20 · Brand fit 20 · No dark patterns 20 |
-| Composer | Citation present 10 · Citations in catalogue 10 · Subject length 10 · Preheader length 10 | Follows direction 20 · Segment fit 20 · Grounded 20 |
-| Guardian | Check pass rate 70 · Email PASS rate 30 | — |
+### Segmentation & Insight — explain, then name
 
-Each list sums to 100. Weights live in [backend/app/eval/rubric.py](backend/app/eval/rubric.py).
-Runs are saved to `eval_run`, so a regression shows up as a score that moved.
+![Segmentation agent](docs/media/architecture/fig-segmentation.png)
+
+Nothing is hardcoded to a CSV: the feature schema is inferred per run
+([`_feature_schema`](backend/app/orchestrator/agents/segmentation.py)). Numerics with spread
+are standardised; ≤25-category columns are one-hot encoded at weight `0.3`; text embeddings
+are reduced by PCA and weighted `0.5`. **Protected attributes never enter the matrix** — they
+are held out and read back afterwards for the proxy test. The model only names what the
+numbers found: it sees the top-four z-scored contributions and up to five sample notes, under
+a schema capping the name to 2–4 words.
+
+### Creative Direction and Email Composer — the model writes words, code builds the email
+
+- Creative direction is a **written direction, not a picture**: six fields, each capped to a
+  phrase; the accent colour is validated as hex in code; prompts forbid urgency, scarcity and
+  protected attributes.
+- The composer's model writes **content only**, under word caps. **Code** assembles logo →
+  hero → headline → intro → three highlights → offer coupon → FAQ → CTA → footer in exactly
+  the shape [email-builder.ts](frontend/src/types/email-builder.ts) defines.
+- **Grounding is enforced, not trusted**: cited offer ids not in `offer_catalogue` are
+  dropped; the coupon appears only when an offer is genuinely cited; the greeting merge tag is
+  inserted by code.
+- **Fallbacks**: strict schema → `json_object` retry; a failed call produces a clearly marked
+  artifact (never a plausible fake); an invalid accent falls back to the brand palette.
+
+### Compliance & Brand Guardian — ten checks between a draft and an inbox
+
+![Guardian](docs/media/architecture/fig-guardian.png)
+
+| Group | Check | Severity | Fails when |
+|-------|-------|----------|------------|
+| Compliance | Marketing consent | `block` | more than 50% of the segment has withdrawn |
+| | Unsubscribe route | `block` | the footer carries no opt-out link |
+| | No leaked identifiers | `block` | an email address or SG phone number is in the copy |
+| | Protected-attribute proxy | `revise` | the segment was flagged by the proxy test |
+| Content | No instruction injection | `block` | jailbreak phrasing appears in the copy |
+| | Offer grounding | `revise` | no offer cited, or a cited id is not in the catalogue |
+| | Personalisation tags | `block` | a merge tag names no uploaded column |
+| Deliverability | Subject line | `revise` | empty, > 70 chars, all caps or spam phrasing |
+| | Link integrity | `revise` | `#`, `javascript:`, placeholder host or non-http link |
+| | Image sources | `revise` | relative path or plain http |
+
+Any failed `block` check ⇒ **BLOCK** (never reaches an inbox); any other failure ⇒ **REVISE**;
+none ⇒ **PASS**. The Guardian runs automatically on every composed email and again after
+every edit in the builder; an edit also revokes any earlier approval. Approve and send both
+return HTTP 409 for a BLOCK verdict, enforced in the API rather than only by a disabled button.
+The check set is versioned (`guardian-v4`) and the console ignores verdicts from older versions.
+
+---
+
+## 5. Explainable and Responsible AI
+
+| Principle | How it is implemented |
+|---|---|
+| **Fairness** | Protected attributes are excluded from clustering. Because exclusion alone is not enough, each segment's distribution of every held-out attribute is compared with the population (continuous attributes bucketed into quartiles); a max deviation above 0.35 flags the segment on the Segments tab and becomes a REVISE in the Guardian. |
+| **Explainability** | Segments show z-scored feature contributions and a rationale; directions carry a rationale; emails show cited offers and a per-check verdict in plain language. The Logs tab separates *what I did* from *what the agents did*. |
+| **Accountability** | Only a person can send, to an address they confirm. BLOCK is refused server-side. Every decision is in the append-only ledger with prompt and model versions. |
+| **Manipulation guardrail** | Prompts forbid urgency, scarcity and loss framing; the subject check flags spam phrasing; the evaluator scores "no dark patterns". |
+| **Data minimisation** | The composer receives no customer records; merge tags are filled locally at send time. |
+| **Governance** | Mapped to IMDA's Model AI Governance Framework — internal governance (named owners, mandatory gate, CI as policy), level of human involvement (risk-tiered human-in-the-loop), operations management (provenance, versioning, evaluation), stakeholder communication (working unsubscribe, per-email explanation). PDPA consent is re-checked whenever the Guardian runs. |
+
+**Real finding on the demo data:** "Loyal Full-Price Buyers" deviates **37% on age** from the
+base rate. It is flagged, not suppressed — the system makes the correlation visible and a
+person owns the decision.
+
+**Excluded on ethical grounds:** no targeting on inferred health, financial distress,
+bereavement or protected attributes; no individual price discrimination (offer value comes
+only from catalogue rows); no targeting of emotional vulnerability, including timing; no
+imagery of identifiable real people and no fabricated endorsements.
+
+---
+
+## 6. AI security risk register
+
+Top risks, mapped to the OWASP Top 10 for LLM Applications (2025). The full 14-risk register
+with evidence and owners is in the report, §6.
+
+| Risk | Controls in place | Residual |
+|---|---|---|
+| Indirect prompt injection via customer free text (LLM01) | free text reaches the model only as ≤5 sample notes under a strict, length-capped schema; Guardian BLOCKs instruction-like copy; CI corpus | **Medium** — no input sanitiser yet |
+| Cross-recipient PII in copy (LLM02) | composer gets no customer records; prompt forbids contact details; PII scan is BLOCK; CI test | Low |
+| Hallucinated offers or claims (LLM09) | uncited ids dropped; grounding check; coupon only when cited | Low–Medium — grounding is REVISE |
+| Improper output handling (LLM05) | model text goes into typed, stringified block fields; builder sanitises HTML (DOMPurify) and URL schemes | Low |
+| Excessive agency (LLM06) | no agent can send; sending is a human action; BLOCK refused server-side | Low |
+| Unbounded consumption (LLM10) | `MAX_SEGMENTS = 6`; no generation loops; cost meter | **Medium** — no hard budget cap |
+| Secrets and supply chain (LLM03) | keys server-side only; CI rejects tracked `.env` files and live keys | **Medium** — dependencies not pinned by hash |
+| Unauthenticated API | CORS allow-list | **High** — add auth and rate limits before any non-demo use |
+
+---
+
+## 7. MLSecOps / LLMSecOps pipeline
+
+![MLSecOps pipeline](docs/media/architecture/fig-mlsecops.png)
+
+Every push and pull request runs [`.github/workflows/ci.yml`](.github/workflows/ci.yml). No job
+calls OpenRouter or Supabase, so the gate is deterministic and free.
+
+| Job | What it locks |
+|-----|----------------|
+| **LLMSecOps · no committed secrets** | Tracked `.env` / `.env.local` files fail the build. |
+| **MLOps · Guardian corpus and contracts** | Six fixture emails in [`backend/tests/fixtures/llmsecops/`](backend/tests/fixtures/llmsecops/) run through the real `run_checks` / `verdict_for` path: PII, missing unsubscribe, unresolved merge tag and injection phrasing must BLOCK; an uncatalogued offer must fail grounding; a clean email must PASS. Contract tests pin eval-v1 weights, agent schemas, prompt versions (`seg-v3`, `direction-v2`, `email-v2`, `guardian-v4`), protected-column detection and the absence of live keys. |
+| **Console lint + build** | `npm run build` must succeed (lint is reported, not blocking). |
+
+**Negative test:** branch `ci/demo-fail-pii` planted a phone number and email in the clean
+fixture and the job went red — evidence in [docs/ci-negative-test.md](docs/ci-negative-test.md).
+
+**Versioning and audit:** prompt versions in code and on every ledger row; model ids per role
+in config and on every ledger row; Guardian check-set and eval rubric versions; numbered DB
+migrations. **Monitoring today:** `/api/health`, the Logs tab, the cost meter and eval runs —
+read by a person. **Planned:** alerts on BLOCK-rate shifts and eval regressions, LLM tracing.
+
+Run the suite locally from `backend/`:
+
+```bash
+pip install -r requirements.txt
+python -m pytest -q        # 14 passed
+```
+
+---
+
+## 8. Testing and evaluation
+
+| Test | Result |
+|---|---|
+| Contract tests (MLOps) | 8 / 8 pass |
+| Guardian corpus (LLMSecOps) | 6 / 6 pass |
+| CI negative test | fails as intended |
+| End-to-end run: 1,000 contacts → 6 segments → 6 emails | completed; 3 live sends via Resend |
+| Guardian re-check of all six emails (guardian-v4) | 5 PASS · 1 REVISE (age proxy) · 0 BLOCK |
+| eval-v1 sidecar | **88.2** overall |
+
+![eval-v1 scores](docs/media/architecture/fig-eval.png)
+
+The sidecar rubric (`eval-v1`, weights in [rubric.py](backend/app/eval/rubric.py)) scores the
+four agents on artifacts **already saved**, never on a fresh, friendlier run: deterministic
+code metrics plus an LLM-as-judge with a conservative rubric. Segmentation is the weakest
+(silhouette 0.382, 25.6% noise, segment-name faithfulness 6.9 / 15) — an honest result on
+deliberately overlapping synthetic data, and the clearest improvement target.
 
 ```bash
 cd backend && .venv/Scripts/python.exe -m app.eval     # or POST /api/eval from the console
@@ -210,106 +338,20 @@ cd backend && .venv/Scripts/python.exe -m app.eval     # or POST /api/eval from 
 
 ---
 
-## Explainable and Responsible AI
+## 9. The console
 
-| Consideration | How it is implemented here |
+| Segments | Approval Queue |
 |---|---|
-| **Fairness** | Protected attributes are excluded from the feature matrix entirely. Exclusion alone is not enough, so a proxy test correlates each discovered segment against the held-out attributes; anything above threshold is flagged on the Segments tab and carried into the Guardian's adjudication of every email from that segment. |
-| **Explainability** | Each segment records the z-scored feature contributions that defined it, rendered as contribution bars. Each direction records its rationale. Each email records its cited offers and its full Guardian breakdown by check and category. The Logs tab separates *what I did* from *what the agents did*. |
-| **Accountability** | The approval gate is mandatory and cannot be disabled. Dispatch refuses anything without an approval and a non-BLOCK verdict. Every decision is appended to the Decision Ledger with the prompt and model versions live at the time. |
-| **Manipulation guardrail** | The creative rubric scores *no dark patterns* explicitly, and the subject-line check rejects manufactured urgency and scarcity language. The system will not tune emotional pressure against inferred vulnerability, and that limit lives in code rather than in prompt wording. |
-| **Governance** | Mapped to IMDA's Model AI Governance Framework: internal governance (approval gate, named accountability), human involvement (risk-tiered human-in-the-loop), operations management (data provenance, ledger, versioning), stakeholder communication (working unsubscribe, per-email explanation). PDPA consent and withdrawal obligations are enforced at the consent check, immediately before dispatch. |
-
-### AI-specific security risks
-
-The threat model is concrete, because the system ingests text an attacker can influence
-(free-text profile fields) and then emits content to third parties under a brand's name.
-
-| Risk | Mitigation |
-|---|---|
-| **Indirect prompt injection** through customer free text | Untrusted text is sanitised and structurally delimited at ingestion and never placed in instruction position. Every model call uses a tight JSON schema with length-capped fields, so an injected instruction has nowhere to land. The Guardian scans generated copy for instruction-like artifacts. |
-| **Cross-recipient PII contamination** | Each email is scanned for email addresses and phone numbers that do not belong to its segment. Severity `block`. |
-| **Hallucinated offers, prices or claims** | Every cited offer id is checked against `offer_catalogue` at composition time and again at adjudication. An ungrounded claim is a BLOCK, not a REVISE. |
-| **Unrendered merge tags** | Both placeholder dialects the app can produce are resolved and verified. An unresolved tag is a BLOCK — it would render literally to a real person. |
-| **Consent and suppression bypass** | Consent is checked immediately before dispatch rather than at segmentation time, so a withdrawal partway through a campaign is still honoured. |
-| **Cost exhaustion** | A cost meter per run, a capped segment count (`MAX_SEGMENTS`, default 6), and no unbounded generation loops anywhere in the graph. |
-
-### Excluded on ethical grounds, enforced in code
-
-No targeting or creative variation on inferred health status, financial distress,
-bereavement, or any protected attribute. No individual price discrimination — offer value
-varies by defined eligibility rules only, never by inferred willingness to pay. No
-targeting of emotional vulnerability, including timing. No imagery depicting identifiable
-real people, and no fabricated endorsements or testimonials.
+| ![Segments tab](docs/media/console/segments.jpg) | ![Approval Queue](docs/media/console/approvals.jpg) |
+| **Email Review** | **Logs** |
+| ![Email Review](docs/media/console/emails.jpg) | ![Logs](docs/media/console/logs.jpg) |
 
 ---
 
-## CI — MLOps and LLMSecOps
+## 10. Running it
 
-Every push and pull request runs [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
-No job calls OpenRouter or Supabase: the gate is deterministic and free.
-
-| Job | What it locks |
-|-----|----------------|
-| **No committed secrets** | Tracked `.env` / `.env.local` files fail the build. |
-| **Guardian corpus** | Fixture emails in [`backend/tests/fixtures/llmsecops/`](backend/tests/fixtures/llmsecops/) are run through the real `run_checks` / `verdict_for` path. PII, missing unsubscribe, unresolved merge tags, and instruction-injection phrasing must **BLOCK**. An offer id that is not in the catalogue must fail grounding. A clean email must **PASS**. |
-| **Contracts** | Eval-v1 weights sum to 100 per agent. Segment / creative / composer JSON schemas still require their artifact fields. Prompt versions (`seg-v3`, `direction-v2`, `email-v2`, `guardian-v4`) are pinned. Protected-attribute column names stay excluded from clustering. |
-| **Console lint** | `npm run lint` in `frontend/` (reported; pre-existing builder warnings are not a merge gate). |
-
-Run the same suite locally from `backend/`:
-
-```bash
-pip install -r requirements.txt
-python -m pytest -q
-```
-
----
-
-## Architecture
-
-```
-MOSAIC/
-├── backend/                  FastAPI orchestrator (Python 3.11+)
-│   └── app/
-│       ├── orchestrator/
-│       │   ├── graph.py      LangGraph: segmentation → creative → composer → guardian
-│       │   ├── state.py      WorkspaceState — the typed shared blackboard
-│       │   └── agents/       The four agents, one file each
-│       ├── eval/             Sidecar rubric, LLM judge, scorecard
-│       ├── routers/          workspace · image_gen · test_send · misc
-│       ├── ledger.py         Append-only Decision Ledger
-│       ├── mailer.py         Real dispatch via Resend
-│       ├── csv_ingest.py     Schema inference + protected-column profiling
-│       ├── persistence.py    Supabase reads and writes
-│       └── config.py         Settings (.env)
-│   └── tests/                CI corpus: Guardian fixtures + eval/schema pins
-├── frontend/                 React 18 + Vite + TypeScript + Tailwind + shadcn/ui
-│   └── src/
-│       ├── pages/            One per pipeline tab, plus Settings and Logs
-│       ├── components/email-builder/   Drag-and-drop builder, 20 block types
-│       └── lib/pipeline.ts   The stage order and unlock rules
-├── supabase/migrations/      0001 → 0008, applied in order
-├── video/                    Remotion project for the intro video
-└── docs/media/               Rendered video and stills used by this README
-```
-
-**Data flow.** Supabase Postgres is the single store: `customer_profile`, `segment_brief`,
-`proxy_check_result`, `creative_direction`, `segment_email`, `offer_catalogue`, `approval`,
-`email_send`, `eval_run`, `ledger_entry`, `activity_log`. The backend holds the
-service-role key and is the only thing that writes pipeline state; the frontend never
-talks to the database for it.
-
-**Models.** Text generation and embeddings go through OpenRouter, configured per role in
-[backend/.env.example](backend/.env.example). Image generation exists but is **never called
-by a pipeline stage** — it fires only when an operator reviews a prompt and presses
-Generate ([routers/image_gen.py](backend/app/routers/image_gen.py)).
-
----
-
-## Running it
-
-**Prerequisites:** Python 3.11+, Node 18+, a Supabase project, an OpenRouter key, and a
-Resend key with a verified sending domain (only needed to actually dispatch).
+**Prerequisites:** Python 3.11+, Node 18+, a Supabase project, an OpenRouter key, and a Resend
+key with a verified sending domain (only needed to actually dispatch).
 
 ```bash
 # 1. Database — run each migration in the Supabase SQL Editor, in order
@@ -333,16 +375,11 @@ Then, from the repo root:
 ./start.ps1     # backend on :8055, console on :5173, one window each
 ```
 
-`start.ps1` kills whatever already owns port 8055 and its whole process tree first —
-uvicorn's `--reload` parent plus its worker child means a naive kill leaves an orphan
-still holding the port, which shows up as edits that appear to do nothing.
+`start.ps1` first kills whatever owns port 8055 and its whole process tree — uvicorn's
+`--reload` parent plus its worker child means a naive kill leaves an orphan holding the port.
 
-Health check: <http://localhost:8055/api/health> reports whether OpenRouter and Supabase
-are configured.
-
-**First run:** open <http://localhost:5173>, fill in Company Info, then either upload your
-own CSV or load the bundled sample — 1,000 synthetic contacts across structured,
-behavioural and psychographic attributes
+Health check: <http://localhost:8055/api/health>. **First run:** open <http://localhost:5173>, fill
+in Company Info, then upload your own CSV or load the bundled sample — 1,000 synthetic contacts
 ([backend/data/mosaic_customers.csv](backend/data/mosaic_customers.csv), generated by
 [synthetic_data.py](backend/app/synthetic_data.py)). Each tab unlocks as the previous one
 produces output.
@@ -351,54 +388,66 @@ produces output.
 
 | | |
 |---|---|
-| **State** | `GET /api/state` · `GET /api/health` · `POST /api/reset` |
+| **State** | `GET /api/state` · `GET /api/health` · `POST /api/reset` · `GET /api/jobs/{id}` |
 | **Intake** | `GET` / `PUT /api/company` · `GET /api/audience` · `POST /api/audience/upload` · `POST /api/audience/load-sample` |
 | **Pipeline** | `POST /api/segments/generate` · `POST /api/creative/generate` · `PATCH /api/creative/{id}` · `POST /api/emails/generate` · `PATCH /api/emails/{id}` · `POST /api/emails/{id}/adjudicate` |
 | **Gate** | `POST /api/approvals` · `DELETE /api/approvals/{id}` · `POST /api/emails/{id}/send` |
-| **Eval and ops** | `POST /api/eval` · `GET /api/logs` · `GET` / `PUT /api/settings` · `GET /api/jobs/{id}` |
+| **Eval and ops** | `POST /api/eval` · `GET /api/logs` · `GET` / `PUT /api/settings` |
 
-Long-running stages return a job id; the console polls `/api/jobs/{id}` and renders the
-agent's own progress steps ([progress.py](backend/app/progress.py)).
+### Repository structure
 
-### Deploying it
-
-Both halves deploy to Railway as two services off this one repo, each with its own
-**Root Directory** — `backend` builds from [backend/Dockerfile](backend/Dockerfile)
-(Python 3.12 slim, healthchecked on `/api/health`), `frontend` builds with Nixpacks and
-is served as a static SPA by `serve -s dist`. Supabase, OpenRouter and Resend stay where
-they are.
-
-Two things bite if you skip them: the backend's `FRONTEND_ORIGIN` must list the Console's
-deployed domain or every call fails CORS, and `VITE_ORCH_API_BASE` is inlined at **build**
-time, so changing it needs a redeploy rather than a restart. The backend also stays at one
-replica — [progress.py](backend/app/progress.py) keeps job progress in process memory.
-
-Full walkthrough: [docs/deploy-railway.md](docs/deploy-railway.md).
+```
+MOSAIC/
+├── backend/                  FastAPI orchestrator (Python 3.11+)
+│   ├── app/
+│   │   ├── orchestrator/     graph.py (LangGraph) · state.py (blackboard) · agents/ (one file each)
+│   │   ├── eval/             eval-v1 rubric, LLM judge, scorecard
+│   │   ├── routers/          workspace · image_gen · test_send · misc
+│   │   └── *.py              ledger · openrouter_client · csv_ingest · brand · mailer · persistence
+│   └── tests/                LLMSecOps Guardian corpus + MLOps contract pins
+├── frontend/                 React 18 + Vite + TypeScript + Tailwind + shadcn/ui console
+├── supabase/migrations/      0001 → 0008, applied in order
+├── docs/                     report, slides, deployment guide, CI evidence, diagrams, screenshots
+├── video/                    Remotion source for the intro video
+└── .github/workflows/ci.yml  the CI gate
+```
 
 ---
 
-## Where the build differs from the proposal
+## 11. Where the build differs from the proposal
 
-The proposal is in [TEAM_13_Project_Proposal.docx](TEAM_13_Project_Proposal.docx) and the
-build plan in [MOSAIC_APPLICATION_PLAN.md](MOSAIC_APPLICATION_PLAN.md). Four things moved
-during implementation, deliberately:
+The proposal is [TEAM_13_Project_Proposal.docx](TEAM_13_Project_Proposal.docx). These changes
+were deliberate:
 
 1. **Creative direction replaced generated imagery.** Stage 3 emits a written direction the
-   composer must follow rather than an asset set. Image generation still exists, but as an
-   operator-triggered tool — no agent calls a text-to-image model, so there is no
-   generate / critique / revise image loop and no per-segment asset cost.
-2. **Sequential, not fan-out.** Creative and copy were to run in parallel; because the
-   direction is now the composer's *input*, and because each console tab owns a stage whose
-   output the operator reviews before the next one runs, the graph is strictly sequential.
-3. **Per-recipient resolution is a merge-tag layer, not a stage.** Copy carries typed slots,
-   the Guardian verifies every one resolves, and resolution happens at send. There is no
-   per-recipient LLM call.
-4. **Dispatch is real, not a sandboxed stub.** Approved mail goes out through Resend to a
-   confirmed address — which is why the Guardian's check set is framed around what would
-   genuinely stop a send, and why consent is re-checked immediately before it.
+   composer must follow. Image generation still exists, but only when an operator reviews a
+   prompt and presses Generate — no agent calls an image model.
+2. **Sequential, not fan-out.** The direction is the composer's input, and each tab reviews
+   the previous output before the next runs.
+3. **Per-recipient resolution is a merge-tag layer, not a stage.** The Guardian verifies every
+   tag resolves; resolution happens at send. There is no per-recipient LLM call.
+4. **Dispatch is real, not a sandboxed stub.** Approved mail goes out through Resend to an
+   address the operator confirms — which is why the Guardian's checks are ones that would
+   genuinely stop a send.
+5. **One builder renderer instead of MJML**, so what the operator approves is byte-for-byte
+   what ships; **a cost meter instead of budget ceilings**; and **a human-driven revise loop**
+   (edit → automatic re-check) instead of an automated one.
 
-One implicit workspace replaces the campaign selector and the Brief Intake screen; every
-pipeline table still carries `campaign_id`, satisfied by a single seeded constant.
+One implicit workspace replaces the campaign selector; every pipeline table still carries
+`campaign_id`, satisfied by a single seeded constant.
+
+---
+
+## 12. Limitations and next steps
+
+- Demonstrator, not production-hardened: **no authentication or rate limiting**, one replica,
+  20,000-row upload cap, not load-tested.
+- Each send delivers one rendered email to a confirmed address; bulk delivery would need
+  per-recipient consent filtering.
+- Next: a bounded Guardian → Composer revise loop; retry and fallback model in the OpenRouter
+  client; auth with named approvers, rate limits and a budget cap; a shared job store; an
+  ingest-time injection scan; alerts on BLOCK-rate shifts and eval regressions; judge
+  calibration against human labels.
 
 ---
 
@@ -406,9 +455,8 @@ pipeline table still carries `campaign_id`, satisfied by a single seeded constan
 
 | | |
 |---|---|
-| **Ong Qing Quan (OQQ)** | Engineering lead. Orchestrator, Segmentation & Insight, Email Composer & Assembly, Campaign Console, CI and versioning. |
-| **Agustinus Benyamin Prasetyo (ABP)** | Domain and assurance lead. Creative Direction, Compliance & Brand Guardian, brand guideline pack, Responsible AI instrumentation, AI security test corpus. |
+| **Ong Qing Quan (OQQ)** | Engineering lead. Orchestrator, Segmentation & Insight, Email Composer & Assembly, Campaign Console, CI, versioning and deployment. |
+| **Agustinus Benyamin Prasetyo (ABP)** | Domain and assurance lead. Creative Direction, Compliance & Brand Guardian, synthetic data and brand content, Responsible AI instrumentation, AI security test corpus. |
 
-Self-initiated project — no external sponsor. All customer data is synthetic and generated
-by us; the brand, guideline pack and offer catalogue are fabricated. 30 person-days across
-August–October 2026.
+Self-initiated project — no external sponsor. All customer data is synthetic and generated by
+the team; the brand and offer catalogue are fictional. 30 person-days, August–October 2026.
