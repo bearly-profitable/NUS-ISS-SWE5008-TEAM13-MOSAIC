@@ -16,29 +16,12 @@ NUS-ISS · Graduate Certificate in Architecting AI Systems (SWE5008) · Practice
 
 ---
 
-## Practice module deliverables
-
-| Deliverable | Where |
-|---|---|
-| **Group project report** | [docs/Team13_MOSAIC_Group_Report.docx](docs/Team13_MOSAIC_Group_Report.docx) · [PDF](docs/Team13_MOSAIC_Group_Report.pdf) |
-| **Presentation slides** | [docs/Team13_MOSAIC_Presentation.pptx](docs/Team13_MOSAIC_Presentation.pptx) |
-| Project proposal | [TEAM_13_Project_Proposal.docx](TEAM_13_Project_Proposal.docx) |
-| Progress report 1 (22 Aug 2026) | [frontend/public/Team 13_22 Aug 2026.pdf](<frontend/public/Team 13_22 Aug 2026.pdf>) |
-| System architecture (logical, physical, deployment, data) | [§3 below](#3-system-architecture) · report §3 |
-| Agent design documentation | [§4 below](#4-agent-roles-and-design) · report §4 |
-| Explainable and Responsible AI report | [§5 below](#5-explainable-and-responsible-ai) · report §5 |
-| AI security risk register | [§6 below](#6-ai-security-risk-register) · report §6 |
-| MLSecOps / LLMSecOps pipeline | [§7 below](#7-mlsecops--llmsecops-pipeline) · [.github/workflows/ci.yml](.github/workflows/ci.yml) · report §7 |
-| Testing artifacts | [backend/tests/](backend/tests/) · [docs/ci-negative-test.md](docs/ci-negative-test.md) · report §8 |
-| UI prototype | the Campaign Console in [frontend/](frontend/) · [screenshots](#9-the-console) |
-| Intro video (60 s) | [YouTube](https://youtu.be/l2s-poLYnV8) · [docs/media/mosaic-intro.mp4](docs/media/mosaic-intro.mp4) |
-
 **Contents:** [1 Problem](#1-the-problem) · [2 System overview](#2-system-overview) ·
 [3 Architecture](#3-system-architecture) · [4 Agents](#4-agent-roles-and-design) ·
 [5 Responsible AI](#5-explainable-and-responsible-ai) · [6 Risk register](#6-ai-security-risk-register) ·
 [7 MLSecOps](#7-mlsecops--llmsecops-pipeline) · [8 Testing and evaluation](#8-testing-and-evaluation) ·
-[9 Console](#9-the-console) · [10 Running it](#10-running-it) · [11 Changes from the proposal](#11-where-the-build-differs-from-the-proposal) ·
-[12 Limitations and next steps](#12-limitations-and-next-steps) · [Team 13](#team-13)
+[9 Console](#9-the-console) · [10 Running it](#10-running-it) ·
+[11 Limitations and next steps](#11-limitations-and-next-steps) · [Team 13](#team-13)
 
 ---
 
@@ -416,31 +399,7 @@ MOSAIC/
 
 ---
 
-## 11. Where the build differs from the proposal
-
-The proposal is [TEAM_13_Project_Proposal.docx](TEAM_13_Project_Proposal.docx). These changes
-were deliberate:
-
-1. **Creative direction replaced generated imagery.** Stage 3 emits a written direction the
-   composer must follow. Image generation still exists, but only when an operator reviews a
-   prompt and presses Generate — no agent calls an image model.
-2. **Sequential, not fan-out.** The direction is the composer's input, and each tab reviews
-   the previous output before the next runs.
-3. **Per-recipient resolution is a merge-tag layer, not a stage.** The Guardian verifies every
-   tag resolves; resolution happens at send. There is no per-recipient LLM call.
-4. **Dispatch is real, not a sandboxed stub.** Approved mail goes out through Resend to an
-   address the operator confirms — which is why the Guardian's checks are ones that would
-   genuinely stop a send.
-5. **One builder renderer instead of MJML**, so what the operator approves is byte-for-byte
-   what ships; **a cost meter instead of budget ceilings**; and **a human-driven revise loop**
-   (edit → automatic re-check) instead of an automated one.
-
-One implicit workspace replaces the campaign selector; every pipeline table still carries
-`campaign_id`, satisfied by a single seeded constant.
-
----
-
-## 12. Limitations and next steps
+## 11. Limitations and next steps
 
 - Demonstrator, not production-hardened: **no authentication or rate limiting**, one replica,
   20,000-row upload cap, not load-tested.
