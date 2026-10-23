@@ -1,51 +1,63 @@
 import React from "react";
-import { AbsoluteFill, Series } from "remotion";
+import { AbsoluteFill } from "remotion";
 import { Background, Vignette } from "./components/Background";
+import { FlashLayer, Shot } from "./components/Shot";
+import { Soundtrack } from "./audio/Soundtrack";
+import { Grain } from "./lib/polish";
 import { SANS } from "./theme";
-import { S01Hook } from "./scenes/S01Hook";
-import { S02Logo } from "./scenes/S02Logo";
-import { S03Pipeline } from "./scenes/S03Pipeline";
-import { S04Segments } from "./scenes/S04Segments";
-import { S05Creative } from "./scenes/S05Creative";
-import { S06Compose } from "./scenes/S06Compose";
-import { S07Guardian } from "./scenes/S07Guardian";
-import { S08Approval } from "./scenes/S08Approval";
-import { S09Eval } from "./scenes/S09Eval";
-import { S10Outro } from "./scenes/S10Outro";
+import { Opening } from "./scenes/Opening";
+import { Company } from "./scenes/Company";
+import { Segments } from "./scenes/Segments";
+import { Breath } from "./scenes/Breath";
+import { Creative } from "./scenes/Creative";
+import { Compose } from "./scenes/Compose";
+import { Guardian } from "./scenes/Guardian";
+import { Ledger } from "./scenes/Ledger";
+import { EvalScore } from "./scenes/EvalScore";
+import { Outro } from "./scenes/Outro";
+
+export type MosaicIntroProps = { bgm: boolean };
 
 /**
- * Scene table. Each scene fades its own contents in and out (see anim.ts's
- * sceneFade) over one continuous background, so cuts read as dissolves rather
- * than hard switches — and the durations stay editable in one place.
+ * Shot order and lengths live in timeline.ts; each <Shot> handles its own
+ * seams (whip / flash) so the scenes only draw their content.
  */
-export const SCENES = [
-  { id: "hook", component: S01Hook, duration: 105 },
-  { id: "logo", component: S02Logo, duration: 150 },
-  { id: "pipeline", component: S03Pipeline, duration: 180 },
-  { id: "segments", component: S04Segments, duration: 190 },
-  { id: "creative", component: S05Creative, duration: 180 },
-  { id: "compose", component: S06Compose, duration: 190 },
-  { id: "guardian", component: S07Guardian, duration: 215 },
-  { id: "approval", component: S08Approval, duration: 180 },
-  { id: "eval", component: S09Eval, duration: 185 },
-  { id: "outro", component: S10Outro, duration: 160 },
-] as const;
-
-export const TOTAL_FRAMES = SCENES.reduce((a, s) => a + s.duration, 0);
-
-export const MosaicIntro: React.FC = () => (
+export const MosaicIntro: React.FC<MosaicIntroProps> = ({ bgm }) => (
   <AbsoluteFill style={{ fontFamily: SANS, background: "#F3F4FA" }}>
     <Background />
-    <Series>
-      {SCENES.map((scene) => {
-        const Scene = scene.component;
-        return (
-          <Series.Sequence key={scene.id} durationInFrames={scene.duration} name={scene.id}>
-            <Scene length={scene.duration} />
-          </Series.Sequence>
-        );
-      })}
-    </Series>
+    <Shot id="opening">
+      <Opening />
+    </Shot>
+    <Shot id="company" lead={18}>
+      <Company />
+    </Shot>
+    <Shot id="segments">
+      <Segments />
+    </Shot>
+    <Shot id="breath">
+      <Breath />
+    </Shot>
+    <Shot id="creative">
+      <Creative />
+    </Shot>
+    <Shot id="compose">
+      <Compose />
+    </Shot>
+    <Shot id="guardian">
+      <Guardian />
+    </Shot>
+    <Shot id="ledger">
+      <Ledger />
+    </Shot>
+    <Shot id="evalScore">
+      <EvalScore />
+    </Shot>
+    <Shot id="outro" lead={0}>
+      <Outro />
+    </Shot>
+    <FlashLayer />
     <Vignette />
+    <Grain opacity={0.018} />
+    <Soundtrack bgm={bgm} />
   </AbsoluteFill>
 );

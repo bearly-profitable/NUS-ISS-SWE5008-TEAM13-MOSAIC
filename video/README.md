@@ -1,64 +1,60 @@
-# MOSAIC — product intro video
+# MOSAIC — product demo video
 
-A [Remotion](https://remotion.dev) project that renders the MOSAIC Campaign
-Console's product intro. Standalone: it has its own `package.json` and does not
-share a build with `frontend/` or `backend/`.
+A [Remotion](https://remotion.dev) project that renders the 60-second MOSAIC product demo,
+cut to the beat of *Forward Motion*. Standalone: it has its own `package.json` and does not
+share a build with `frontend/` or `backend/`. Design decisions, the storyboard and the music
+analysis are in [SPEC.md](SPEC.md).
 
 ```bash
 cd video
 npm install
-npm run studio     # preview + scrub in the Remotion Studio
-npm run render     # -> out/mosaic-intro.mp4   (1920x1080, 30fps, ~58s)
-npm run render:sting  # -> out/mosaic-sting.mp4 (the 5s logo lockup on its own)
-npm run still      # -> out/frame.png          (a single frame, for thumbnails)
+npm run studio        # preview + scrub in the Remotion Studio
+npm run render        # -> out/mosaic-intro.mp4        (1920x1080, 30 fps, 60.0 s, with music)
+npm run render:nobgm  # -> out/mosaic-intro-nobgm.mp4  (same cut, SFX only)
+npm run still         # -> out/frame.png               (the closing lockup, for a poster)
 ```
 
-## What it shows
+## Where the screenshots come from
 
-Ten scenes, in the order the console itself works:
+Every UI shot is the real Console. `capture/` drives `frontend/` (vite dev on :5173) with
+Playwright and answers each Orchestrator call from `capture/fixture/*.json`, so no live backend
+or Supabase project is needed:
 
-| # | Scene | Source of truth |
-|---|---|---|
-| 1 | The problem — one email for everyone | — |
-| 2 | Logo build | `frontend/public/mosaic_logo_cropped.png` |
-| 3 | The five-tab pipeline and its unlock rule | `frontend/src/lib/pipeline.ts`, `App.tsx` |
-| 4 | Segmentation: HDBSCAN, noise, held-out protected attributes | `backend/app/orchestrator/agents/segmentation.py` |
-| 5 | Creative Director: the four direction fields + palette | `backend/app/orchestrator/state.py` |
-| 6 | Composition: typed slots, 20 block types, offer citations | `frontend/src/types/email-builder.ts`, `agents/email_composer.py` |
-| 7 | Guardian: nine checks, three groups, severity → verdict | `backend/app/orchestrator/agents/guardian.py` |
-| 8 | Human approval + the append-only ledger | `backend/app/ledger.py`, `mailer.py` |
-| 9 | Sidecar eval scorecard | `backend/app/eval/rubric.py` |
-| 10 | Outro lockup | — |
+```bash
+cd backend && .venv/Scripts/python.exe ../video/capture/build_fixture.py   # rebuild the fixture
+cd ../frontend && npm run dev                                              # in another shell
+cd ../video && npm run capture                                             # -> public/ui/, src/ui-layout.json
+```
 
-Numbers on screen (segment sizes, scores, timings) are one illustrative run, not
-live data. Everything structural — stage names, check names, field names, rubric
-weights, model ids — is taken from the code and should be updated here when it
-changes there.
+`build_fixture.py` restates the FatCatPillow run's outputs (segments, copy, scores) and builds
+everything structural with the backend's own code: email blocks from
+`email_composer._build_blocks`, Guardian results from `guardian.run_checks`, CSV profiling from
+`csv_ingest`, the rubric from `eval.rubric`. Textures are captured at 3× device scale.
 
 ## Structure
 
 ```
 src/
-  index.ts            registerRoot
-  Root.tsx            compositions: MosaicIntro, LogoSting
-  MosaicIntro.tsx     the scene table — durations live here
-  theme.ts            colours and fonts, mirrored from frontend/src/index.css
-  anim.ts             shared easing/entrance helpers
-  components/
-    Background.tsx    the console's .gradient-mesh, slowly drifting
-    MosaicMark.tsx    the logo rebuilt as eight animatable vector tiles
-    Ui.tsx            Card / Title / Sub / Chip / SceneHead primitives
-  scenes/S01…S10      one file per scene, each taking its own `length`
+  timeline.ts         beat grid + shot table — the one clock everything is written against
+  MosaicIntro.tsx     shot order
+  audio/Soundtrack    music + the SFX pin table (peak-lag and encoder-offset compensated)
+  lib/                camera (2.5D PageCam), easing/blur/grain, text reveals
+  components/         Shot (whip / flash seams), Caption, Cursor, MosaicMark, Background
+  scenes/             Opening, Company, Segments, Breath, Creative, Compose, Guardian,
+                      Ledger, EvalScore, Outro
+capture/              fixture builder, Playwright capture, texture post-processing
+analysis/             beat grid of the track, SFX peak lags
+public/               ui/ textures, music/, sfx/ (Mixkit, see sfx/ATTRIBUTION-shotcraft.md)
 ```
 
-To retime the film, edit the `duration` values in `SCENES` (`src/MosaicIntro.tsx`)
-— each scene fades itself in and out against one continuous background, so the
-cuts stay dissolves whatever the lengths are.
+To retime, edit `SHOTS` in `src/timeline.ts` in beats; SFX pins follow automatically.
 
 ## Notes
 
-- There is no audio track. Drop a music bed in with `<Audio src={staticFile(...)}/>`
-  in `MosaicIntro.tsx` if one is wanted.
-- Fonts come from `@remotion/google-fonts` (Inter + JetBrains Mono), restricted
-  to the latin subset and the weights actually used — rendering pulls them at
-  render time, so the first render needs a network connection.
+- Built with the [video-shotcraft](https://github.com/Vincentwei1021/video-shotcraft) workflow
+  (Apache-2.0); `src/lib/polish.tsx`, `text.tsx` and the camera math in `cam.tsx` are adapted
+  from its fixtures.
+- The rendered audio trails the picture by the AAC encoder's priming delay (2032 samples on this
+  pipeline); `OUTPUT_AUDIO_OFFSET_SEC` in `timeline.ts` compensates. Re-measure it if the codec,
+  sample rate or Remotion version changes.
+- Fonts come from `@remotion/google-fonts`, so the first render needs a network connection.

@@ -1,0 +1,107 @@
+{
+ "air-woosh-quick.mp3": {
+  "dur": 1.51,
+  "peak_s": 0.24,
+  "peak_db": -0.3
+ },
+ "bass-hit-futuristic.mp3": {
+  "dur": 2.75,
+  "peak_s": 0.205,
+  "peak_db": -4.4
+ },
+ "data-compute.mp3": {
+  "dur": 4.0,
+  "peak_s": 0.685,
+  "peak_db": -2.7
+ },
+ "data-scan.mp3": {
+  "dur": 2.03,
+  "peak_s": 0.94,
+  "peak_db": -2.3
+ },
+ "impact-deep-whoosh.mp3": {
+  "dur": 4.06,
+  "peak_s": 0.55,
+  "peak_db": -0.9
+ },
+ "impact-zoom-quick.mp3": {
+  "dur": 1.22,
+  "peak_s": 0.415,
+  "peak_db": -1.0
+ },
+ "lock-quick.mp3": {
+  "dur": 1.13,
+  "peak_s": 0.06,
+  "peak_db": -0.3
+ },
+ "paper-slide.mp3": {
+  "dur": 1.09,
+  "peak_s": 0.355,
+  "peak_db": -0.5
+ },
+ "riser-cine.mp3": {
+  "dur": 4.81,
+  "peak_s": 1.04,
+  "peak_db": -0.1
+ },
+ "shimmer-sparkle-sweep.mp3": {
+  "dur": 3.0,
+  "peak_s": 0.98,
+  "peak_db": -1.7
+ },
+ "sparkle-touch.mp3": {
+  "dur": 2.33,
+  "peak_s": 0.535,
+  "peak_db": -5.5
+ },
+ "sparkle.mp3": {
+  "dur": 4.55,
+  "peak_s": 1.48,
+  "peak_db": -7.4
+ },
+ "sweep-digital.mp3": {
+  "dur": 1.13,
+  "peak_s": 0.37,
+  "peak_db": -2.1
+ },
+ "sweep-fast-small.mp3": {
+  "dur": 0.78,
+  "peak_s": 0.295,
+  "peak_db": -3.9
+ },
+ "switch-click-quick.mp3": {
+  "dur": 1.04,
+  "peak_s": 0.01,
+  "peak_db": 0.1
+ },
+ "swoosh-quick.mp3": {
+  "dur": 0.78,
+  "peak_s": 0.295,
+  "peak_db": -3.9
+ },
+ "transition-soft.mp3": {
+  "dur": 1.27,
+  "peak_s": 0.435,
+  "peak_db": -0.9
+ },
+ "whoosh-big.mp3": {
+  "dur": 2.32,
+  "peak_s": 0.715,
+  "peak_db": -1.5
+ },
+ "whoosh-electric.mp3": {
+  "dur": 3.11,
+  "peak_s": 0.87,
+  "peak_db": -1.5
+ },
+ "whoosh-fast.mp3": {
+  "dur": 1.76,
+  "peak_s": 0.71,
+  "peak_db": -6.1
+ },
+ "zoom-air-fast.mp3": {
+  "dur": 1.28,
+  "peak_s": 0.525,
+  "peak_db": -4.7
+ }
+}

@@ -1,0 +1,203 @@
+{
+ "entries": [
+  {
+   "id": "log-000",
+   "kind": "user",
+   "actor": "Operator",
+   "action": "email.adjudicate",
+   "detail": "Re-ran Guardian checks — verdict PASS",
+   "target_type": "artifact",
+   "target_id": "email-lapsed",
+   "verdict": "PASS",
+   "created_at": "2026-10-14T01:09:59+08:00"
+  },
+  {
+   "id": "log-001",
+   "kind": "agent",
+   "actor": "Pre-flight Guardian",
+   "action": "Compliance Adjudication",
+   "detail": "prompt guardian-v4 · model rule-engine",
+   "target_type": "artifact",
+   "target_id": "email-lapsed",
+   "verdict": "PASS",
+   "created_at": "2026-10-14T01:09:59+08:00"
+  },
+  {
+   "id": "log-002",
+   "kind": "user",
+   "actor": "Operator",
+   "action": "email.adjudicate",
+   "detail": "Re-ran Guardian checks — verdict PASS",
+   "target_type": "artifact",
+   "target_id": "email-conscious",
+   "verdict": "PASS",
+   "created_at": "2026-10-14T01:09:57+08:00"
+  },
+  {
+   "id": "log-003",
+   "kind": "agent",
+   "actor": "Pre-flight Guardian",
+   "action": "Compliance Adjudication",
+   "detail": "prompt guardian-v4 · model rule-engine",
+   "target_type": "artifact",
+   "target_id": "email-conscious",
+   "verdict": "PASS",
+   "created_at": "2026-10-14T01:09:57+08:00"
+  },
+  {
+   "id": "log-004",
+   "kind": "user",
+   "actor": "Operator",
+   "action": "email.adjudicate",
+   "detail": "Re-ran Guardian checks — verdict PASS",
+   "target_type": "artifact",
+   "target_id": "email-gift",
+   "verdict": "PASS",
+   "created_at": "2026-10-14T01:08:55+08:00"
+  },
+  {
+   "id": "log-005",
+   "kind": "agent",
+   "actor": "Pre-flight Guardian",
+   "action": "Compliance Adjudication",
+   "detail": "prompt guardian-v4 · model rule-engine",
+   "target_type": "artifact",
+   "target_id": "email-gift",
+   "verdict": "PASS",
+   "created_at": "2026-10-14T01:08:55+08:00"
+  },
+  {
+   "id": "log-006",
+   "kind": "user",
+   "actor": "Operator",
+   "action": "email.adjudicate",
+   "detail": "Re-ran Guardian checks — verdict REVISE",
+   "target_type": "artifact",
+   "target_id": "email-loyal",
+   "verdict": "REVISE",
+   "created_at": "2026-10-14T01:08:53+08:00"
+  },
+  {
+   "id": "log-007",
+   "kind": "agent",
+   "actor": "Pre-flight Guardian",
+   "action": "Compliance Adjudication",
+   "detail": "prompt guardian-v4 · model rule-engine",
+   "target_type": "artifact",
+   "target_id": "email-loyal",
+   "verdict": "REVISE",
+   "created_at": "2026-10-14T01:08:53+08:00"
+  },
+  {
+   "id": "log-008",
+   "kind": "user",
+   "actor": "Operator",
+   "action": "email.adjudicate",
+   "detail": "Re-ran Guardian checks — verdict PASS",
+   "target_type": "artifact",
+   "target_id": "email-app",
+   "verdict": "PASS",
+   "created_at": "2026-10-14T01:08:51+08:00"
+  },
+  {
+   "id": "log-009",
+   "kind": "agent",
+   "actor": "Pre-flight Guardian",
+   "action": "Compliance Adjudication",
+   "detail": "prompt guardian-v4 · model rule-engine",
+   "target_type": "artifact",
+   "target_id": "email-app",
+   "verdict": "PASS",
+   "created_at": "2026-10-14T01:08:51+08:00"
+  },
+  {
+   "id": "log-010",
+   "kind": "user",
+   "actor": "Operator",
+   "action": "email.adjudicate",
+   "detail": "Re-ran Guardian checks — verdict PASS",
+   "target_type": "artifact",
+   "target_id": "email-discount",
+   "verdict": "PASS",
+   "created_at": "2026-10-14T01:08:49+08:00"
+  },
+  {
+   "id": "log-011",
+   "kind": "agent",
+   "actor": "Pre-flight Guardian",
+   "action": "Compliance Adjudication",
+   "detail": "prompt guardian-v4 · model rule-engine",
+   "target_type": "artifact",
+   "target_id": "email-discount",
+   "verdict": "PASS",
+   "created_at": "2026-10-14T01:08:49+08:00"
+  },
+  {
+   "id": "log-012",
+   "kind": "user",
+   "actor": "Operator",
+   "action": "email.send",
+   "detail": "Sent “Save 20% On Fat Cat Pillows” to demo@fcp.com.sg",
+   "target_type": "artifact",
+   "target_id": "email-discount",
+   "verdict": null,
+   "created_at": "2026-09-12T11:27:24+08:00"
+  },
+  {
+   "id": "log-013",
+   "kind": "user",
+   "actor": "Operator",
+   "action": "email.send",
+   "detail": "Sent “Explore New Fat Cat Drops” to demo@fcp.com.sg",
+   "target_type": "artifact",
+   "target_id": "email-app",
+   "verdict": null,
+   "created_at": "2026-09-12T11:27:10+08:00"
+  },
+  {
+   "id": "log-014",
+   "kind": "user",
+   "actor": "Ong Qing Quan",
+   "action": "approval.grant",
+   "detail": "Approved “Explore New Fat Cat Drops”",
+   "target_type": null,
+   "target_id": null,
+   "verdict": "PASS",
+   "created_at": "2026-09-12T11:26:40+08:00"
+  },
+  {
+   "id": "log-015",
+   "kind": "agent",
+   "actor": "Copywriter & Assembly",
+   "action": "Email Composition",
+   "detail": "prompt composer-v6 · model openai/gpt-5.6-luna",
+   "target_type": null,
+   "target_id": null,
+   "verdict": null,
+   "created_at": "2026-09-12T11:04:12+08:00"
+  },
+  {
+   "id": "log-016",
+   "kind": "agent",
+   "actor": "Creative Director",
+   "action": "Creative Direction",
+   "detail": "prompt creative-v5 · model openai/gpt-5.6-luna",
+   "target_type": null,
+   "target_id": null,
+   "verdict": null,
+   "created_at": "2026-09-12T10:58:31+08:00"
+  },
+  {
+   "id": "log-017",
+   "kind": "agent",
+   "actor": "Segmentation & Insight",
+   "action": "Segment Discovery",
+   "detail": "prompt segmentation-v4 · model openai/gpt-5.6-luna",
+   "target_type": null,
+   "target_id": null,
+   "verdict": null,
+   "created_at": "2026-09-12T10:52:09+08:00"
+  }
+ ],
+ "spend_usd": 0.4172
+}

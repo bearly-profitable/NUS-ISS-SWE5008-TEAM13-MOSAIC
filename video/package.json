@@ -7,8 +7,9 @@
     "dev": "remotion studio",
     "studio": "remotion studio",
     "render": "remotion render MosaicIntro out/mosaic-intro.mp4",
-    "render:sting": "remotion render LogoSting out/mosaic-sting.mp4",
-    "still": "remotion still MosaicIntro out/frame.png --frame=520",
+    "render:nobgm": "remotion render MosaicIntro out/mosaic-intro-nobgm.mp4 --props=props-nobgm.json",
+    "still": "remotion still MosaicIntro out/frame.png --frame=1770",
+    "capture": "node capture/capture.mjs && python capture/postprocess.py",
     "upgrade": "remotion upgrade"
   },
   "dependencies": {
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@types/react": "^19.0.0",
+    "playwright": "^1.56.1",
     "typescript": "^5.6.3"
   }
 }

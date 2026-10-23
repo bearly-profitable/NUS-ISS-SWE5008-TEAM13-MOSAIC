@@ -1,0 +1,2491 @@
+{
+ "company": {
+  "name": "FatCatPillow",
+  "website": "FCP.com.sg",
+  "description": "Sells fat cat pillows",
+  "campaign_intent": "Sell fat cat pillows to users that like fat cats",
+  "dynamic_attribute": "name",
+  "logo_url": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-b78febe59c86.png",
+  "hero_image_url": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-13648166940a.png",
+  "columns": [
+   {
+    "name": "base_id",
+    "kind": "identifier",
+    "protected": false,
+    "distinct": 1000,
+    "sample": "mosaic-cust-00000"
+   },
+   {
+    "name": "name",
+    "kind": "categorical",
+    "protected": false,
+    "distinct": 20,
+    "sample": "Cheryl Tan"
+   },
+   {
+    "name": "age",
+    "kind": "numeric",
+    "protected": true,
+    "distinct": 46,
+    "sample": "22"
+   },
+   {
+    "name": "tenure_months",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 83,
+    "sample": "1"
+   },
+   {
+    "name": "age_bracket",
+    "kind": "categorical",
+    "protected": true,
+    "distinct": 5,
+    "sample": "18-24"
+   },
+   {
+    "name": "gender",
+    "kind": "categorical",
+    "protected": true,
+    "distinct": 4,
+    "sample": "Undisclosed"
+   },
+   {
+    "name": "location",
+    "kind": "categorical",
+    "protected": false,
+    "distinct": 5,
+    "sample": "East"
+   },
+   {
+    "name": "language",
+    "kind": "categorical",
+    "protected": false,
+    "distinct": 4,
+    "sample": "Mandarin"
+   },
+   {
+    "name": "membership_tier",
+    "kind": "categorical",
+    "protected": false,
+    "distinct": 3,
+    "sample": "Explorer"
+   },
+   {
+    "name": "signup_channel",
+    "kind": "categorical",
+    "protected": false,
+    "distinct": 4,
+    "sample": "App"
+   },
+   {
+    "name": "newsletter_opt_in",
+    "kind": "categorical",
+    "protected": false,
+    "distinct": 2,
+    "sample": "TRUE"
+   },
+   {
+    "name": "app_installed",
+    "kind": "categorical",
+    "protected": false,
+    "distinct": 2,
+    "sample": "TRUE"
+   },
+   {
+    "name": "p3m_spend_sgd",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 991,
+    "sample": "111.73"
+   },
+   {
+    "name": "p6m_spend_sgd",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 995,
+    "sample": "149.59"
+   },
+   {
+    "name": "avg_basket_sgd",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 861,
+    "sample": "49.86"
+   },
+   {
+    "name": "email_open_rate",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 88,
+    "sample": "0.37"
+   },
+   {
+    "name": "avg_discount_pct",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 326,
+    "sample": "8.7"
+   },
+   {
+    "name": "returns_rate",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 41,
+    "sample": "0.08"
+   },
+   {
+    "name": "orders_p3m",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 15,
+    "sample": "2"
+   },
+   {
+    "name": "orders_p6m",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 32,
+    "sample": "3"
+   },
+   {
+    "name": "days_since_last_order",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 201,
+    "sample": "4"
+   },
+   {
+    "name": "app_sessions_per_month",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 46,
+    "sample": "9"
+   },
+   {
+    "name": "price_sensitivity",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 96,
+    "sample": "0.55"
+   },
+   {
+    "name": "brand_loyalty",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 96,
+    "sample": "0.12"
+   },
+   {
+    "name": "discovery_appetite",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 96,
+    "sample": "0.86"
+   },
+   {
+    "name": "sustainability_affinity",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 91,
+    "sample": "0.39"
+   },
+   {
+    "name": "free_text",
+    "kind": "text",
+    "protected": false,
+    "distinct": 126,
+    "sample": "First order placed recently, still browsing other categories."
+   },
+   {
+    "name": "consent_state",
+    "kind": "categorical",
+    "protected": false,
+    "distinct": 2,
+    "sample": "active"
+   }
+  ],
+  "csv_filename": "mosaic_customers.csv",
+  "csv_row_count": 1000,
+  "uploaded_at": "2026-09-12T02:14:07+00:00",
+  "configured": true
+ },
+ "audience_count": 1000,
+ "segments": [
+  {
+   "id": "seg-lapsed",
+   "name": "Lapsed Complaint Customers",
+   "motivation": "They need their delivery issue resolved before considering another fat cat pillow.",
+   "tone_guidance": "Acknowledge the complaint; offer a clear fix.",
+   "size": 141,
+   "confidence": 0.91,
+   "rationale": "HDBSCAN cluster of 141 contacts; named from its four most distinctive engineered features.",
+   "feature_contributions": [
+    {
+     "feature": "days_since_last_order",
+     "weight": 2.1
+    },
+    {
+     "feature": "email_open_rate",
+     "weight": -1.76
+    },
+    {
+     "feature": "discovery_appetite",
+     "weight": -1.21
+    },
+    {
+     "feature": "orders_p3m",
+     "weight": -0.97
+    }
+   ]
+  },
+  {
+   "id": "seg-loyal",
+   "name": "Loyal Full-Price Buyers",
+   "motivation": "They buy every new fat cat pillow release at full price and want first access.",
+   "tone_guidance": "Lead with launches, restocks, and loyalty rewards.",
+   "size": 134,
+   "confidence": 0.93,
+   "rationale": "HDBSCAN cluster of 134 contacts; named from its four most distinctive engineered features.",
+   "feature_contributions": [
+    {
+     "feature": "p6m_spend_sgd",
+     "weight": 2.25
+    },
+    {
+     "feature": "p3m_spend_sgd",
+     "weight": 2.23
+    },
+    {
+     "feature": "brand_loyalty",
+     "weight": 1.84
+    },
+    {
+     "feature": "orders_p3m",
+     "weight": 1.81
+    }
+   ]
+  },
+  {
+   "id": "seg-app",
+   "name": "App-First Drop Explorers",
+   "motivation": "They want early access to new fat cat pillow drops and enjoy exploring the range.",
+   "tone_guidance": "Lead with app launches and early access.",
+   "size": 134,
+   "confidence": 0.93,
+   "rationale": "HDBSCAN cluster of 134 contacts; named from its four most distinctive engineered features.",
+   "feature_contributions": [
+    {
+     "feature": "app_sessions_per_month",
+     "weight": 1.93
+    },
+    {
+     "feature": "discovery_appetite",
+     "weight": 1.55
+    },
+    {
+     "feature": "returns_rate",
+     "weight": 1.41
+    },
+    {
+     "feature": "orders_p6m",
+     "weight": 0.71
+    }
+   ]
+  },
+  {
+   "id": "seg-gift",
+   "name": "Seasonal Gift Buyers",
+   "motivation": "They buy fat cat pillows as occasional gifts during festive periods.",
+   "tone_guidance": "Lead with gifting, wrapping, and delivery options.",
+   "size": 121,
+   "confidence": 0.93,
+   "rationale": "HDBSCAN cluster of 121 contacts; named from its four most distinctive engineered features.",
+   "feature_contributions": [
+    {
+     "feature": "discovery_appetite",
+     "weight": -0.98
+    },
+    {
+     "feature": "email_open_rate",
+     "weight": -0.88
+    },
+    {
+     "feature": "app_sessions_per_month",
+     "weight": -0.87
+    },
+    {
+     "feature": "returns_rate",
+     "weight": -0.85
+    }
+   ]
+  },
+  {
+   "id": "seg-conscious",
+   "name": "Conscious Cat Keepers",
+   "motivation": "They buy durable fat cat pillows from brands that offer take-back programs and lower-impact delivery.",
+   "tone_guidance": "Lead with durability and circular delivery choices",
+   "size": 114,
+   "confidence": 0.93,
+   "rationale": "HDBSCAN cluster of 114 contacts; named from its four most distinctive engineered features.",
+   "feature_contributions": [
+    {
+     "feature": "sustainability_affinity",
+     "weight": 1.89
+    },
+    {
+     "feature": "brand_loyalty",
+     "weight": 1.03
+    },
+    {
+     "feature": "returns_rate",
+     "weight": -0.71
+    },
+    {
+     "feature": "avg_discount_pct",
+     "weight": -0.57
+    }
+   ]
+  },
+  {
+   "id": "seg-discount",
+   "name": "Discount-Driven Cat Shoppers",
+   "motivation": "They want fat cat pillows at the lowest possible price and watch for discounts before buying.",
+   "tone_guidance": "Lead with savings and clear price comparisons.",
+   "size": 100,
+   "confidence": 0.95,
+   "rationale": "HDBSCAN cluster of 100 contacts; named from its four most distinctive engineered features.",
+   "feature_contributions": [
+    {
+     "feature": "avg_discount_pct",
+     "weight": 1.66
+    },
+    {
+     "feature": "price_sensitivity",
+     "weight": 1.52
+    },
+    {
+     "feature": "sustainability_affinity",
+     "weight": -1.06
+    },
+    {
+     "feature": "email_open_rate",
+     "weight": 0.98
+    }
+   ]
+  }
+ ],
+ "creative_directions": [
+  {
+   "segment_brief_id": "seg-lapsed",
+   "tonality": "Calm, accountable, resolution-first",
+   "language_style": "Plain, short sentences; own the problem",
+   "cta_style": "Low-pressure: see the fix first",
+   "design_style": "Soft, rounded, generous whitespace",
+   "palette": {
+    "primary": "#C2703D",
+    "accent": "#8A4B2A",
+    "background": "#FFF8F0",
+    "text": "#1f2937"
+   },
+   "logo_url": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-b78febe59c86.png",
+   "hero_image_url": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-13648166940a.png",
+   "rationale": "Lead with acknowledgment, then present resolution before inviting a new pillow purchase.",
+   "model_version": "openai/gpt-5.6-luna"
+  },
+  {
+   "segment_brief_id": "seg-loyal",
+   "tonality": "Warm, insider, release-focused",
+   "language_style": "Confident, concise, first-person plural",
+   "cta_style": "Exclusive first look, one tap",
+   "design_style": "Rounded cards, product-forward hero",
+   "palette": {
+    "primary": "#C2703D",
+    "accent": "#9A4E26",
+    "background": "#FFF8F0",
+    "text": "#1f2937"
+   },
+   "logo_url": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-b78febe59c86.png",
+   "hero_image_url": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-13648166940a.png",
+   "rationale": "Dark terracotta improves button contrast while preserving the warm palette.",
+   "model_version": "openai/gpt-5.6-luna"
+  },
+  {
+   "segment_brief_id": "seg-app",
+   "tonality": "Curious, playful, discovery-led",
+   "language_style": "Snappy fragments, app-native phrasing",
+   "cta_style": "Open the app to explore",
+   "design_style": "Playful, rounded, bold product imagery",
+   "palette": {
+    "primary": "#C2703D",
+    "accent": "#C2703D",
+    "background": "#FFF8F0",
+    "text": "#1f2937"
+   },
+   "logo_url": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-b78febe59c86.png",
+   "hero_image_url": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-5d21c0a7e913.png",
+   "rationale": "Brand terracotta kept as-is; playful radius matches the app's own UI.",
+   "model_version": "openai/gpt-5.6-luna"
+  },
+  {
+   "segment_brief_id": "seg-gift",
+   "tonality": "Thoughtful, festive, reassuring",
+   "language_style": "Warm and descriptive, gift-giver's view",
+   "cta_style": "Pick a gift, we'll wrap it",
+   "design_style": "Soft rounded panels, cosy seasonal warmth",
+   "palette": {
+    "primary": "#C2703D",
+    "accent": "#B5653A",
+    "background": "#FFF8F0",
+    "text": "#1f2937"
+   },
+   "logo_url": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-b78febe59c86.png",
+   "hero_image_url": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-13648166940a.png",
+   "rationale": "Gifting cues lead; delivery reassurance sits beside the CTA.",
+   "model_version": "openai/gpt-5.6-luna"
+  },
+  {
+   "segment_brief_id": "seg-conscious",
+   "tonality": "Grounded, honest, quietly proud",
+   "language_style": "Factual, specific, no greenwashing",
+   "cta_style": "Built to last — see how",
+   "design_style": "Calm, rounded, natural light imagery",
+   "palette": {
+    "primary": "#C2703D",
+    "accent": "#7E6A3A",
+    "background": "#FFF8F0",
+    "text": "#1f2937"
+   },
+   "logo_url": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-b78febe59c86.png",
+   "hero_image_url": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-13648166940a.png",
+   "rationale": "Earthier accent signals durability without a green-washed palette.",
+   "model_version": "openai/gpt-5.6-luna"
+  },
+  {
+   "segment_brief_id": "seg-discount",
+   "tonality": "Direct, value-first, transparent",
+   "language_style": "Numbers up front, short declaratives",
+   "cta_style": "Claim the Early Bird price",
+   "design_style": "Clean rounded blocks, price clearly visible",
+   "palette": {
+    "primary": "#C2703D",
+    "accent": "#C2703D",
+    "background": "#FFF8F0",
+    "text": "#1f2937"
+   },
+   "logo_url": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-b78febe59c86.png",
+   "hero_image_url": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-13648166940a.png",
+   "rationale": "Offer terms visible without scrolling; no countdown or scarcity framing.",
+   "model_version": "openai/gpt-5.6-luna"
+  }
+ ],
+ "emails": [
+  {
+   "id": "email-discount",
+   "segment_brief_id": "seg-discount",
+   "subject": "Save 20% On Fat Cat Pillows",
+   "preheader": "Pay 80% of regular price with Early Bird savings.",
+   "blocks": [
+    {
+     "id": "5c2c8e68",
+     "type": "header",
+     "content": {
+      "logoUrl": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-b78febe59c86.png",
+      "bgColor": "#FFF8F0",
+      "logoHeight": "76",
+      "floating": "false"
+     }
+    },
+    {
+     "id": "7931ed99",
+     "type": "hero-image",
+     "content": {
+      "imageUrl": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-13648166940a.png",
+      "alt": "",
+      "align": "center",
+      "width": "auto",
+      "borderRadius": "24",
+      "heroLayersMerged": "false",
+      "heroOverlay": "{\"layout\": \"simple\", \"topTextOverlays\": [], \"textOverlays\": [], \"shapeOverlays\": []}",
+      "heroLogoEnabled": "false"
+     }
+    },
+    {
+     "id": "e9f7079f",
+     "type": "heading",
+     "content": {
+      "text": "The same pillow, for less",
+      "align": "center",
+      "size": "28"
+     }
+    },
+    {
+     "id": "71172d99",
+     "type": "body-text",
+     "content": {
+      "markdown": "Hi {{name}},\n\nEarly Bird pricing takes 20% off every fat cat pillow. The offer terms are below, in full."
+     }
+    },
+    {
+     "id": "ceb7a777",
+     "type": "spacer",
+     "content": {
+      "height": "8"
+     }
+    },
+    {
+     "id": "946a56e2",
+     "type": "columns",
+     "content": {
+      "columnCount": "3",
+      "col1Heading": "Clear savings",
+      "col1Text": "Pay 80% of the regular price at checkout.",
+      "col1ImageUrl": "",
+      "col1ImageLink": "",
+      "col2Heading": "Same quality",
+      "col2Text": "Identical pillows, stitched and stuffed the same way.",
+      "col2ImageUrl": "",
+      "col2ImageLink": "",
+      "col3Heading": "No catches",
+      "col3Text": "One price, shown upfront, before you pay.",
+      "col3ImageUrl": "",
+      "col3ImageLink": ""
+     }
+    },
+    {
+     "id": "81457c07",
+     "type": "divider",
+     "content": {
+      "color": "#C2703D",
+      "style": "solid",
+      "thickness": "1"
+     }
+    },
+    {
+     "id": "4aab07d1",
+     "type": "coupon",
+     "content": {
+      "code": "EARLYBIRD",
+      "label": "Early Bird",
+      "bgColor": "#FFF8F0",
+      "textColor": "#C2703D"
+     }
+    },
+    {
+     "id": "08b71b22",
+     "type": "accordion",
+     "content": {
+      "items": "[{\"id\": \"a1\", \"question\": \"How does Early Bird pricing work?\", \"answer\": \"You pay 80% of the regular price on any pillow ordered before launch day.\"}, {\"id\": \"a2\", \"question\": \"Can I return a pillow?\", \"answer\": \"Yes \\u2014 unused pillows can be returned within 30 days of delivery.\"}]",
+      "headerBgColor": "#C2703D",
+      "headerTextColor": "#ffffff",
+      "bodyBgColor": "#FFF8F0",
+      "bodyTextColor": "#1f2937",
+      "borderColor": "#e5e7eb",
+      "borderRadius": "24",
+      "iconStyle": "chevron"
+     }
+    },
+    {
+     "id": "5cfbedaf",
+     "type": "button",
+     "content": {
+      "text": "Claim Early Bird",
+      "url": "https://FCP.com.sg",
+      "color": "#C2703D",
+      "textColor": "#ffffff",
+      "style": "rounded",
+      "size": "medium",
+      "align": "center"
+     }
+    },
+    {
+     "id": "4cf8f011",
+     "type": "spacer",
+     "content": {
+      "height": "8"
+     }
+    },
+    {
+     "id": "98761f18",
+     "type": "body-text",
+     "content": {
+      "markdown": "With love from the FatCatPillow team."
+     }
+    },
+    {
+     "id": "7b66dadc",
+     "type": "divider",
+     "content": {
+      "color": "#C2703D",
+      "style": "solid",
+      "thickness": "1"
+     }
+    },
+    {
+     "id": "f8fec670",
+     "type": "social-links",
+     "content": {
+      "facebook": "https://FCP.com.sg",
+      "twitter": "https://FCP.com.sg",
+      "instagram": "https://FCP.com.sg",
+      "linkedin": "https://FCP.com.sg",
+      "youtube": "https://FCP.com.sg"
+     }
+    },
+    {
+     "id": "6f975845",
+     "type": "footer",
+     "content": {
+      "link1Label": "FCP.com.sg",
+      "link1Url": "https://FCP.com.sg",
+      "link2Label": "Contact us",
+      "link2Url": "https://FCP.com.sg/contact",
+      "link3Label": "Unsubscribe",
+      "link3Url": "https://FCP.com.sg/preferences",
+      "textColor": "#1f2937"
+     }
+    }
+   ],
+   "background": {
+    "type": "solid",
+    "primaryColor": "#FFF8F0",
+    "secondaryColor": "#C2703D",
+    "pattern": "none",
+    "patternOpacity": 15,
+    "patternScale": 1,
+    "gradientDirection": "to-bottom",
+    "contentBgColor": "#ffffff",
+    "contentBorderRadius": 24,
+    "contentShadow": true,
+    "paddingX": 24,
+    "paddingY": 32
+   },
+   "cited_offer_ids": [
+    "OFFER-02ad920e"
+   ],
+   "status": "sent",
+   "model_version": "openai/gpt-5.6-luna"
+  },
+  {
+   "id": "email-app",
+   "segment_brief_id": "seg-app",
+   "subject": "Explore New Fat Cat Drops",
+   "preheader": "Enter the app for early access and explore the range.",
+   "blocks": [
+    {
+     "id": "faec90f1",
+     "type": "header",
+     "content": {
+      "logoUrl": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-b78febe59c86.png",
+      "bgColor": "#FFF8F0",
+      "logoHeight": "76",
+      "floating": "false"
+     }
+    },
+    {
+     "id": "b81b8dbe",
+     "type": "hero-image",
+     "content": {
+      "imageUrl": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-5d21c0a7e913.png",
+      "alt": "",
+      "align": "center",
+      "width": "auto",
+      "borderRadius": "24",
+      "heroLayersMerged": "false",
+      "heroOverlay": "{\"layout\": \"simple\", \"topTextOverlays\": [], \"textOverlays\": [], \"shapeOverlays\": []}",
+      "heroLogoEnabled": "false"
+     }
+    },
+    {
+     "id": "70afd54d",
+     "type": "heading",
+     "content": {
+      "text": "New drops land in the app first",
+      "align": "center",
+      "size": "28"
+     }
+    },
+    {
+     "id": "f032ce25",
+     "type": "body-text",
+     "content": {
+      "markdown": "Hi {{name}},\n\nThe newest fat cat pillows appear in the app before anywhere else. Browse the full range and save favourites."
+     }
+    },
+    {
+     "id": "f5671b9f",
+     "type": "spacer",
+     "content": {
+      "height": "8"
+     }
+    },
+    {
+     "id": "98499113",
+     "type": "columns",
+     "content": {
+      "columnCount": "3",
+      "col1Heading": "First access",
+      "col1Text": "New drops open in the app before the site.",
+      "col1ImageUrl": "",
+      "col1ImageLink": "",
+      "col2Heading": "Full range",
+      "col2Text": "Every shape, size and colourway in one place.",
+      "col2ImageUrl": "",
+      "col2ImageLink": "",
+      "col3Heading": "Early Bird",
+      "col3Text": "Pay 80% of the regular price on launch orders.",
+      "col3ImageUrl": "",
+      "col3ImageLink": ""
+     }
+    },
+    {
+     "id": "9cccd5a9",
+     "type": "divider",
+     "content": {
+      "color": "#C2703D",
+      "style": "solid",
+      "thickness": "1"
+     }
+    },
+    {
+     "id": "a14653ec",
+     "type": "coupon",
+     "content": {
+      "code": "EARLYBIRD",
+      "label": "Early Bird",
+      "bgColor": "#FFF8F0",
+      "textColor": "#C2703D"
+     }
+    },
+    {
+     "id": "8877fad6",
+     "type": "accordion",
+     "content": {
+      "items": "[{\"id\": \"a1\", \"question\": \"How does Early Bird pricing work?\", \"answer\": \"You pay 80% of the regular price on any pillow ordered before launch day.\"}, {\"id\": \"a2\", \"question\": \"Can I return a pillow?\", \"answer\": \"Yes \\u2014 unused pillows can be returned within 30 days of delivery.\"}]",
+      "headerBgColor": "#C2703D",
+      "headerTextColor": "#ffffff",
+      "bodyBgColor": "#FFF8F0",
+      "bodyTextColor": "#1f2937",
+      "borderColor": "#e5e7eb",
+      "borderRadius": "24",
+      "iconStyle": "chevron"
+     }
+    },
+    {
+     "id": "a611d8df",
+     "type": "button",
+     "content": {
+      "text": "Open the app",
+      "url": "https://FCP.com.sg",
+      "color": "#C2703D",
+      "textColor": "#ffffff",
+      "style": "rounded",
+      "size": "medium",
+      "align": "center"
+     }
+    },
+    {
+     "id": "4fd083b5",
+     "type": "spacer",
+     "content": {
+      "height": "8"
+     }
+    },
+    {
+     "id": "c2d25364",
+     "type": "body-text",
+     "content": {
+      "markdown": "With love from the FatCatPillow team."
+     }
+    },
+    {
+     "id": "e1ca2403",
+     "type": "divider",
+     "content": {
+      "color": "#C2703D",
+      "style": "solid",
+      "thickness": "1"
+     }
+    },
+    {
+     "id": "7c243366",
+     "type": "social-links",
+     "content": {
+      "facebook": "https://FCP.com.sg",
+      "twitter": "https://FCP.com.sg",
+      "instagram": "https://FCP.com.sg",
+      "linkedin": "https://FCP.com.sg",
+      "youtube": "https://FCP.com.sg"
+     }
+    },
+    {
+     "id": "f86b799c",
+     "type": "footer",
+     "content": {
+      "link1Label": "FCP.com.sg",
+      "link1Url": "https://FCP.com.sg",
+      "link2Label": "Contact us",
+      "link2Url": "https://FCP.com.sg/contact",
+      "link3Label": "Unsubscribe",
+      "link3Url": "https://FCP.com.sg/preferences",
+      "textColor": "#1f2937"
+     }
+    }
+   ],
+   "background": {
+    "type": "solid",
+    "primaryColor": "#FFF8F0",
+    "secondaryColor": "#C2703D",
+    "pattern": "none",
+    "patternOpacity": 15,
+    "patternScale": 1,
+    "gradientDirection": "to-bottom",
+    "contentBgColor": "#ffffff",
+    "contentBorderRadius": 24,
+    "contentShadow": true,
+    "paddingX": 24,
+    "paddingY": 32
+   },
+   "cited_offer_ids": [
+    "OFFER-02ad920e"
+   ],
+   "status": "sent",
+   "model_version": "openai/gpt-5.6-luna"
+  },
+  {
+   "id": "email-loyal",
+   "segment_brief_id": "seg-loyal",
+   "subject": "First Look: Latest Fat Cat Pillow",
+   "preheader": "Your insider preview of the newest fat cat pillow release.",
+   "blocks": [
+    {
+     "id": "246feae8",
+     "type": "header",
+     "content": {
+      "logoUrl": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-b78febe59c86.png",
+      "bgColor": "#FFF8F0",
+      "logoHeight": "76",
+      "floating": "false"
+     }
+    },
+    {
+     "id": "6d21df28",
+     "type": "hero-image",
+     "content": {
+      "imageUrl": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-13648166940a.png",
+      "alt": "",
+      "align": "center",
+      "width": "auto",
+      "borderRadius": "24",
+      "heroLayersMerged": "false",
+      "heroOverlay": "{\"layout\": \"simple\", \"topTextOverlays\": [], \"textOverlays\": [], \"shapeOverlays\": []}",
+      "heroLogoEnabled": "false"
+     }
+    },
+    {
+     "id": "cdad8c9c",
+     "type": "heading",
+     "content": {
+      "text": "Meet the newest fat cat",
+      "align": "center",
+      "size": "28"
+     }
+    },
+    {
+     "id": "ec834738",
+     "type": "body-text",
+     "content": {
+      "markdown": "Hi {{name}},\n\nYou have been with us since the first pillow. Here is the next one, before it reaches the shop."
+     }
+    },
+    {
+     "id": "da988d69",
+     "type": "spacer",
+     "content": {
+      "height": "8"
+     }
+    },
+    {
+     "id": "159bd1a9",
+     "type": "columns",
+     "content": {
+      "columnCount": "3",
+      "col1Heading": "Insider preview",
+      "col1Text": "See the new release before anyone else.",
+      "col1ImageUrl": "",
+      "col1ImageLink": "",
+      "col2Heading": "Restock alerts",
+      "col2Text": "Know first when favourites come back.",
+      "col2ImageUrl": "",
+      "col2ImageLink": "",
+      "col3Heading": "Early Bird",
+      "col3Text": "Pay 80% of the regular price before launch.",
+      "col3ImageUrl": "",
+      "col3ImageLink": ""
+     }
+    },
+    {
+     "id": "99be53e4",
+     "type": "divider",
+     "content": {
+      "color": "#9A4E26",
+      "style": "solid",
+      "thickness": "1"
+     }
+    },
+    {
+     "id": "35eca0e1",
+     "type": "coupon",
+     "content": {
+      "code": "EARLYBIRD",
+      "label": "Early Bird",
+      "bgColor": "#FFF8F0",
+      "textColor": "#9A4E26"
+     }
+    },
+    {
+     "id": "6757ddfa",
+     "type": "accordion",
+     "content": {
+      "items": "[{\"id\": \"a1\", \"question\": \"How does Early Bird pricing work?\", \"answer\": \"You pay 80% of the regular price on any pillow ordered before launch day.\"}, {\"id\": \"a2\", \"question\": \"Can I return a pillow?\", \"answer\": \"Yes \\u2014 unused pillows can be returned within 30 days of delivery.\"}]",
+      "headerBgColor": "#9A4E26",
+      "headerTextColor": "#ffffff",
+      "bodyBgColor": "#FFF8F0",
+      "bodyTextColor": "#1f2937",
+      "borderColor": "#e5e7eb",
+      "borderRadius": "24",
+      "iconStyle": "chevron"
+     }
+    },
+    {
+     "id": "4a67d6b9",
+     "type": "button",
+     "content": {
+      "text": "Get first look",
+      "url": "https://FCP.com.sg",
+      "color": "#9A4E26",
+      "textColor": "#ffffff",
+      "style": "rounded",
+      "size": "medium",
+      "align": "center"
+     }
+    },
+    {
+     "id": "f309c2ce",
+     "type": "spacer",
+     "content": {
+      "height": "8"
+     }
+    },
+    {
+     "id": "62858398",
+     "type": "body-text",
+     "content": {
+      "markdown": "With love from the FatCatPillow team."
+     }
+    },
+    {
+     "id": "c01aa79f",
+     "type": "divider",
+     "content": {
+      "color": "#9A4E26",
+      "style": "solid",
+      "thickness": "1"
+     }
+    },
+    {
+     "id": "8a59fdb6",
+     "type": "social-links",
+     "content": {
+      "facebook": "https://FCP.com.sg",
+      "twitter": "https://FCP.com.sg",
+      "instagram": "https://FCP.com.sg",
+      "linkedin": "https://FCP.com.sg",
+      "youtube": "https://FCP.com.sg"
+     }
+    },
+    {
+     "id": "bea3cb1f",
+     "type": "footer",
+     "content": {
+      "link1Label": "FCP.com.sg",
+      "link1Url": "https://FCP.com.sg",
+      "link2Label": "Contact us",
+      "link2Url": "https://FCP.com.sg/contact",
+      "link3Label": "Unsubscribe",
+      "link3Url": "https://FCP.com.sg/preferences",
+      "textColor": "#1f2937"
+     }
+    }
+   ],
+   "background": {
+    "type": "solid",
+    "primaryColor": "#FFF8F0",
+    "secondaryColor": "#9A4E26",
+    "pattern": "none",
+    "patternOpacity": 15,
+    "patternScale": 1,
+    "gradientDirection": "to-bottom",
+    "contentBgColor": "#ffffff",
+    "contentBorderRadius": 24,
+    "contentShadow": true,
+    "paddingX": 24,
+    "paddingY": 32
+   },
+   "cited_offer_ids": [
+    "OFFER-02ad920e"
+   ],
+   "status": "draft",
+   "model_version": "openai/gpt-5.6-luna"
+  },
+  {
+   "id": "email-gift",
+   "segment_brief_id": "seg-gift",
+   "subject": "A Thoughtful Fat Cat Gift",
+   "preheader": "Thoughtful gifting starts with a fat cat pillow.",
+   "blocks": [
+    {
+     "id": "d867d69c",
+     "type": "header",
+     "content": {
+      "logoUrl": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-b78febe59c86.png",
+      "bgColor": "#FFF8F0",
+      "logoHeight": "76",
+      "floating": "false"
+     }
+    },
+    {
+     "id": "cc08ceda",
+     "type": "hero-image",
+     "content": {
+      "imageUrl": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-13648166940a.png",
+      "alt": "",
+      "align": "center",
+      "width": "auto",
+      "borderRadius": "24",
+      "heroLayersMerged": "false",
+      "heroOverlay": "{\"layout\": \"simple\", \"topTextOverlays\": [], \"textOverlays\": [], \"shapeOverlays\": []}",
+      "heroLogoEnabled": "false"
+     }
+    },
+    {
+     "id": "3de3b14a",
+     "type": "heading",
+     "content": {
+      "text": "A gift that gets hugged",
+      "align": "center",
+      "size": "28"
+     }
+    },
+    {
+     "id": "31b65d7f",
+     "type": "body-text",
+     "content": {
+      "markdown": "Hi {{name}},\n\nA fat cat pillow is the gift people actually keep on the sofa. We wrap it and add a card."
+     }
+    },
+    {
+     "id": "2b29b550",
+     "type": "spacer",
+     "content": {
+      "height": "8"
+     }
+    },
+    {
+     "id": "32d49685",
+     "type": "columns",
+     "content": {
+      "columnCount": "3",
+      "col1Heading": "Free wrapping",
+      "col1Text": "Every order can arrive gift-wrapped with a card.",
+      "col1ImageUrl": "",
+      "col1ImageLink": "",
+      "col2Heading": "Easy delivery",
+      "col2Text": "Send it straight to the person it's for.",
+      "col2ImageUrl": "",
+      "col2ImageLink": "",
+      "col3Heading": "Early Bird",
+      "col3Text": "Pay 80% of the regular price before launch.",
+      "col3ImageUrl": "",
+      "col3ImageLink": ""
+     }
+    },
+    {
+     "id": "b2cfe641",
+     "type": "divider",
+     "content": {
+      "color": "#B5653A",
+      "style": "solid",
+      "thickness": "1"
+     }
+    },
+    {
+     "id": "e7121b0a",
+     "type": "coupon",
+     "content": {
+      "code": "EARLYBIRD",
+      "label": "Early Bird",
+      "bgColor": "#FFF8F0",
+      "textColor": "#B5653A"
+     }
+    },
+    {
+     "id": "c833128d",
+     "type": "accordion",
+     "content": {
+      "items": "[{\"id\": \"a1\", \"question\": \"How does Early Bird pricing work?\", \"answer\": \"You pay 80% of the regular price on any pillow ordered before launch day.\"}, {\"id\": \"a2\", \"question\": \"Can I return a pillow?\", \"answer\": \"Yes \\u2014 unused pillows can be returned within 30 days of delivery.\"}]",
+      "headerBgColor": "#B5653A",
+      "headerTextColor": "#ffffff",
+      "bodyBgColor": "#FFF8F0",
+      "bodyTextColor": "#1f2937",
+      "borderColor": "#e5e7eb",
+      "borderRadius": "24",
+      "iconStyle": "chevron"
+     }
+    },
+    {
+     "id": "53fe3764",
+     "type": "button",
+     "content": {
+      "text": "Choose a gift",
+      "url": "https://FCP.com.sg",
+      "color": "#B5653A",
+      "textColor": "#ffffff",
+      "style": "rounded",
+      "size": "medium",
+      "align": "center"
+     }
+    },
+    {
+     "id": "f21627f5",
+     "type": "spacer",
+     "content": {
+      "height": "8"
+     }
+    },
+    {
+     "id": "4249e804",
+     "type": "body-text",
+     "content": {
+      "markdown": "With love from the FatCatPillow team."
+     }
+    },
+    {
+     "id": "724a43ba",
+     "type": "divider",
+     "content": {
+      "color": "#B5653A",
+      "style": "solid",
+      "thickness": "1"
+     }
+    },
+    {
+     "id": "4328af48",
+     "type": "social-links",
+     "content": {
+      "facebook": "https://FCP.com.sg",
+      "twitter": "https://FCP.com.sg",
+      "instagram": "https://FCP.com.sg",
+      "linkedin": "https://FCP.com.sg",
+      "youtube": "https://FCP.com.sg"
+     }
+    },
+    {
+     "id": "f4b1f3af",
+     "type": "footer",
+     "content": {
+      "link1Label": "FCP.com.sg",
+      "link1Url": "https://FCP.com.sg",
+      "link2Label": "Contact us",
+      "link2Url": "https://FCP.com.sg/contact",
+      "link3Label": "Unsubscribe",
+      "link3Url": "https://FCP.com.sg/preferences",
+      "textColor": "#1f2937"
+     }
+    }
+   ],
+   "background": {
+    "type": "solid",
+    "primaryColor": "#FFF8F0",
+    "secondaryColor": "#B5653A",
+    "pattern": "none",
+    "patternOpacity": 15,
+    "patternScale": 1,
+    "gradientDirection": "to-bottom",
+    "contentBgColor": "#ffffff",
+    "contentBorderRadius": 24,
+    "contentShadow": true,
+    "paddingX": 24,
+    "paddingY": 32
+   },
+   "cited_offer_ids": [
+    "OFFER-02ad920e"
+   ],
+   "status": "draft",
+   "model_version": "openai/gpt-5.6-luna"
+  },
+  {
+   "id": "email-conscious",
+   "segment_brief_id": "seg-conscious",
+   "subject": "A Fat Cat Pillow Built to Last",
+   "preheader": "Durable stitching, take-back at end of life.",
+   "blocks": [
+    {
+     "id": "fbb66d54",
+     "type": "header",
+     "content": {
+      "logoUrl": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-b78febe59c86.png",
+      "bgColor": "#FFF8F0",
+      "logoHeight": "76",
+      "floating": "false"
+     }
+    },
+    {
+     "id": "c66158e4",
+     "type": "hero-image",
+     "content": {
+      "imageUrl": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-13648166940a.png",
+      "alt": "",
+      "align": "center",
+      "width": "auto",
+      "borderRadius": "24",
+      "heroLayersMerged": "false",
+      "heroOverlay": "{\"layout\": \"simple\", \"topTextOverlays\": [], \"textOverlays\": [], \"shapeOverlays\": []}",
+      "heroLogoEnabled": "false"
+     }
+    },
+    {
+     "id": "a7e56435",
+     "type": "heading",
+     "content": {
+      "text": "Made to be kept",
+      "align": "center",
+      "size": "28"
+     }
+    },
+    {
+     "id": "0bd47dad",
+     "type": "body-text",
+     "content": {
+      "markdown": "Hi {{name}},\n\nEvery fat cat pillow is double-stitched to last for years. When it's done, we take it back."
+     }
+    },
+    {
+     "id": "1ced779d",
+     "type": "spacer",
+     "content": {
+      "height": "8"
+     }
+    },
+    {
+     "id": "c0f81578",
+     "type": "columns",
+     "content": {
+      "columnCount": "3",
+      "col1Heading": "Built to last",
+      "col1Text": "Double-stitched seams and a washable cover.",
+      "col1ImageUrl": "",
+      "col1ImageLink": "",
+      "col2Heading": "Take-back",
+      "col2Text": "Return worn pillows; we recycle the fill.",
+      "col2ImageUrl": "",
+      "col2ImageLink": "",
+      "col3Heading": "Early Bird",
+      "col3Text": "Pay 80% of the regular price before launch.",
+      "col3ImageUrl": "",
+      "col3ImageLink": ""
+     }
+    },
+    {
+     "id": "18848905",
+     "type": "divider",
+     "content": {
+      "color": "#7E6A3A",
+      "style": "solid",
+      "thickness": "1"
+     }
+    },
+    {
+     "id": "d6e8c1c9",
+     "type": "coupon",
+     "content": {
+      "code": "EARLYBIRD",
+      "label": "Early Bird",
+      "bgColor": "#FFF8F0",
+      "textColor": "#7E6A3A"
+     }
+    },
+    {
+     "id": "ae2b4be2",
+     "type": "accordion",
+     "content": {
+      "items": "[{\"id\": \"a1\", \"question\": \"How does Early Bird pricing work?\", \"answer\": \"You pay 80% of the regular price on any pillow ordered before launch day.\"}, {\"id\": \"a2\", \"question\": \"Can I return a pillow?\", \"answer\": \"Yes \\u2014 unused pillows can be returned within 30 days of delivery.\"}]",
+      "headerBgColor": "#7E6A3A",
+      "headerTextColor": "#ffffff",
+      "bodyBgColor": "#FFF8F0",
+      "bodyTextColor": "#1f2937",
+      "borderColor": "#e5e7eb",
+      "borderRadius": "24",
+      "iconStyle": "chevron"
+     }
+    },
+    {
+     "id": "605ae26f",
+     "type": "button",
+     "content": {
+      "text": "See how it's made",
+      "url": "https://FCP.com.sg",
+      "color": "#7E6A3A",
+      "textColor": "#ffffff",
+      "style": "rounded",
+      "size": "medium",
+      "align": "center"
+     }
+    },
+    {
+     "id": "04a06864",
+     "type": "spacer",
+     "content": {
+      "height": "8"
+     }
+    },
+    {
+     "id": "1b047604",
+     "type": "body-text",
+     "content": {
+      "markdown": "With love from the FatCatPillow team."
+     }
+    },
+    {
+     "id": "9563b331",
+     "type": "divider",
+     "content": {
+      "color": "#7E6A3A",
+      "style": "solid",
+      "thickness": "1"
+     }
+    },
+    {
+     "id": "b4a1748d",
+     "type": "social-links",
+     "content": {
+      "facebook": "https://FCP.com.sg",
+      "twitter": "https://FCP.com.sg",
+      "instagram": "https://FCP.com.sg",
+      "linkedin": "https://FCP.com.sg",
+      "youtube": "https://FCP.com.sg"
+     }
+    },
+    {
+     "id": "d3d33300",
+     "type": "footer",
+     "content": {
+      "link1Label": "FCP.com.sg",
+      "link1Url": "https://FCP.com.sg",
+      "link2Label": "Contact us",
+      "link2Url": "https://FCP.com.sg/contact",
+      "link3Label": "Unsubscribe",
+      "link3Url": "https://FCP.com.sg/preferences",
+      "textColor": "#1f2937"
+     }
+    }
+   ],
+   "background": {
+    "type": "solid",
+    "primaryColor": "#FFF8F0",
+    "secondaryColor": "#7E6A3A",
+    "pattern": "none",
+    "patternOpacity": 15,
+    "patternScale": 1,
+    "gradientDirection": "to-bottom",
+    "contentBgColor": "#ffffff",
+    "contentBorderRadius": 24,
+    "contentShadow": true,
+    "paddingX": 24,
+    "paddingY": 32
+   },
+   "cited_offer_ids": [
+    "OFFER-02ad920e"
+   ],
+   "status": "draft",
+   "model_version": "openai/gpt-5.6-luna"
+  },
+  {
+   "id": "email-lapsed",
+   "segment_brief_id": "seg-lapsed",
+   "subject": "Let's Resolve Your Delivery Issue",
+   "preheader": "We're sorting your last order first.",
+   "blocks": [
+    {
+     "id": "bb928341",
+     "type": "header",
+     "content": {
+      "logoUrl": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-b78febe59c86.png",
+      "bgColor": "#FFF8F0",
+      "logoHeight": "76",
+      "floating": "false"
+     }
+    },
+    {
+     "id": "fc326cf5",
+     "type": "hero-image",
+     "content": {
+      "imageUrl": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-13648166940a.png",
+      "alt": "",
+      "align": "center",
+      "width": "auto",
+      "borderRadius": "24",
+      "heroLayersMerged": "false",
+      "heroOverlay": "{\"layout\": \"simple\", \"topTextOverlays\": [], \"textOverlays\": [], \"shapeOverlays\": []}",
+      "heroLogoEnabled": "false"
+     }
+    },
+    {
+     "id": "93e3c61d",
+     "type": "heading",
+     "content": {
+      "text": "Your last order, sorted",
+      "align": "center",
+      "size": "28"
+     }
+    },
+    {
+     "id": "bbdca1de",
+     "type": "body-text",
+     "content": {
+      "markdown": "Hi {{name}},\n\nYour last delivery didn't go the way it should have. Here's what we've fixed, and how to reach us."
+     }
+    },
+    {
+     "id": "8d4b7880",
+     "type": "spacer",
+     "content": {
+      "height": "8"
+     }
+    },
+    {
+     "id": "c6995eb8",
+     "type": "columns",
+     "content": {
+      "columnCount": "3",
+      "col1Heading": "What happened",
+      "col1Text": "We traced the delay on your last order.",
+      "col1ImageUrl": "",
+      "col1ImageLink": "",
+      "col2Heading": "What we fixed",
+      "col2Text": "Tracked delivery is now standard on every order.",
+      "col2ImageUrl": "",
+      "col2ImageLink": "",
+      "col3Heading": "Early Bird",
+      "col3Text": "Pay 80% of the regular price if you order again.",
+      "col3ImageUrl": "",
+      "col3ImageLink": ""
+     }
+    },
+    {
+     "id": "a62455c4",
+     "type": "divider",
+     "content": {
+      "color": "#8A4B2A",
+      "style": "solid",
+      "thickness": "1"
+     }
+    },
+    {
+     "id": "407cd91e",
+     "type": "coupon",
+     "content": {
+      "code": "EARLYBIRD",
+      "label": "Early Bird",
+      "bgColor": "#FFF8F0",
+      "textColor": "#8A4B2A"
+     }
+    },
+    {
+     "id": "f567b773",
+     "type": "accordion",
+     "content": {
+      "items": "[{\"id\": \"a1\", \"question\": \"How does Early Bird pricing work?\", \"answer\": \"You pay 80% of the regular price on any pillow ordered before launch day.\"}, {\"id\": \"a2\", \"question\": \"Can I return a pillow?\", \"answer\": \"Yes \\u2014 unused pillows can be returned within 30 days of delivery.\"}]",
+      "headerBgColor": "#8A4B2A",
+      "headerTextColor": "#ffffff",
+      "bodyBgColor": "#FFF8F0",
+      "bodyTextColor": "#1f2937",
+      "borderColor": "#e5e7eb",
+      "borderRadius": "24",
+      "iconStyle": "chevron"
+     }
+    },
+    {
+     "id": "a1149032",
+     "type": "button",
+     "content": {
+      "text": "See the fix",
+      "url": "https://FCP.com.sg",
+      "color": "#8A4B2A",
+      "textColor": "#ffffff",
+      "style": "rounded",
+      "size": "medium",
+      "align": "center"
+     }
+    },
+    {
+     "id": "c4211654",
+     "type": "spacer",
+     "content": {
+      "height": "8"
+     }
+    },
+    {
+     "id": "92bea637",
+     "type": "body-text",
+     "content": {
+      "markdown": "With love from the FatCatPillow team."
+     }
+    },
+    {
+     "id": "e5cc8173",
+     "type": "divider",
+     "content": {
+      "color": "#8A4B2A",
+      "style": "solid",
+      "thickness": "1"
+     }
+    },
+    {
+     "id": "9c50be45",
+     "type": "social-links",
+     "content": {
+      "facebook": "https://FCP.com.sg",
+      "twitter": "https://FCP.com.sg",
+      "instagram": "https://FCP.com.sg",
+      "linkedin": "https://FCP.com.sg",
+      "youtube": "https://FCP.com.sg"
+     }
+    },
+    {
+     "id": "bca79ef9",
+     "type": "footer",
+     "content": {
+      "link1Label": "FCP.com.sg",
+      "link1Url": "https://FCP.com.sg",
+      "link2Label": "Contact us",
+      "link2Url": "https://FCP.com.sg/contact",
+      "link3Label": "Unsubscribe",
+      "link3Url": "https://FCP.com.sg/preferences",
+      "textColor": "#1f2937"
+     }
+    }
+   ],
+   "background": {
+    "type": "solid",
+    "primaryColor": "#FFF8F0",
+    "secondaryColor": "#8A4B2A",
+    "pattern": "none",
+    "patternOpacity": 15,
+    "patternScale": 1,
+    "gradientDirection": "to-bottom",
+    "contentBgColor": "#ffffff",
+    "contentBorderRadius": 24,
+    "contentShadow": true,
+    "paddingX": 24,
+    "paddingY": 32
+   },
+   "cited_offer_ids": [
+    "OFFER-02ad920e"
+   ],
+   "status": "draft",
+   "model_version": "openai/gpt-5.6-luna"
+  }
+ ],
+ "verdicts": {
+  "email-discount": {
+   "verdict": "PASS",
+   "checks": [
+    {
+     "name": "Marketing consent",
+     "category": "compliance",
+     "passed": true,
+     "detail": "95 of 100 contacts still opted in (5% withdrawn)",
+     "severity": "block"
+    },
+    {
+     "name": "Unsubscribe route",
+     "category": "compliance",
+     "passed": true,
+     "detail": "Footer carries an opt-out link",
+     "severity": "block"
+    },
+    {
+     "name": "No leaked identifiers",
+     "category": "compliance",
+     "passed": true,
+     "detail": "No customer emails or phone numbers in the copy",
+     "severity": "block"
+    },
+    {
+     "name": "Protected-attribute proxy",
+     "category": "compliance",
+     "passed": true,
+     "detail": "age deviates 7% from the base rate — within tolerance",
+     "severity": "revise"
+    },
+    {
+     "name": "No instruction injection",
+     "category": "content",
+     "passed": true,
+     "detail": "No instruction-like artifacts in the copy",
+     "severity": "block"
+    },
+    {
+     "name": "Offer grounding",
+     "category": "content",
+     "passed": true,
+     "detail": "Cites 1 catalogue offer(s): Early Bird",
+     "severity": "revise"
+    },
+    {
+     "name": "Personalisation tags",
+     "category": "content",
+     "passed": true,
+     "detail": "name resolves from the uploaded CSV",
+     "severity": "block"
+    },
+    {
+     "name": "Subject line",
+     "category": "deliverability",
+     "passed": true,
+     "detail": "27 chars, no spam triggers",
+     "severity": "revise"
+    },
+    {
+     "name": "Link integrity",
+     "category": "deliverability",
+     "passed": true,
+     "detail": "All 9 links resolve to a real destination",
+     "severity": "revise"
+    },
+    {
+     "name": "Image sources",
+     "category": "deliverability",
+     "passed": true,
+     "detail": "All 2 images on public https URLs",
+     "severity": "revise"
+    }
+   ],
+   "created_at": "2026-10-14T01:08:55+08:00"
+  },
+  "email-app": {
+   "verdict": "PASS",
+   "checks": [
+    {
+     "name": "Marketing consent",
+     "category": "compliance",
+     "passed": true,
+     "detail": "130 of 134 contacts still opted in (3% withdrawn)",
+     "severity": "block"
+    },
+    {
+     "name": "Unsubscribe route",
+     "category": "compliance",
+     "passed": true,
+     "detail": "Footer carries an opt-out link",
+     "severity": "block"
+    },
+    {
+     "name": "No leaked identifiers",
+     "category": "compliance",
+     "passed": true,
+     "detail": "No customer emails or phone numbers in the copy",
+     "severity": "block"
+    },
+    {
+     "name": "Protected-attribute proxy",
+     "category": "compliance",
+     "passed": true,
+     "detail": "age deviates 14% from the base rate — within tolerance",
+     "severity": "revise"
+    },
+    {
+     "name": "No instruction injection",
+     "category": "content",
+     "passed": true,
+     "detail": "No instruction-like artifacts in the copy",
+     "severity": "block"
+    },
+    {
+     "name": "Offer grounding",
+     "category": "content",
+     "passed": true,
+     "detail": "Cites 1 catalogue offer(s): Early Bird",
+     "severity": "revise"
+    },
+    {
+     "name": "Personalisation tags",
+     "category": "content",
+     "passed": true,
+     "detail": "name resolves from the uploaded CSV",
+     "severity": "block"
+    },
+    {
+     "name": "Subject line",
+     "category": "deliverability",
+     "passed": true,
+     "detail": "25 chars, no spam triggers",
+     "severity": "revise"
+    },
+    {
+     "name": "Link integrity",
+     "category": "deliverability",
+     "passed": true,
+     "detail": "All 9 links resolve to a real destination",
+     "severity": "revise"
+    },
+    {
+     "name": "Image sources",
+     "category": "deliverability",
+     "passed": true,
+     "detail": "All 2 images on public https URLs",
+     "severity": "revise"
+    }
+   ],
+   "created_at": "2026-10-14T01:08:56+08:00"
+  },
+  "email-loyal": {
+   "verdict": "REVISE",
+   "checks": [
+    {
+     "name": "Marketing consent",
+     "category": "compliance",
+     "passed": true,
+     "detail": "131 of 134 contacts still opted in (2% withdrawn)",
+     "severity": "block"
+    },
+    {
+     "name": "Unsubscribe route",
+     "category": "compliance",
+     "passed": true,
+     "detail": "Footer carries an opt-out link",
+     "severity": "block"
+    },
+    {
+     "name": "No leaked identifiers",
+     "category": "compliance",
+     "passed": true,
+     "detail": "No customer emails or phone numbers in the copy",
+     "severity": "block"
+    },
+    {
+     "name": "Protected-attribute proxy",
+     "category": "compliance",
+     "passed": false,
+     "detail": "age deviates 37% from the base rate — this segment is a proxy for it",
+     "severity": "revise"
+    },
+    {
+     "name": "No instruction injection",
+     "category": "content",
+     "passed": true,
+     "detail": "No instruction-like artifacts in the copy",
+     "severity": "block"
+    },
+    {
+     "name": "Offer grounding",
+     "category": "content",
+     "passed": true,
+     "detail": "Cites 1 catalogue offer(s): Early Bird",
+     "severity": "revise"
+    },
+    {
+     "name": "Personalisation tags",
+     "category": "content",
+     "passed": true,
+     "detail": "name resolves from the uploaded CSV",
+     "severity": "block"
+    },
+    {
+     "name": "Subject line",
+     "category": "deliverability",
+     "passed": true,
+     "detail": "33 chars, no spam triggers",
+     "severity": "revise"
+    },
+    {
+     "name": "Link integrity",
+     "category": "deliverability",
+     "passed": true,
+     "detail": "All 9 links resolve to a real destination",
+     "severity": "revise"
+    },
+    {
+     "name": "Image sources",
+     "category": "deliverability",
+     "passed": true,
+     "detail": "All 2 images on public https URLs",
+     "severity": "revise"
+    }
+   ],
+   "created_at": "2026-10-14T01:08:57+08:00"
+  },
+  "email-gift": {
+   "verdict": "PASS",
+   "checks": [
+    {
+     "name": "Marketing consent",
+     "category": "compliance",
+     "passed": true,
+     "detail": "115 of 121 contacts still opted in (5% withdrawn)",
+     "severity": "block"
+    },
+    {
+     "name": "Unsubscribe route",
+     "category": "compliance",
+     "passed": true,
+     "detail": "Footer carries an opt-out link",
+     "severity": "block"
+    },
+    {
+     "name": "No leaked identifiers",
+     "category": "compliance",
+     "passed": true,
+     "detail": "No customer emails or phone numbers in the copy",
+     "severity": "block"
+    },
+    {
+     "name": "Protected-attribute proxy",
+     "category": "compliance",
+     "passed": true,
+     "detail": "age deviates 14% from the base rate — within tolerance",
+     "severity": "revise"
+    },
+    {
+     "name": "No instruction injection",
+     "category": "content",
+     "passed": true,
+     "detail": "No instruction-like artifacts in the copy",
+     "severity": "block"
+    },
+    {
+     "name": "Offer grounding",
+     "category": "content",
+     "passed": true,
+     "detail": "Cites 1 catalogue offer(s): Early Bird",
+     "severity": "revise"
+    },
+    {
+     "name": "Personalisation tags",
+     "category": "content",
+     "passed": true,
+     "detail": "name resolves from the uploaded CSV",
+     "severity": "block"
+    },
+    {
+     "name": "Subject line",
+     "category": "deliverability",
+     "passed": true,
+     "detail": "25 chars, no spam triggers",
+     "severity": "revise"
+    },
+    {
+     "name": "Link integrity",
+     "category": "deliverability",
+     "passed": true,
+     "detail": "All 9 links resolve to a real destination",
+     "severity": "revise"
+    },
+    {
+     "name": "Image sources",
+     "category": "deliverability",
+     "passed": true,
+     "detail": "All 2 images on public https URLs",
+     "severity": "revise"
+    }
+   ],
+   "created_at": "2026-10-14T01:08:58+08:00"
+  },
+  "email-conscious": {
+   "verdict": "PASS",
+   "checks": [
+    {
+     "name": "Marketing consent",
+     "category": "compliance",
+     "passed": true,
+     "detail": "112 of 114 contacts still opted in (2% withdrawn)",
+     "severity": "block"
+    },
+    {
+     "name": "Unsubscribe route",
+     "category": "compliance",
+     "passed": true,
+     "detail": "Footer carries an opt-out link",
+     "severity": "block"
+    },
+    {
+     "name": "No leaked identifiers",
+     "category": "compliance",
+     "passed": true,
+     "detail": "No customer emails or phone numbers in the copy",
+     "severity": "block"
+    },
+    {
+     "name": "Protected-attribute proxy",
+     "category": "compliance",
+     "passed": true,
+     "detail": "age deviates 16% from the base rate — within tolerance",
+     "severity": "revise"
+    },
+    {
+     "name": "No instruction injection",
+     "category": "content",
+     "passed": true,
+     "detail": "No instruction-like artifacts in the copy",
+     "severity": "block"
+    },
+    {
+     "name": "Offer grounding",
+     "category": "content",
+     "passed": true,
+     "detail": "Cites 1 catalogue offer(s): Early Bird",
+     "severity": "revise"
+    },
+    {
+     "name": "Personalisation tags",
+     "category": "content",
+     "passed": true,
+     "detail": "name resolves from the uploaded CSV",
+     "severity": "block"
+    },
+    {
+     "name": "Subject line",
+     "category": "deliverability",
+     "passed": true,
+     "detail": "30 chars, no spam triggers",
+     "severity": "revise"
+    },
+    {
+     "name": "Link integrity",
+     "category": "deliverability",
+     "passed": true,
+     "detail": "All 9 links resolve to a real destination",
+     "severity": "revise"
+    },
+    {
+     "name": "Image sources",
+     "category": "deliverability",
+     "passed": true,
+     "detail": "All 2 images on public https URLs",
+     "severity": "revise"
+    }
+   ],
+   "created_at": "2026-10-14T01:08:59+08:00"
+  },
+  "email-lapsed": {
+   "verdict": "PASS",
+   "checks": [
+    {
+     "name": "Marketing consent",
+     "category": "compliance",
+     "passed": true,
+     "detail": "132 of 141 contacts still opted in (6% withdrawn)",
+     "severity": "block"
+    },
+    {
+     "name": "Unsubscribe route",
+     "category": "compliance",
+     "passed": true,
+     "detail": "Footer carries an opt-out link",
+     "severity": "block"
+    },
+    {
+     "name": "No leaked identifiers",
+     "category": "compliance",
+     "passed": true,
+     "detail": "No customer emails or phone numbers in the copy",
+     "severity": "block"
+    },
+    {
+     "name": "Protected-attribute proxy",
+     "category": "compliance",
+     "passed": true,
+     "detail": "age deviates 8% from the base rate — within tolerance",
+     "severity": "revise"
+    },
+    {
+     "name": "No instruction injection",
+     "category": "content",
+     "passed": true,
+     "detail": "No instruction-like artifacts in the copy",
+     "severity": "block"
+    },
+    {
+     "name": "Offer grounding",
+     "category": "content",
+     "passed": true,
+     "detail": "Cites 1 catalogue offer(s): Early Bird",
+     "severity": "revise"
+    },
+    {
+     "name": "Personalisation tags",
+     "category": "content",
+     "passed": true,
+     "detail": "name resolves from the uploaded CSV",
+     "severity": "block"
+    },
+    {
+     "name": "Subject line",
+     "category": "deliverability",
+     "passed": true,
+     "detail": "33 chars, no spam triggers",
+     "severity": "revise"
+    },
+    {
+     "name": "Link integrity",
+     "category": "deliverability",
+     "passed": true,
+     "detail": "All 9 links resolve to a real destination",
+     "severity": "revise"
+    },
+    {
+     "name": "Image sources",
+     "category": "deliverability",
+     "passed": true,
+     "detail": "All 2 images on public https URLs",
+     "severity": "revise"
+    }
+   ],
+   "created_at": "2026-10-14T01:08:60+08:00"
+  }
+ },
+ "proxy_checks": [
+  {
+   "segment_brief_id": "seg-lapsed",
+   "protected_attribute": "age",
+   "correlation": 0.08,
+   "flagged": false
+  },
+  {
+   "segment_brief_id": "seg-loyal",
+   "protected_attribute": "age",
+   "correlation": 0.37,
+   "flagged": true
+  },
+  {
+   "segment_brief_id": "seg-app",
+   "protected_attribute": "age",
+   "correlation": 0.14,
+   "flagged": false
+  },
+  {
+   "segment_brief_id": "seg-gift",
+   "protected_attribute": "age",
+   "correlation": 0.14,
+   "flagged": false
+  },
+  {
+   "segment_brief_id": "seg-conscious",
+   "protected_attribute": "age",
+   "correlation": 0.16,
+   "flagged": false
+  },
+  {
+   "segment_brief_id": "seg-discount",
+   "protected_attribute": "age",
+   "correlation": 0.07,
+   "flagged": false
+  }
+ ],
+ "approvals": [
+  {
+   "id": "appr-email-discount",
+   "scope": "email",
+   "approver_name": "Ong Qing Quan",
+   "decision": "approved",
+   "target_id": "email-discount",
+   "created_at": "2026-09-12T11:26:40+08:00"
+  },
+  {
+   "id": "appr-email-app",
+   "scope": "email",
+   "approver_name": "Ong Qing Quan",
+   "decision": "approved",
+   "target_id": "email-app",
+   "created_at": "2026-09-12T11:26:40+08:00"
+  }
+ ],
+ "sends": [
+  {
+   "id": "send-email-discount",
+   "email_id": "email-discount",
+   "segment_brief_id": "seg-discount",
+   "recipient": "demo@fcp.com.sg",
+   "subject": "Save 20% On Fat Cat Pillows",
+   "status": "sent",
+   "provider": "resend",
+   "provider_id": "re_0a91f3c",
+   "error": null,
+   "created_at": "2026-09-12T11:27:10+08:00"
+  },
+  {
+   "id": "send-email-app",
+   "email_id": "email-app",
+   "segment_brief_id": "seg-app",
+   "recipient": "demo@fcp.com.sg",
+   "subject": "Explore New Fat Cat Drops",
+   "status": "sent",
+   "provider": "resend",
+   "provider_id": "re_1a91f3c",
+   "error": null,
+   "created_at": "2026-09-12T11:27:24+08:00"
+  }
+ ],
+ "offers": [
+  {
+   "id": "OFFER-02ad920e",
+   "name": "Early Bird",
+   "terms": "Pay 80% of the regular price on any fat cat pillow ordered before launch day."
+  },
+  {
+   "id": "OFFER-7c41be09",
+   "name": "Gift Wrap",
+   "terms": "Free gift wrapping and a handwritten card on any order."
+  }
+ ],
+ "brand_palette": {
+  "primary": "#C2703D",
+  "accent": "#C2703D",
+  "background": "#FFF8F0",
+  "text": "#1f2937"
+ },
+ "max_segments": 6,
+ "spend_usd": 0.4172,
+ "eval": {
+  "id": "eval-4be1d07a2c",
+  "created_at": "2026-09-12T02:41:00+00:00",
+  "rubric_version": "eval-v1",
+  "judge_model": "openai/gpt-5.6-luna",
+  "overall": 88.2,
+  "agents": {
+   "segmentation": {
+    "score": 70.8,
+    "available": true,
+    "metrics": {},
+    "notes": [],
+    "items": [],
+    "breakdown": [
+     {
+      "name": "Silhouette",
+      "kind": "Code",
+      "weight": 38.5,
+      "earned": 26.6
+     },
+     {
+      "name": "Coverage",
+      "kind": "Code",
+      "weight": 17.5,
+      "earned": 13.0
+     },
+     {
+      "name": "HDBSCAN confidence",
+      "kind": "Code",
+      "weight": 14.0,
+      "earned": 13.0
+     },
+     {
+      "name": "Faithfulness",
+      "kind": "LLM Judge",
+      "weight": 15.0,
+      "earned": 6.9
+     },
+     {
+      "name": "Specificity",
+      "kind": "LLM Judge",
+      "weight": 15.0,
+      "earned": 11.2
+     }
+    ]
+   },
+   "creative": {
+    "score": 95.0,
+    "available": true,
+    "metrics": {},
+    "notes": [],
+    "items": [],
+    "breakdown": [
+     {
+      "name": "Tonality length",
+      "kind": "Code",
+      "weight": 8.0,
+      "earned": 8
+     },
+     {
+      "name": "Language length",
+      "kind": "Code",
+      "weight": 8.0,
+      "earned": 8
+     },
+     {
+      "name": "CTA length",
+      "kind": "Code",
+      "weight": 8.0,
+      "earned": 8
+     },
+     {
+      "name": "Design length",
+      "kind": "Code",
+      "weight": 8.0,
+      "earned": 8
+     },
+     {
+      "name": "Accent hex",
+      "kind": "Code",
+      "weight": 8.0,
+      "earned": 8
+     },
+     {
+      "name": "Segment fit",
+      "kind": "LLM Judge",
+      "weight": 20.0,
+      "earned": 20
+     },
+     {
+      "name": "Brand fit",
+      "kind": "LLM Judge",
+      "weight": 20.0,
+      "earned": 15
+     },
+     {
+      "name": "No dark patterns",
+      "kind": "LLM Judge",
+      "weight": 20.0,
+      "earned": 20
+     }
+    ]
+   },
+   "composer": {
+    "score": 93.3,
+    "available": true,
+    "metrics": {},
+    "notes": [],
+    "items": [],
+    "breakdown": [
+     {
+      "name": "Has citation",
+      "kind": "Code",
+      "weight": 10.0,
+      "earned": 10
+     },
+     {
+      "name": "Citations in catalogue",
+      "kind": "Code",
+      "weight": 10.0,
+      "earned": 10
+     },
+     {
+      "name": "Subject length",
+      "kind": "Code",
+      "weight": 10.0,
+      "earned": 10
+     },
+     {
+      "name": "Preheader length",
+      "kind": "Code",
+      "weight": 10.0,
+      "earned": 10
+     },
+     {
+      "name": "Follows direction",
+      "kind": "LLM Judge",
+      "weight": 20.0,
+      "earned": 20
+     },
+     {
+      "name": "Segment fit",
+      "kind": "LLM Judge",
+      "weight": 20.0,
+      "earned": 19.2
+     },
+     {
+      "name": "Grounded",
+      "kind": "LLM Judge",
+      "weight": 20.0,
+      "earned": 14.2
+     }
+    ]
+   },
+   "guardian": {
+    "score": 93.7,
+    "available": true,
+    "metrics": {},
+    "notes": [],
+    "items": [],
+    "breakdown": [
+     {
+      "name": "Check pass rate",
+      "kind": "Code",
+      "weight": 70.0,
+      "earned": 68.7
+     },
+     {
+      "name": "Email PASS rate",
+      "kind": "Code",
+      "weight": 30.0,
+      "earned": 25
+     }
+    ]
+   }
+  },
+  "delta": {
+   "overall": 3.4,
+   "segmentation": 1.2,
+   "creative": 4.1,
+   "composer": 2.6,
+   "guardian": 5.7
+  },
+  "rubric": {
+   "segmentation": [
+    {
+     "name": "Silhouette",
+     "kind": "Code",
+     "weight": 38.5,
+     "earned": null
+    },
+    {
+     "name": "Coverage",
+     "kind": "Code",
+     "weight": 17.5,
+     "earned": null
+    },
+    {
+     "name": "HDBSCAN confidence",
+     "kind": "Code",
+     "weight": 14.0,
+     "earned": null
+    },
+    {
+     "name": "Faithfulness",
+     "kind": "LLM Judge",
+     "weight": 15.0,
+     "earned": null
+    },
+    {
+     "name": "Specificity",
+     "kind": "LLM Judge",
+     "weight": 15.0,
+     "earned": null
+    }
+   ],
+   "creative": [
+    {
+     "name": "Tonality length",
+     "kind": "Code",
+     "weight": 8.0,
+     "earned": null
+    },
+    {
+     "name": "Language length",
+     "kind": "Code",
+     "weight": 8.0,
+     "earned": null
+    },
+    {
+     "name": "CTA length",
+     "kind": "Code",
+     "weight": 8.0,
+     "earned": null
+    },
+    {
+     "name": "Design length",
+     "kind": "Code",
+     "weight": 8.0,
+     "earned": null
+    },
+    {
+     "name": "Accent hex",
+     "kind": "Code",
+     "weight": 8.0,
+     "earned": null
+    },
+    {
+     "name": "Segment fit",
+     "kind": "LLM Judge",
+     "weight": 20.0,
+     "earned": null
+    },
+    {
+     "name": "Brand fit",
+     "kind": "LLM Judge",
+     "weight": 20.0,
+     "earned": null
+    },
+    {
+     "name": "No dark patterns",
+     "kind": "LLM Judge",
+     "weight": 20.0,
+     "earned": null
+    }
+   ],
+   "composer": [
+    {
+     "name": "Has citation",
+     "kind": "Code",
+     "weight": 10.0,
+     "earned": null
+    },
+    {
+     "name": "Citations in catalogue",
+     "kind": "Code",
+     "weight": 10.0,
+     "earned": null
+    },
+    {
+     "name": "Subject length",
+     "kind": "Code",
+     "weight": 10.0,
+     "earned": null
+    },
+    {
+     "name": "Preheader length",
+     "kind": "Code",
+     "weight": 10.0,
+     "earned": null
+    },
+    {
+     "name": "Follows direction",
+     "kind": "LLM Judge",
+     "weight": 20.0,
+     "earned": null
+    },
+    {
+     "name": "Segment fit",
+     "kind": "LLM Judge",
+     "weight": 20.0,
+     "earned": null
+    },
+    {
+     "name": "Grounded",
+     "kind": "LLM Judge",
+     "weight": 20.0,
+     "earned": null
+    }
+   ],
+   "guardian": [
+    {
+     "name": "Check pass rate",
+     "kind": "Code",
+     "weight": 70.0,
+     "earned": null
+    },
+    {
+     "name": "Email PASS rate",
+     "kind": "Code",
+     "weight": 30.0,
+     "earned": null
+    }
+   ]
+  }
+ },
+ "dispatch": {
+  "configured": true,
+  "from_address": "FatCatPillow <hello@fcp.com.sg>",
+  "default_recipient": "demo@fcp.com.sg"
+ }
+}

@@ -31,7 +31,7 @@ NUS-ISS · Graduate Certificate in Architecting AI Systems (SWE5008) · Practice
 | MLSecOps / LLMSecOps pipeline | [§7 below](#7-mlsecops--llmsecops-pipeline) · [.github/workflows/ci.yml](.github/workflows/ci.yml) · report §7 |
 | Testing artifacts | [backend/tests/](backend/tests/) · [docs/ci-negative-test.md](docs/ci-negative-test.md) · report §8 |
 | UI prototype | the Campaign Console in [frontend/](frontend/) · [screenshots](#9-the-console) |
-| Intro video (58 s) | [docs/media/mosaic-intro.mp4](docs/media/mosaic-intro.mp4) |
+| Intro video (60 s) | [YouTube](https://youtu.be/l2s-poLYnV8) · [docs/media/mosaic-intro.mp4](docs/media/mosaic-intro.mp4) |
 
 **Contents:** [1 Problem](#1-the-problem) · [2 System overview](#2-system-overview) ·
 [3 Architecture](#3-system-architecture) · [4 Agents](#4-agent-roles-and-design) ·
@@ -44,11 +44,13 @@ NUS-ISS · Graduate Certificate in Architecting AI Systems (SWE5008) · Practice
 
 ## Watch the intro
 
-[![MOSAIC intro video](docs/media/poster.jpg)](docs/media/mosaic-intro.mp4)
+[![MOSAIC intro video](docs/media/poster.jpg)](https://youtu.be/l2s-poLYnV8)
 
-**▶ [docs/media/mosaic-intro.mp4](docs/media/mosaic-intro.mp4)** — 58 seconds, 1920×1080, ten scenes in
-the order the console works. It is a [Remotion](https://remotion.dev) project in [video/](video/),
-rendered from source rather than edited by hand: `cd video && npm install && npm run render`.
+**▶ [Watch on YouTube](https://youtu.be/l2s-poLYnV8)** — 60 seconds, 1920×1080, cut to the beat of
+*Forward Motion*. Every UI shot is the real Console, driven by Playwright over the FatCatPillow demo run.
+It is a [Remotion](https://remotion.dev) project in [video/](video/), rendered from source rather than
+edited by hand: `cd video && npm install && npm run render`. The rendered file is also kept in the
+repo: [docs/media/mosaic-intro.mp4](docs/media/mosaic-intro.mp4).
 
 ---
 

@@ -1,0 +1,16 @@
+{
+ "brand_palette": {
+  "primary": "#C2703D",
+  "accent": "#C2703D",
+  "background": "#FFF8F0",
+  "text": "#1f2937"
+ },
+ "openrouter_configured": true,
+ "supabase_configured": true,
+ "resend_configured": true,
+ "resend_from": "FatCatPillow <hello@fcp.com.sg>",
+ "default_recipient": "demo@fcp.com.sg",
+ "text_model": "openai/gpt-5.6-luna",
+ "embedding_model": "openai/text-embedding-3-small",
+ "max_segments": 6
+}

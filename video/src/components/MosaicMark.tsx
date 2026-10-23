@@ -61,8 +61,11 @@ export const MosaicMark: React.FC<{
   stagger?: number;
   /** Skip the fly-in entirely (outro, lockups). */
   still?: boolean;
-}> = ({ width = 520, delay = 0, stagger = 3.5, still = false }) => {
-  const frame = useCurrentFrame();
+  /** Clock override for callers measuring from a shot's own start. */
+  frame?: number;
+}> = ({ width = 520, delay = 0, stagger = 3.5, still = false, frame: frameProp }) => {
+  const own = useCurrentFrame();
+  const frame = frameProp ?? own;
   const { fps } = useVideoConfig();
 
   return (

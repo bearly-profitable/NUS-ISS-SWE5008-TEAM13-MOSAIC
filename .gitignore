@@ -35,6 +35,9 @@ Thumbs.db
 .idea/
 ~$*
 
+# Practice module briefing (NUS-ISS course material, not part of the project)
+AAS Practice Module Briefing*.pdf
+
 # Claude Code local state
 .claude/
 

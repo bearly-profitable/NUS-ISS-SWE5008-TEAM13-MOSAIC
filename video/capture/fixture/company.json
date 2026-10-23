@@ -1,0 +1,225 @@
+{
+ "company": {
+  "name": "FatCatPillow",
+  "website": "FCP.com.sg",
+  "description": "Sells fat cat pillows",
+  "campaign_intent": "Sell fat cat pillows to users that like fat cats",
+  "dynamic_attribute": "name",
+  "logo_url": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-b78febe59c86.png",
+  "hero_image_url": "https://mvtpknmrwrhjowocutjv.supabase.co/storage/v1/object/public/email-images/email-asset-13648166940a.png",
+  "columns": [
+   {
+    "name": "base_id",
+    "kind": "identifier",
+    "protected": false,
+    "distinct": 1000,
+    "sample": "mosaic-cust-00000"
+   },
+   {
+    "name": "name",
+    "kind": "categorical",
+    "protected": false,
+    "distinct": 20,
+    "sample": "Cheryl Tan"
+   },
+   {
+    "name": "age",
+    "kind": "numeric",
+    "protected": true,
+    "distinct": 46,
+    "sample": "22"
+   },
+   {
+    "name": "tenure_months",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 83,
+    "sample": "1"
+   },
+   {
+    "name": "age_bracket",
+    "kind": "categorical",
+    "protected": true,
+    "distinct": 5,
+    "sample": "18-24"
+   },
+   {
+    "name": "gender",
+    "kind": "categorical",
+    "protected": true,
+    "distinct": 4,
+    "sample": "Undisclosed"
+   },
+   {
+    "name": "location",
+    "kind": "categorical",
+    "protected": false,
+    "distinct": 5,
+    "sample": "East"
+   },
+   {
+    "name": "language",
+    "kind": "categorical",
+    "protected": false,
+    "distinct": 4,
+    "sample": "Mandarin"
+   },
+   {
+    "name": "membership_tier",
+    "kind": "categorical",
+    "protected": false,
+    "distinct": 3,
+    "sample": "Explorer"
+   },
+   {
+    "name": "signup_channel",
+    "kind": "categorical",
+    "protected": false,
+    "distinct": 4,
+    "sample": "App"
+   },
+   {
+    "name": "newsletter_opt_in",
+    "kind": "categorical",
+    "protected": false,
+    "distinct": 2,
+    "sample": "TRUE"
+   },
+   {
+    "name": "app_installed",
+    "kind": "categorical",
+    "protected": false,
+    "distinct": 2,
+    "sample": "TRUE"
+   },
+   {
+    "name": "p3m_spend_sgd",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 991,
+    "sample": "111.73"
+   },
+   {
+    "name": "p6m_spend_sgd",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 995,
+    "sample": "149.59"
+   },
+   {
+    "name": "avg_basket_sgd",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 861,
+    "sample": "49.86"
+   },
+   {
+    "name": "email_open_rate",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 88,
+    "sample": "0.37"
+   },
+   {
+    "name": "avg_discount_pct",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 326,
+    "sample": "8.7"
+   },
+   {
+    "name": "returns_rate",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 41,
+    "sample": "0.08"
+   },
+   {
+    "name": "orders_p3m",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 15,
+    "sample": "2"
+   },
+   {
+    "name": "orders_p6m",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 32,
+    "sample": "3"
+   },
+   {
+    "name": "days_since_last_order",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 201,
+    "sample": "4"
+   },
+   {
+    "name": "app_sessions_per_month",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 46,
+    "sample": "9"
+   },
+   {
+    "name": "price_sensitivity",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 96,
+    "sample": "0.55"
+   },
+   {
+    "name": "brand_loyalty",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 96,
+    "sample": "0.12"
+   },
+   {
+    "name": "discovery_appetite",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 96,
+    "sample": "0.86"
+   },
+   {
+    "name": "sustainability_affinity",
+    "kind": "numeric",
+    "protected": false,
+    "distinct": 91,
+    "sample": "0.39"
+   },
+   {
+    "name": "free_text",
+    "kind": "text",
+    "protected": false,
+    "distinct": 126,
+    "sample": "First order placed recently, still browsing other categories."
+   },
+   {
+    "name": "consent_state",
+    "kind": "categorical",
+    "protected": false,
+    "distinct": 2,
+    "sample": "active"
+   }
+  ],
+  "csv_filename": "mosaic_customers.csv",
+  "csv_row_count": 1000,
+  "uploaded_at": "2026-09-12T02:14:07+00:00",
+  "configured": true
+ },
+ "offers": [
+  {
+   "id": "OFFER-02ad920e",
+   "name": "Early Bird",
+   "terms": "Pay 80% of the regular price on any fat cat pillow ordered before launch day."
+  },
+  {
+   "id": "OFFER-7c41be09",
+   "name": "Gift Wrap",
+   "terms": "Free gift wrapping and a handwritten card on any order."
+  }
+ ]
+}

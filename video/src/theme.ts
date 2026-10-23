@@ -10,6 +10,8 @@ export const { fontFamily: SANS } = loadInter("normal", {
   weights: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
 });
+// Italic is used once, for the accented word on the breath card.
+loadInter("italic", { weights: ["700"], subsets: ["latin"] });
 export const { fontFamily: MONO } = loadMono("normal", {
   weights: ["400", "600", "700"],
   subsets: ["latin"],
