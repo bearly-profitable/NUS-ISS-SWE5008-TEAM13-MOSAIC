@@ -442,6 +442,9 @@ One implicit workspace replaces the campaign selector; every pipeline table stil
 
 - Demonstrator, not production-hardened: **no authentication or rate limiting**, one replica,
   20,000-row upload cap, not load-tested.
+- Row-level security in the migrations is deliberately **permissive** (`using (true)` for the
+  `anon` role), so the console's Supabase anon key can read and write every table. Tighten the
+  policies and add auth before pointing this at real data.
 - Each send delivers one rendered email to a confirmed address; bulk delivery would need
   per-recipient consent filtering.
 - Next: a bounded Guardian → Composer revise loop; retry and fallback model in the OpenRouter

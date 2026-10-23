@@ -47,7 +47,7 @@ class Settings(BaseSettings):
     resend_reply_to: str = ""
     # Pre-filled in the Approval Queue's recipient field. Every send is still
     # explicit — the operator confirms the address before dispatch.
-    default_recipient: str = "ongqingquan@gmail.com"
+    default_recipient: str = ""
 
     # -- CORS --
     # Comma-separated: the Console is served from a different origin in every
