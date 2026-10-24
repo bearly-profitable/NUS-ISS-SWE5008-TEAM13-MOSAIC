@@ -10,7 +10,10 @@
     "render:nobgm": "remotion render MosaicIntro out/mosaic-intro-nobgm.mp4 --props=props-nobgm.json",
     "still": "remotion still MosaicIntro out/frame.png --frame=1770",
     "capture": "node capture/capture.mjs && python capture/postprocess.py",
-    "upgrade": "remotion upgrade"
+    "upgrade": "remotion upgrade",
+    "walkthrough": "node walkthrough/render.mjs",
+    "walkthrough:cut": "python walkthrough/build_edl.py && python walkthrough/cut.py ../walkthru-unedited2.mp4",
+    "walkthrough:poster": "remotion still WalkthroughPoster out/walkthrough-poster.png && remotion still WalkthroughPoster out/walkthrough-poster-youtube.jpg --props=props-noplay.json --scale=0.6666667 --image-format=jpeg --jpeg-quality=92"
   },
   "dependencies": {
     "@remotion/cli": "4.0.523",

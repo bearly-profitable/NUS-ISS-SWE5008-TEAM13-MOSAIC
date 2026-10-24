@@ -25,15 +25,19 @@ NUS-ISS · Graduate Certificate in Architecting AI Systems (SWE5008) · Practice
 
 ---
 
-## Watch the intro
+## Watch the videos
 
-[![MOSAIC intro video](docs/media/poster.jpg)](https://youtu.be/l2s-poLYnV8)
+### Product demo
 
-**▶ [Watch on YouTube](https://youtu.be/l2s-poLYnV8)** — 60 seconds, 1920×1080, cut to the beat of
-*Forward Motion*. Every UI shot is the real Console, driven by Playwright over the FatCatPillow demo run.
-It is a [Remotion](https://remotion.dev) project in [video/](video/), rendered from source rather than
-edited by hand: `cd video && npm install && npm run render`. The rendered file is also kept in the
-repo: [docs/media/mosaic-intro.mp4](docs/media/mosaic-intro.mp4).
+[![MOSAIC product demo video](docs/media/poster.jpg)](https://youtu.be/l2s-poLYnV8)
+
+**▶ [Watch the product demo on YouTube](https://youtu.be/l2s-poLYnV8)**
+
+### Product walkthrough
+
+[![MOSAIC product walkthrough video](docs/media/walkthrough-poster.jpg)](https://youtu.be/80V2wwRQRX0)
+
+**▶ [Watch the walkthrough on YouTube](https://youtu.be/80V2wwRQRX0)**
 
 ---
 

@@ -1,0 +1,6985 @@
+{
+ "fps": 30,
+ "srcW": 2838,
+ "srcH": 1428,
+ "cutTotal": 11485,
+ "segs": [
+  {
+   "srcIn": 0,
+   "srcOut": 105,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 105,
+   "cutIn": 0
+  },
+  {
+   "srcIn": 114,
+   "srcOut": 413,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 299,
+   "cutIn": 105
+  },
+  {
+   "srcIn": 413,
+   "srcOut": 623,
+   "speed": 5.3846,
+   "kind": "ff",
+   "why": "loading 1,000 contacts",
+   "privacy": null,
+   "frames": 39,
+   "cutIn": 404
+  },
+  {
+   "srcIn": 623,
+   "srcOut": 945,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 322,
+   "cutIn": 443
+  },
+  {
+   "srcIn": 993,
+   "srcOut": 1186,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 193,
+   "cutIn": 765
+  },
+  {
+   "srcIn": 1203,
+   "srcOut": 1333,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 130,
+   "cutIn": 958
+  },
+  {
+   "srcIn": 1333,
+   "srcOut": 1585,
+   "speed": 6.0,
+   "kind": "ff",
+   "why": "typing the campaign intent",
+   "privacy": null,
+   "frames": 42,
+   "cutIn": 1088
+  },
+  {
+   "srcIn": 1585,
+   "srcOut": 1723,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 138,
+   "cutIn": 1130
+  },
+  {
+   "srcIn": 1744,
+   "srcOut": 1769,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 25,
+   "cutIn": 1268
+  },
+  {
+   "srcIn": 1769,
+   "srcOut": 1993,
+   "speed": 5.7436,
+   "kind": "ff",
+   "why": "adding the Early Bird offer",
+   "privacy": null,
+   "frames": 39,
+   "cutIn": 1293
+  },
+  {
+   "srcIn": 1993,
+   "srcOut": 2024,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 31,
+   "cutIn": 1332
+  },
+  {
+   "srcIn": 2111,
+   "srcOut": 2216,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 105,
+   "cutIn": 1363
+  },
+  {
+   "srcIn": 2359,
+   "srcOut": 2390,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 31,
+   "cutIn": 1468
+  },
+  {
+   "srcIn": 2390,
+   "srcOut": 2603,
+   "speed": 5.4615,
+   "kind": "ff",
+   "why": "adding the flash-sale offer",
+   "privacy": null,
+   "frames": 39,
+   "cutIn": 1499
+  },
+  {
+   "srcIn": 2603,
+   "srcOut": 2695,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 92,
+   "cutIn": 1538
+  },
+  {
+   "srcIn": 2711,
+   "srcOut": 2828,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 117,
+   "cutIn": 1630
+  },
+  {
+   "srcIn": 2851,
+   "srcOut": 3383,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 532,
+   "cutIn": 1747
+  },
+  {
+   "srcIn": 3411,
+   "srcOut": 3538,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 127,
+   "cutIn": 2279
+  },
+  {
+   "srcIn": 3556,
+   "srcOut": 4175,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 619,
+   "cutIn": 2406
+  },
+  {
+   "srcIn": 4272,
+   "srcOut": 4384,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 112,
+   "cutIn": 3025
+  },
+  {
+   "srcIn": 4400,
+   "srcOut": 4544,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 144,
+   "cutIn": 3137
+  },
+  {
+   "srcIn": 4544,
+   "srcOut": 5183,
+   "speed": 8.875,
+   "kind": "ff",
+   "why": "building segments",
+   "privacy": null,
+   "frames": 72,
+   "cutIn": 3281
+  },
+  {
+   "srcIn": 5183,
+   "srcOut": 6034,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 851,
+   "cutIn": 3353
+  },
+  {
+   "srcIn": 6058,
+   "srcOut": 6137,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 79,
+   "cutIn": 4204
+  },
+  {
+   "srcIn": 6170,
+   "srcOut": 6386,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 216,
+   "cutIn": 4283
+  },
+  {
+   "srcIn": 6386,
+   "srcOut": 6398,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": {
+    "kind": "picker",
+    "keep": []
+   },
+   "frames": 12,
+   "cutIn": 4499
+  },
+  {
+   "srcIn": 6430,
+   "srcOut": 6482,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": {
+    "kind": "picker",
+    "keep": []
+   },
+   "frames": 52,
+   "cutIn": 4511
+  },
+  {
+   "srcIn": 6482,
+   "srcOut": 6536,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 54,
+   "cutIn": 4563
+  },
+  {
+   "srcIn": 6536,
+   "srcOut": 6611,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": {
+    "kind": "picker",
+    "keep": []
+   },
+   "frames": 75,
+   "cutIn": 4617
+  },
+  {
+   "srcIn": 6611,
+   "srcOut": 6640,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 29,
+   "cutIn": 4692
+  },
+  {
+   "srcIn": 6656,
+   "srcOut": 6938,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 282,
+   "cutIn": 4721
+  },
+  {
+   "srcIn": 6965,
+   "srcOut": 7143,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 178,
+   "cutIn": 5003
+  },
+  {
+   "srcIn": 7166,
+   "srcOut": 7520,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 354,
+   "cutIn": 5181
+  },
+  {
+   "srcIn": 7520,
+   "srcOut": 7981,
+   "speed": 6.4028,
+   "kind": "ff",
+   "why": "writing creative direction",
+   "privacy": null,
+   "frames": 72,
+   "cutIn": 5535
+  },
+  {
+   "srcIn": 7981,
+   "srcOut": 8583,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 602,
+   "cutIn": 5607
+  },
+  {
+   "srcIn": 8594,
+   "srcOut": 9376,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 782,
+   "cutIn": 6209
+  },
+  {
+   "srcIn": 9376,
+   "srcOut": 11034,
+   "speed": 23.0278,
+   "kind": "ff",
+   "why": "composing six emails",
+   "privacy": null,
+   "frames": 72,
+   "cutIn": 6991
+  },
+  {
+   "srcIn": 11034,
+   "srcOut": 11307,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 273,
+   "cutIn": 7063
+  },
+  {
+   "srcIn": 11318,
+   "srcOut": 11514,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 196,
+   "cutIn": 7336
+  },
+  {
+   "srcIn": 11533,
+   "srcOut": 11711,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 178,
+   "cutIn": 7532
+  },
+  {
+   "srcIn": 11736,
+   "srcOut": 12083,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 347,
+   "cutIn": 7710
+  },
+  {
+   "srcIn": 12097,
+   "srcOut": 12127,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 30,
+   "cutIn": 8057
+  },
+  {
+   "srcIn": 12151,
+   "srcOut": 12222,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 71,
+   "cutIn": 8087
+  },
+  {
+   "srcIn": 12238,
+   "srcOut": 12300,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 62,
+   "cutIn": 8158
+  },
+  {
+   "srcIn": 12327,
+   "srcOut": 12657,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 330,
+   "cutIn": 8220
+  },
+  {
+   "srcIn": 12692,
+   "srcOut": 12849,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 157,
+   "cutIn": 8550
+  },
+  {
+   "srcIn": 12927,
+   "srcOut": 13166,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 239,
+   "cutIn": 8707
+  },
+  {
+   "srcIn": 13179,
+   "srcOut": 13440,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 261,
+   "cutIn": 8946
+  },
+  {
+   "srcIn": 13464,
+   "srcOut": 14014,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 550,
+   "cutIn": 9207
+  },
+  {
+   "srcIn": 14036,
+   "srcOut": 14189,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 153,
+   "cutIn": 9757
+  },
+  {
+   "srcIn": 14228,
+   "srcOut": 14326,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 98,
+   "cutIn": 9910
+  },
+  {
+   "srcIn": 14326,
+   "srcOut": 14483,
+   "speed": 4.0256,
+   "kind": "ff",
+   "why": "sending",
+   "privacy": null,
+   "frames": 39,
+   "cutIn": 10008
+  },
+  {
+   "srcIn": 14483,
+   "srcOut": 14586,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 103,
+   "cutIn": 10047
+  },
+  {
+   "srcIn": 14596,
+   "srcOut": 14655,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 59,
+   "cutIn": 10150
+  },
+  {
+   "srcIn": 14667,
+   "srcOut": 14680,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 13,
+   "cutIn": 10209
+  },
+  {
+   "srcIn": 14680,
+   "srcOut": 14863,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": {
+    "kind": "inbox",
+    "keep": [
+     [
+      600,
+      300,
+      2190,
+      80
+     ]
+    ]
+   },
+   "frames": 183,
+   "cutIn": 10222
+  },
+  {
+   "srcIn": 14881,
+   "srcOut": 14908,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": {
+    "kind": "inbox",
+    "keep": [
+     [
+      600,
+      300,
+      2190,
+      80
+     ]
+    ]
+   },
+   "frames": 27,
+   "cutIn": 10405
+  },
+  {
+   "srcIn": 15002,
+   "srcOut": 15035,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": {
+    "kind": "inbox-open",
+    "keep": [
+     [
+      40,
+      110,
+      2020,
+      1140
+     ]
+    ]
+   },
+   "frames": 33,
+   "cutIn": 10432
+  },
+  {
+   "srcIn": 15035,
+   "srcOut": 15166,
+   "speed": 5.0385,
+   "kind": "ff",
+   "why": "reading the email",
+   "privacy": {
+    "kind": "inbox-open",
+    "keep": [
+     [
+      40,
+      110,
+      2020,
+      1140
+     ]
+    ]
+   },
+   "frames": 26,
+   "cutIn": 10465
+  },
+  {
+   "srcIn": 15166,
+   "srcOut": 15187,
+   "speed": 5.25,
+   "kind": "ff",
+   "why": "reading the email",
+   "privacy": {
+    "kind": "inbox",
+    "keep": []
+   },
+   "frames": 4,
+   "cutIn": 10491
+  },
+  {
+   "srcIn": 15187,
+   "srcOut": 15234,
+   "speed": 5.2222,
+   "kind": "ff",
+   "why": "reading the email",
+   "privacy": null,
+   "frames": 9,
+   "cutIn": 10495
+  },
+  {
+   "srcIn": 15234,
+   "srcOut": 15272,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 38,
+   "cutIn": 10504
+  },
+  {
+   "srcIn": 15305,
+   "srcOut": 15866,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 561,
+   "cutIn": 10542
+  },
+  {
+   "srcIn": 15877,
+   "srcOut": 16259,
+   "speed": 1.0,
+   "kind": "talk",
+   "privacy": null,
+   "frames": 382,
+   "cutIn": 11103
+  }
+ ],
+ "chapters": [
+  {
+   "id": "company",
+   "cutFrom": 0
+  },
+  {
+   "id": "segments",
+   "cutFrom": 2169
+  },
+  {
+   "id": "creative",
+   "cutFrom": 4283
+  },
+  {
+   "id": "emails",
+   "cutFrom": 6342
+  },
+  {
+   "id": "guardian",
+   "cutFrom": 8462
+  },
+  {
+   "id": "dispatch",
+   "cutFrom": 9910
+  },
+  {
+   "id": "logs",
+   "cutFrom": 10519
+  }
+ ],
+ "cues": [
+  {
+   "from": 0.0,
+   "to": 33.6,
+   "words": [
+    {
+     "text": "Hi",
+     "from": 0.0,
+     "to": 6.0
+    },
+    {
+     "text": "everyone,",
+     "from": 6.0,
+     "to": 14.4
+    },
+    {
+     "text": "today",
+     "from": 19.2,
+     "to": 22.2
+    },
+    {
+     "text": "I'm",
+     "from": 22.2,
+     "to": 27.6
+    },
+    {
+     "text": "going",
+     "from": 27.6,
+     "to": 31.2
+    },
+    {
+     "text": "to",
+     "from": 31.2,
+     "to": 33.6
+    }
+   ]
+  },
+  {
+   "from": 33.6,
+   "to": 97.8,
+   "words": [
+    {
+     "text": "do",
+     "from": 33.6,
+     "to": 37.8
+    },
+    {
+     "text": "a",
+     "from": 37.8,
+     "to": 45.0
+    },
+    {
+     "text": "short",
+     "from": 45.0,
+     "to": 53.4
+    },
+    {
+     "text": "walkthrough",
+     "from": 53.4,
+     "to": 71.4
+    },
+    {
+     "text": "on",
+     "from": 71.4,
+     "to": 81.0
+    },
+    {
+     "text": "MOSAIC.",
+     "from": 81.0,
+     "to": 97.8
+    }
+   ]
+  },
+  {
+   "from": 107.4,
+   "to": 200.4,
+   "words": [
+    {
+     "text": "So,",
+     "from": 107.4,
+     "to": 132.0
+    },
+    {
+     "text": "when",
+     "from": 132.6,
+     "to": 147.0
+    },
+    {
+     "text": "you",
+     "from": 147.0,
+     "to": 150.0
+    },
+    {
+     "text": "go",
+     "from": 150.0,
+     "to": 154.8
+    },
+    {
+     "text": "to",
+     "from": 154.8,
+     "to": 158.4
+    },
+    {
+     "text": "the",
+     "from": 158.4,
+     "to": 162.6
+    },
+    {
+     "text": "website,",
+     "from": 162.6,
+     "to": 172.8
+    },
+    {
+     "text": "you'll",
+     "from": 180.6,
+     "to": 190.2
+    },
+    {
+     "text": "come",
+     "from": 190.2,
+     "to": 195.0
+    },
+    {
+     "text": "to",
+     "from": 195.0,
+     "to": 200.4
+    }
+   ]
+  },
+  {
+   "from": 200.4,
+   "to": 279.0,
+   "words": [
+    {
+     "text": "this",
+     "from": 200.4,
+     "to": 205.8
+    },
+    {
+     "text": "page",
+     "from": 205.8,
+     "to": 213.6
+    },
+    {
+     "text": "over",
+     "from": 213.6,
+     "to": 221.4
+    },
+    {
+     "text": "here,",
+     "from": 221.4,
+     "to": 234.0
+    },
+    {
+     "text": "you",
+     "from": 248.4,
+     "to": 256.8
+    },
+    {
+     "text": "can",
+     "from": 256.8,
+     "to": 261.0
+    },
+    {
+     "text": "click",
+     "from": 261.0,
+     "to": 266.4
+    },
+    {
+     "text": "on",
+     "from": 266.4,
+     "to": 271.2
+    },
+    {
+     "text": "the",
+     "from": 271.2,
+     "to": 275.4
+    },
+    {
+     "text": "load",
+     "from": 275.4,
+     "to": 279.0
+    }
+   ]
+  },
+  {
+   "from": 279.0,
+   "to": 394.2,
+   "words": [
+    {
+     "text": "example",
+     "from": 279.0,
+     "to": 293.4
+    },
+    {
+     "text": "to",
+     "from": 293.4,
+     "to": 310.2
+    },
+    {
+     "text": "load",
+     "from": 310.2,
+     "to": 316.2
+    },
+    {
+     "text": "in",
+     "from": 316.2,
+     "to": 321.0
+    },
+    {
+     "text": "our",
+     "from": 321.0,
+     "to": 334.8
+    },
+    {
+     "text": "dummy",
+     "from": 349.8,
+     "to": 369.0
+    },
+    {
+     "text": "customer",
+     "from": 369.0,
+     "to": 381.6
+    },
+    {
+     "text": "base.",
+     "from": 381.6,
+     "to": 394.2
+    }
+   ]
+  },
+  {
+   "from": 451.8,
+   "to": 513.6,
+   "words": [
+    {
+     "text": "So",
+     "from": 451.8,
+     "to": 456.6
+    },
+    {
+     "text": "you",
+     "from": 456.6,
+     "to": 458.4
+    },
+    {
+     "text": "can",
+     "from": 458.4,
+     "to": 463.2
+    },
+    {
+     "text": "see",
+     "from": 463.2,
+     "to": 468.6
+    },
+    {
+     "text": "that",
+     "from": 468.6,
+     "to": 474.0
+    },
+    {
+     "text": "our",
+     "from": 474.0,
+     "to": 482.4
+    },
+    {
+     "text": "contacts",
+     "from": 482.4,
+     "to": 495.0
+    },
+    {
+     "text": "are",
+     "from": 495.0,
+     "to": 513.6
+    }
+   ]
+  },
+  {
+   "from": 513.6,
+   "to": 582.9,
+   "words": [
+    {
+     "text": "being",
+     "from": 513.6,
+     "to": 525.0
+    },
+    {
+     "text": "loaded",
+     "from": 525.0,
+     "to": 534.0
+    },
+    {
+     "text": "in,",
+     "from": 534.0,
+     "to": 547.2
+    },
+    {
+     "text": "and",
+     "from": 557.7,
+     "to": 564.3
+    },
+    {
+     "text": "then",
+     "from": 564.3,
+     "to": 568.5
+    },
+    {
+     "text": "this",
+     "from": 568.5,
+     "to": 573.3
+    },
+    {
+     "text": "is",
+     "from": 573.3,
+     "to": 576.9
+    },
+    {
+     "text": "where",
+     "from": 576.9,
+     "to": 582.9
+    }
+   ]
+  },
+  {
+   "from": 582.9,
+   "to": 656.7,
+   "words": [
+    {
+     "text": "we",
+     "from": 582.9,
+     "to": 586.5
+    },
+    {
+     "text": "are",
+     "from": 586.5,
+     "to": 589.5
+    },
+    {
+     "text": "able",
+     "from": 589.5,
+     "to": 595.5
+    },
+    {
+     "text": "to",
+     "from": 595.5,
+     "to": 603.3
+    },
+    {
+     "text": "type",
+     "from": 603.3,
+     "to": 611.1
+    },
+    {
+     "text": "in",
+     "from": 611.1,
+     "to": 620.1
+    },
+    {
+     "text": "our",
+     "from": 620.1,
+     "to": 631.5
+    },
+    {
+     "text": "company",
+     "from": 631.5,
+     "to": 647.7
+    },
+    {
+     "text": "name.",
+     "from": 647.7,
+     "to": 656.7
+    }
+   ]
+  },
+  {
+   "from": 669.3,
+   "to": 696.3,
+   "words": [
+    {
+     "text": "So",
+     "from": 669.3,
+     "to": 672.9
+    },
+    {
+     "text": "in",
+     "from": 672.9,
+     "to": 677.1
+    },
+    {
+     "text": "this",
+     "from": 677.1,
+     "to": 683.1
+    },
+    {
+     "text": "case,",
+     "from": 683.1,
+     "to": 687.9
+    },
+    {
+     "text": "I'm",
+     "from": 690.9,
+     "to": 693.3
+    },
+    {
+     "text": "going",
+     "from": 693.3,
+     "to": 696.3
+    }
+   ]
+  },
+  {
+   "from": 696.3,
+   "to": 740.1,
+   "words": [
+    {
+     "text": "to",
+     "from": 696.3,
+     "to": 699.9
+    },
+    {
+     "text": "type",
+     "from": 699.9,
+     "to": 705.9
+    },
+    {
+     "text": "in",
+     "from": 705.9,
+     "to": 712.5
+    },
+    {
+     "text": "maybe",
+     "from": 712.5,
+     "to": 723.9
+    },
+    {
+     "text": "fat",
+     "from": 723.9,
+     "to": 731.7
+    },
+    {
+     "text": "cat",
+     "from": 731.7,
+     "to": 740.1
+    }
+   ]
+  },
+  {
+   "from": 767.4,
+   "to": 852.0,
+   "words": [
+    {
+     "text": "then",
+     "from": 767.4,
+     "to": 772.8
+    },
+    {
+     "text": "our",
+     "from": 772.8,
+     "to": 779.4
+    },
+    {
+     "text": "website",
+     "from": 779.4,
+     "to": 789.0
+    },
+    {
+     "text": "is",
+     "from": 789.0,
+     "to": 797.4
+    },
+    {
+     "text": "FCS.com.sg",
+     "from": 797.4,
+     "to": 852.0
+    }
+   ]
+  },
+  {
+   "from": 880.2,
+   "to": 946.2,
+   "words": [
+    {
+     "text": "maybe",
+     "from": 880.2,
+     "to": 895.2
+    },
+    {
+     "text": "sell",
+     "from": 895.2,
+     "to": 904.8
+    },
+    {
+     "text": "fat",
+     "from": 904.8,
+     "to": 916.2
+    },
+    {
+     "text": "cat",
+     "from": 916.2,
+     "to": 925.8
+    },
+    {
+     "text": "pillows",
+     "from": 925.8,
+     "to": 946.2
+    }
+   ]
+  },
+  {
+   "from": 960.4,
+   "to": 1081.6,
+   "words": [
+    {
+     "text": "and",
+     "from": 960.4,
+     "to": 974.2
+    },
+    {
+     "text": "for",
+     "from": 974.2,
+     "to": 983.2
+    },
+    {
+     "text": "the",
+     "from": 983.2,
+     "to": 990.4
+    },
+    {
+     "text": "campaign,",
+     "from": 990.4,
+     "to": 1008.4
+    },
+    {
+     "text": "then",
+     "from": 1017.4,
+     "to": 1024.6
+    },
+    {
+     "text": "selling",
+     "from": 1024.6,
+     "to": 1053.4
+    },
+    {
+     "text": "fat",
+     "from": 1053.4,
+     "to": 1073.8
+    },
+    {
+     "text": "cat.",
+     "from": 1073.8,
+     "to": 1081.6
+    }
+   ]
+  },
+  {
+   "from": 1132.0,
+   "to": 1193.2,
+   "words": [
+    {
+     "text": "So",
+     "from": 1132.0,
+     "to": 1137.4
+    },
+    {
+     "text": "this",
+     "from": 1137.4,
+     "to": 1141.6
+    },
+    {
+     "text": "is",
+     "from": 1141.6,
+     "to": 1145.8
+    },
+    {
+     "text": "just",
+     "from": 1145.8,
+     "to": 1150.6
+    },
+    {
+     "text": "a",
+     "from": 1150.6,
+     "to": 1156.0
+    },
+    {
+     "text": "quick",
+     "from": 1156.0,
+     "to": 1160.8
+    },
+    {
+     "text": "campaign",
+     "from": 1160.8,
+     "to": 1175.2
+    },
+    {
+     "text": "intent",
+     "from": 1175.2,
+     "to": 1193.2
+    }
+   ]
+  },
+  {
+   "from": 1211.8,
+   "to": 1286.2,
+   "words": [
+    {
+     "text": "our",
+     "from": 1211.8,
+     "to": 1211.8
+    },
+    {
+     "text": "offer",
+     "from": 1211.8,
+     "to": 1220.8
+    },
+    {
+     "text": "will",
+     "from": 1220.8,
+     "to": 1229.2
+    },
+    {
+     "text": "be",
+     "from": 1229.2,
+     "to": 1236.4
+    },
+    {
+     "text": "offer",
+     "from": 1236.4,
+     "to": 1244.2
+    },
+    {
+     "text": "name,",
+     "from": 1244.2,
+     "to": 1261.0
+    },
+    {
+     "text": "early",
+     "from": 1272.4,
+     "to": 1276.6
+    },
+    {
+     "text": "bird",
+     "from": 1276.6,
+     "to": 1286.2
+    }
+   ]
+  },
+  {
+   "from": 1339.4,
+   "to": 1405.4,
+   "words": [
+    {
+     "text": "some",
+     "from": 1339.4,
+     "to": 1356.8
+    },
+    {
+     "text": "quick",
+     "from": 1368.2,
+     "to": 1385.0
+    },
+    {
+     "text": "examples",
+     "from": 1385.0,
+     "to": 1405.4
+    }
+   ]
+  },
+  {
+   "from": 1424.6,
+   "to": 1493.4,
+   "words": [
+    {
+     "text": "so",
+     "from": 1424.6,
+     "to": 1427.6
+    },
+    {
+     "text": "in",
+     "from": 1427.6,
+     "to": 1431.8
+    },
+    {
+     "text": "this",
+     "from": 1431.8,
+     "to": 1439.0
+    },
+    {
+     "text": "case,",
+     "from": 1439.0,
+     "to": 1452.8
+    },
+    {
+     "text": "flash",
+     "from": 1470.6,
+     "to": 1480.8
+    },
+    {
+     "text": "sale.",
+     "from": 1480.8,
+     "to": 1493.4
+    }
+   ]
+  },
+  {
+   "from": 1540.5,
+   "to": 1588.5,
+   "words": [
+    {
+     "text": "And",
+     "from": 1540.5,
+     "to": 1544.1
+    },
+    {
+     "text": "then",
+     "from": 1544.1,
+     "to": 1548.3
+    },
+    {
+     "text": "in",
+     "from": 1548.3,
+     "to": 1551.9
+    },
+    {
+     "text": "this",
+     "from": 1551.9,
+     "to": 1556.7
+    },
+    {
+     "text": "case,",
+     "from": 1556.7,
+     "to": 1562.7
+    },
+    {
+     "text": "the",
+     "from": 1566.9,
+     "to": 1569.3
+    },
+    {
+     "text": "dynamic",
+     "from": 1569.3,
+     "to": 1575.9
+    },
+    {
+     "text": "attribute",
+     "from": 1575.9,
+     "to": 1588.5
+    }
+   ]
+  },
+  {
+   "from": 1592.7,
+   "to": 1621.5,
+   "words": [
+    {
+     "text": "we're",
+     "from": 1592.7,
+     "to": 1594.5
+    },
+    {
+     "text": "going",
+     "from": 1594.5,
+     "to": 1596.9
+    },
+    {
+     "text": "to",
+     "from": 1596.9,
+     "to": 1598.7
+    },
+    {
+     "text": "choose",
+     "from": 1598.7,
+     "to": 1605.9
+    },
+    {
+     "text": "its",
+     "from": 1605.9,
+     "to": 1612.5
+    },
+    {
+     "text": "name.",
+     "from": 1612.5,
+     "to": 1621.5
+    }
+   ]
+  },
+  {
+   "from": 1632.8,
+   "to": 1682.0,
+   "words": [
+    {
+     "text": "So",
+     "from": 1632.8,
+     "to": 1641.2
+    },
+    {
+     "text": "this",
+     "from": 1641.2,
+     "to": 1655.0
+    },
+    {
+     "text": "is",
+     "from": 1655.0,
+     "to": 1659.8
+    },
+    {
+     "text": "so",
+     "from": 1659.8,
+     "to": 1665.8
+    },
+    {
+     "text": "that",
+     "from": 1665.8,
+     "to": 1669.4
+    },
+    {
+     "text": "we",
+     "from": 1669.4,
+     "to": 1673.0
+    },
+    {
+     "text": "can",
+     "from": 1673.0,
+     "to": 1677.2
+    },
+    {
+     "text": "have",
+     "from": 1677.2,
+     "to": 1682.0
+    }
+   ]
+  },
+  {
+   "from": 1682.0,
+   "to": 1724.0,
+   "words": [
+    {
+     "text": "a",
+     "from": 1682.0,
+     "to": 1692.8
+    },
+    {
+     "text": "hyper-personalized",
+     "from": 1692.8,
+     "to": 1715.6
+    },
+    {
+     "text": "email.",
+     "from": 1715.6,
+     "to": 1724.0
+    }
+   ]
+  },
+  {
+   "from": 1749.6,
+   "to": 1818.0,
+   "words": [
+    {
+     "text": "And",
+     "from": 1749.6,
+     "to": 1757.4
+    },
+    {
+     "text": "then",
+     "from": 1757.4,
+     "to": 1761.6
+    },
+    {
+     "text": "this",
+     "from": 1761.6,
+     "to": 1767.6
+    },
+    {
+     "text": "is",
+     "from": 1767.6,
+     "to": 1773.0
+    },
+    {
+     "text": "our",
+     "from": 1773.0,
+     "to": 1782.0
+    },
+    {
+     "text": "contacts,",
+     "from": 1782.0,
+     "to": 1795.8
+    },
+    {
+     "text": "we",
+     "from": 1802.4,
+     "to": 1803.6
+    },
+    {
+     "text": "have",
+     "from": 1803.6,
+     "to": 1807.2
+    },
+    {
+     "text": "some",
+     "from": 1807.2,
+     "to": 1818.0
+    }
+   ]
+  },
+  {
+   "from": 1830.9,
+   "to": 1896.3,
+   "words": [
+    {
+     "text": "columns",
+     "from": 1830.9,
+     "to": 1853.1
+    },
+    {
+     "text": "over",
+     "from": 1853.1,
+     "to": 1860.9
+    },
+    {
+     "text": "here",
+     "from": 1860.9,
+     "to": 1867.5
+    },
+    {
+     "text": "like",
+     "from": 1867.5,
+     "to": 1874.7
+    },
+    {
+     "text": "past",
+     "from": 1874.7,
+     "to": 1881.9
+    },
+    {
+     "text": "three",
+     "from": 1881.9,
+     "to": 1889.7
+    },
+    {
+     "text": "months",
+     "from": 1889.7,
+     "to": 1896.3
+    }
+   ]
+  },
+  {
+   "from": 1899.9,
+   "to": 1988.7,
+   "words": [
+    {
+     "text": "spend,",
+     "from": 1899.9,
+     "to": 1910.1
+    },
+    {
+     "text": "newsletter",
+     "from": 1925.7,
+     "to": 1925.7
+    },
+    {
+     "text": "opt-in,",
+     "from": 1925.7,
+     "to": 1949.1
+    },
+    {
+     "text": "average",
+     "from": 1965.9,
+     "to": 1975.5
+    },
+    {
+     "text": "discount",
+     "from": 1975.5,
+     "to": 1988.7
+    }
+   ]
+  },
+  {
+   "from": 1995.3,
+   "to": 2056.5,
+   "words": [
+    {
+     "text": "spend,",
+     "from": 1995.3,
+     "to": 2003.7
+    },
+    {
+     "text": "percentage,",
+     "from": 2018.1,
+     "to": 2031.9
+    },
+    {
+     "text": "so",
+     "from": 2036.7,
+     "to": 2039.1
+    },
+    {
+     "text": "on",
+     "from": 2039.1,
+     "to": 2042.7
+    },
+    {
+     "text": "and",
+     "from": 2042.7,
+     "to": 2044.5
+    },
+    {
+     "text": "so",
+     "from": 2044.5,
+     "to": 2047.5
+    },
+    {
+     "text": "forth.",
+     "from": 2047.5,
+     "to": 2056.5
+    }
+   ]
+  },
+  {
+   "from": 2058.0,
+   "to": 2109.6,
+   "words": [
+    {
+     "text": "And",
+     "from": 2058.0,
+     "to": 2073.0
+    },
+    {
+     "text": "once",
+     "from": 2073.0,
+     "to": 2079.6
+    },
+    {
+     "text": "everything",
+     "from": 2079.6,
+     "to": 2089.2
+    },
+    {
+     "text": "is",
+     "from": 2089.2,
+     "to": 2094.6
+    },
+    {
+     "text": "done,",
+     "from": 2094.6,
+     "to": 2100.6
+    },
+    {
+     "text": "we",
+     "from": 2103.0,
+     "to": 2106.0
+    },
+    {
+     "text": "can",
+     "from": 2106.0,
+     "to": 2109.6
+    }
+   ]
+  },
+  {
+   "from": 2109.6,
+   "to": 2163.0,
+   "words": [
+    {
+     "text": "click",
+     "from": 2109.6,
+     "to": 2114.4
+    },
+    {
+     "text": "on",
+     "from": 2114.4,
+     "to": 2122.2
+    },
+    {
+     "text": "next",
+     "from": 2122.2,
+     "to": 2128.8
+    },
+    {
+     "text": "to",
+     "from": 2128.8,
+     "to": 2136.6
+    },
+    {
+     "text": "go",
+     "from": 2136.6,
+     "to": 2140.2
+    },
+    {
+     "text": "to",
+     "from": 2140.2,
+     "to": 2144.4
+    },
+    {
+     "text": "the",
+     "from": 2144.4,
+     "to": 2146.8
+    },
+    {
+     "text": "next",
+     "from": 2146.8,
+     "to": 2154.0
+    },
+    {
+     "text": "segment.",
+     "from": 2154.0,
+     "to": 2163.0
+    }
+   ]
+  },
+  {
+   "from": 2175.6,
+   "to": 2217.6,
+   "words": [
+    {
+     "text": "So",
+     "from": 2175.6,
+     "to": 2177.4
+    },
+    {
+     "text": "segment",
+     "from": 2177.4,
+     "to": 2185.2
+    },
+    {
+     "text": "is",
+     "from": 2185.2,
+     "to": 2191.2
+    },
+    {
+     "text": "empty",
+     "from": 2191.2,
+     "to": 2199.6
+    },
+    {
+     "text": "now,",
+     "from": 2199.6,
+     "to": 2206.8
+    },
+    {
+     "text": "I'm",
+     "from": 2209.2,
+     "to": 2214.6
+    },
+    {
+     "text": "going",
+     "from": 2214.6,
+     "to": 2217.6
+    }
+   ]
+  },
+  {
+   "from": 2217.6,
+   "to": 2269.8,
+   "words": [
+    {
+     "text": "to",
+     "from": 2217.6,
+     "to": 2221.2
+    },
+    {
+     "text": "click",
+     "from": 2221.2,
+     "to": 2227.2
+    },
+    {
+     "text": "on",
+     "from": 2227.2,
+     "to": 2233.2
+    },
+    {
+     "text": "the",
+     "from": 2233.2,
+     "to": 2239.2
+    },
+    {
+     "text": "generate",
+     "from": 2239.2,
+     "to": 2248.2
+    },
+    {
+     "text": "button.",
+     "from": 2248.2,
+     "to": 2269.8
+    }
+   ]
+  },
+  {
+   "from": 2281.4,
+   "to": 2337.2,
+   "words": [
+    {
+     "text": "So",
+     "from": 2281.4,
+     "to": 2283.8
+    },
+    {
+     "text": "what",
+     "from": 2283.8,
+     "to": 2288.6
+    },
+    {
+     "text": "you",
+     "from": 2288.6,
+     "to": 2292.2
+    },
+    {
+     "text": "do",
+     "from": 2292.2,
+     "to": 2298.2
+    },
+    {
+     "text": "is",
+     "from": 2298.2,
+     "to": 2305.4
+    },
+    {
+     "text": "you",
+     "from": 2305.4,
+     "to": 2309.6
+    },
+    {
+     "text": "read",
+     "from": 2309.6,
+     "to": 2316.8
+    },
+    {
+     "text": "the",
+     "from": 2316.8,
+     "to": 2320.4
+    },
+    {
+     "text": "audience",
+     "from": 2320.4,
+     "to": 2337.2
+    }
+   ]
+  },
+  {
+   "from": 2358.8,
+   "to": 2445.8,
+   "words": [
+    {
+     "text": "embed",
+     "from": 2358.8,
+     "to": 2365.4
+    },
+    {
+     "text": "the",
+     "from": 2365.4,
+     "to": 2372.6
+    },
+    {
+     "text": "customer",
+     "from": 2372.6,
+     "to": 2382.2
+    },
+    {
+     "text": "notes,",
+     "from": 2382.2,
+     "to": 2396.0
+    },
+    {
+     "text": "build",
+     "from": 2408.0,
+     "to": 2413.4
+    },
+    {
+     "text": "the",
+     "from": 2413.4,
+     "to": 2424.2
+    },
+    {
+     "text": "feature",
+     "from": 2424.2,
+     "to": 2433.2
+    },
+    {
+     "text": "matrix",
+     "from": 2433.2,
+     "to": 2445.8
+    }
+   ]
+  },
+  {
+   "from": 2460.2,
+   "to": 2551.4,
+   "words": [
+    {
+     "text": "then",
+     "from": 2460.2,
+     "to": 2475.2
+    },
+    {
+     "text": "you",
+     "from": 2475.2,
+     "to": 2480.0
+    },
+    {
+     "text": "proceed",
+     "from": 2480.0,
+     "to": 2491.4
+    },
+    {
+     "text": "to",
+     "from": 2491.4,
+     "to": 2501.0
+    },
+    {
+     "text": "cluster",
+     "from": 2501.0,
+     "to": 2515.4
+    },
+    {
+     "text": "using",
+     "from": 2515.4,
+     "to": 2529.2
+    },
+    {
+     "text": "HDBSCAN.",
+     "from": 2529.2,
+     "to": 2551.4
+    }
+   ]
+  },
+  {
+   "from": 2600.0,
+   "to": 2655.2,
+   "words": [
+    {
+     "text": "And",
+     "from": 2600.0,
+     "to": 2602.4
+    },
+    {
+     "text": "then",
+     "from": 2602.4,
+     "to": 2606.6
+    },
+    {
+     "text": "once",
+     "from": 2606.6,
+     "to": 2615.0
+    },
+    {
+     "text": "we",
+     "from": 2615.0,
+     "to": 2621.6
+    },
+    {
+     "text": "have",
+     "from": 2621.6,
+     "to": 2626.4
+    },
+    {
+     "text": "our",
+     "from": 2626.4,
+     "to": 2633.6
+    },
+    {
+     "text": "segments",
+     "from": 2633.6,
+     "to": 2642.0
+    },
+    {
+     "text": "ready",
+     "from": 2642.0,
+     "to": 2655.2
+    }
+   ]
+  },
+  {
+   "from": 2673.5,
+   "to": 2734.7,
+   "words": [
+    {
+     "text": "we",
+     "from": 2673.5,
+     "to": 2675.9
+    },
+    {
+     "text": "will",
+     "from": 2675.9,
+     "to": 2679.5
+    },
+    {
+     "text": "then",
+     "from": 2679.5,
+     "to": 2684.3
+    },
+    {
+     "text": "feed",
+     "from": 2684.3,
+     "to": 2692.7
+    },
+    {
+     "text": "the",
+     "from": 2692.7,
+     "to": 2698.7
+    },
+    {
+     "text": "attributes",
+     "from": 2698.7,
+     "to": 2714.9
+    },
+    {
+     "text": "and",
+     "from": 2714.9,
+     "to": 2729.9
+    },
+    {
+     "text": "the",
+     "from": 2729.9,
+     "to": 2734.7
+    }
+   ]
+  },
+  {
+   "from": 2734.7,
+   "to": 2833.7,
+   "words": [
+    {
+     "text": "characteristics",
+     "from": 2734.7,
+     "to": 2749.1
+    },
+    {
+     "text": "of",
+     "from": 2749.1,
+     "to": 2759.3
+    },
+    {
+     "text": "those",
+     "from": 2759.3,
+     "to": 2766.5
+    },
+    {
+     "text": "segments",
+     "from": 2766.5,
+     "to": 2780.3
+    },
+    {
+     "text": "to",
+     "from": 2780.3,
+     "to": 2799.5
+    },
+    {
+     "text": "the",
+     "from": 2811.5,
+     "to": 2815.7
+    },
+    {
+     "text": "AI",
+     "from": 2815.7,
+     "to": 2822.3
+    },
+    {
+     "text": "models",
+     "from": 2822.3,
+     "to": 2833.7
+    }
+   ]
+  },
+  {
+   "from": 2833.7,
+   "to": 2938.1,
+   "words": [
+    {
+     "text": "so",
+     "from": 2833.7,
+     "to": 2853.5
+    },
+    {
+     "text": "that",
+     "from": 2855.9,
+     "to": 2863.7
+    },
+    {
+     "text": "the",
+     "from": 2863.7,
+     "to": 2874.5
+    },
+    {
+     "text": "AI",
+     "from": 2874.5,
+     "to": 2879.3
+    },
+    {
+     "text": "models",
+     "from": 2879.3,
+     "to": 2887.1
+    },
+    {
+     "text": "are",
+     "from": 2887.1,
+     "to": 2891.9
+    },
+    {
+     "text": "able",
+     "from": 2891.9,
+     "to": 2897.9
+    },
+    {
+     "text": "to",
+     "from": 2897.9,
+     "to": 2904.5
+    },
+    {
+     "text": "generate",
+     "from": 2904.5,
+     "to": 2924.3
+    },
+    {
+     "text": "segments",
+     "from": 2924.3,
+     "to": 2938.1
+    }
+   ]
+  },
+  {
+   "from": 2938.1,
+   "to": 3016.1,
+   "words": [
+    {
+     "text": "briefs",
+     "from": 2938.1,
+     "to": 2950.7
+    },
+    {
+     "text": "as",
+     "from": 2950.7,
+     "to": 2959.7
+    },
+    {
+     "text": "well",
+     "from": 2959.7,
+     "to": 2965.1
+    },
+    {
+     "text": "as",
+     "from": 2965.1,
+     "to": 2972.3
+    },
+    {
+     "text": "the",
+     "from": 2972.3,
+     "to": 2978.9
+    },
+    {
+     "text": "naming",
+     "from": 2978.9,
+     "to": 2987.9
+    },
+    {
+     "text": "of",
+     "from": 2987.9,
+     "to": 2995.7
+    },
+    {
+     "text": "those",
+     "from": 2995.7,
+     "to": 3002.3
+    },
+    {
+     "text": "segments.",
+     "from": 3002.3,
+     "to": 3016.1
+    }
+   ]
+  },
+  {
+   "from": 3028.9,
+   "to": 3073.3,
+   "words": [
+    {
+     "text": "Okay,",
+     "from": 3028.9,
+     "to": 3031.9
+    },
+    {
+     "text": "so",
+     "from": 3033.1,
+     "to": 3038.5
+    },
+    {
+     "text": "you",
+     "from": 3038.5,
+     "to": 3040.9
+    },
+    {
+     "text": "can",
+     "from": 3040.9,
+     "to": 3044.5
+    },
+    {
+     "text": "see",
+     "from": 3044.5,
+     "to": 3049.9
+    },
+    {
+     "text": "right",
+     "from": 3049.9,
+     "to": 3055.3
+    },
+    {
+     "text": "now",
+     "from": 3055.3,
+     "to": 3073.3
+    }
+   ]
+  },
+  {
+   "from": 3074.5,
+   "to": 3126.1,
+   "words": [
+    {
+     "text": "we",
+     "from": 3074.5,
+     "to": 3079.3
+    },
+    {
+     "text": "are",
+     "from": 3079.3,
+     "to": 3081.7
+    },
+    {
+     "text": "generating",
+     "from": 3081.7,
+     "to": 3097.3
+    },
+    {
+     "text": "the",
+     "from": 3097.3,
+     "to": 3108.1
+    },
+    {
+     "text": "segments",
+     "from": 3108.1,
+     "to": 3115.9
+    },
+    {
+     "text": "brief.",
+     "from": 3115.9,
+     "to": 3126.1
+    }
+   ]
+  },
+  {
+   "from": 3140.4,
+   "to": 3204.6,
+   "words": [
+    {
+     "text": "So",
+     "from": 3140.4,
+     "to": 3144.0
+    },
+    {
+     "text": "this",
+     "from": 3144.0,
+     "to": 3149.4
+    },
+    {
+     "text": "whole",
+     "from": 3149.4,
+     "to": 3156.0
+    },
+    {
+     "text": "setup",
+     "from": 3156.0,
+     "to": 3164.4
+    },
+    {
+     "text": "will",
+     "from": 3164.4,
+     "to": 3177.6
+    },
+    {
+     "text": "take",
+     "from": 3177.6,
+     "to": 3183.0
+    },
+    {
+     "text": "approximately",
+     "from": 3183.0,
+     "to": 3204.6
+    }
+   ]
+  },
+  {
+   "from": 3204.6,
+   "to": 3275.4,
+   "words": [
+    {
+     "text": "about",
+     "from": 3204.6,
+     "to": 3219.0
+    },
+    {
+     "text": "30",
+     "from": 3219.0,
+     "to": 3237.6
+    },
+    {
+     "text": "seconds",
+     "from": 3237.6,
+     "to": 3246.6
+    },
+    {
+     "text": "or",
+     "from": 3246.6,
+     "to": 3256.8
+    },
+    {
+     "text": "to",
+     "from": 3256.8,
+     "to": 3261.6
+    },
+    {
+     "text": "one",
+     "from": 3261.6,
+     "to": 3266.4
+    },
+    {
+     "text": "minute.",
+     "from": 3266.4,
+     "to": 3275.4
+    }
+   ]
+  },
+  {
+   "from": 3355.8,
+   "to": 3450.6,
+   "words": [
+    {
+     "text": "Alright,",
+     "from": 3355.8,
+     "to": 3361.2
+    },
+    {
+     "text": "so",
+     "from": 3366.6,
+     "to": 3370.8
+    },
+    {
+     "text": "the",
+     "from": 3370.8,
+     "to": 3376.8
+    },
+    {
+     "text": "six",
+     "from": 3376.8,
+     "to": 3385.2
+    },
+    {
+     "text": "segments",
+     "from": 3385.2,
+     "to": 3399.0
+    },
+    {
+     "text": "has",
+     "from": 3399.0,
+     "to": 3420.0
+    },
+    {
+     "text": "been",
+     "from": 3420.0,
+     "to": 3430.2
+    },
+    {
+     "text": "generated.",
+     "from": 3430.2,
+     "to": 3450.6
+    }
+   ]
+  },
+  {
+   "from": 3465.0,
+   "to": 3496.2,
+   "words": [
+    {
+     "text": "So",
+     "from": 3465.0,
+     "to": 3471.0
+    },
+    {
+     "text": "you",
+     "from": 3471.0,
+     "to": 3473.4
+    },
+    {
+     "text": "can",
+     "from": 3473.4,
+     "to": 3479.4
+    },
+    {
+     "text": "see",
+     "from": 3479.4,
+     "to": 3484.8
+    },
+    {
+     "text": "these",
+     "from": 3484.8,
+     "to": 3492.0
+    },
+    {
+     "text": "are",
+     "from": 3492.0,
+     "to": 3496.2
+    }
+   ]
+  },
+  {
+   "from": 3496.2,
+   "to": 3544.2,
+   "words": [
+    {
+     "text": "some",
+     "from": 3496.2,
+     "to": 3504.0
+    },
+    {
+     "text": "of",
+     "from": 3504.0,
+     "to": 3507.6
+    },
+    {
+     "text": "the",
+     "from": 3507.6,
+     "to": 3510.0
+    },
+    {
+     "text": "examples",
+     "from": 3510.0,
+     "to": 3523.8
+    },
+    {
+     "text": "we",
+     "from": 3523.8,
+     "to": 3533.4
+    },
+    {
+     "text": "have.",
+     "from": 3533.4,
+     "to": 3544.2
+    }
+   ]
+  },
+  {
+   "from": 3565.2,
+   "to": 3639.6,
+   "words": [
+    {
+     "text": "So",
+     "from": 3565.2,
+     "to": 3567.6
+    },
+    {
+     "text": "maybe",
+     "from": 3567.6,
+     "to": 3576.0
+    },
+    {
+     "text": "we",
+     "from": 3576.0,
+     "to": 3585.6
+    },
+    {
+     "text": "can",
+     "from": 3585.6,
+     "to": 3593.4
+    },
+    {
+     "text": "take",
+     "from": 3593.4,
+     "to": 3598.8
+    },
+    {
+     "text": "a",
+     "from": 3598.8,
+     "to": 3602.4
+    },
+    {
+     "text": "look",
+     "from": 3602.4,
+     "to": 3605.4
+    },
+    {
+     "text": "at",
+     "from": 3605.4,
+     "to": 3609.0
+    },
+    {
+     "text": "a",
+     "from": 3609.0,
+     "to": 3615.0
+    },
+    {
+     "text": "Seasonal",
+     "from": 3615.0,
+     "to": 3627.6
+    },
+    {
+     "text": "Buyer.",
+     "from": 3627.6,
+     "to": 3639.6
+    }
+   ]
+  },
+  {
+   "from": 3643.8,
+   "to": 3721.2,
+   "words": [
+    {
+     "text": "We",
+     "from": 3643.8,
+     "to": 3647.4
+    },
+    {
+     "text": "are",
+     "from": 3647.4,
+     "to": 3648.6
+    },
+    {
+     "text": "able",
+     "from": 3648.6,
+     "to": 3654.0
+    },
+    {
+     "text": "to",
+     "from": 3654.0,
+     "to": 3659.4
+    },
+    {
+     "text": "view",
+     "from": 3659.4,
+     "to": 3667.8
+    },
+    {
+     "text": "the",
+     "from": 3667.8,
+     "to": 3676.8
+    },
+    {
+     "text": "motivation",
+     "from": 3676.8,
+     "to": 3693.0
+    },
+    {
+     "text": "and",
+     "from": 3693.0,
+     "to": 3706.2
+    },
+    {
+     "text": "the",
+     "from": 3706.2,
+     "to": 3714.0
+    },
+    {
+     "text": "tone.",
+     "from": 3714.0,
+     "to": 3721.2
+    }
+   ]
+  },
+  {
+   "from": 3721.2,
+   "to": 3790.2,
+   "words": [
+    {
+     "text": "So",
+     "from": 3721.2,
+     "to": 3741.6
+    },
+    {
+     "text": "for",
+     "from": 3741.6,
+     "to": 3748.8
+    },
+    {
+     "text": "example,",
+     "from": 3748.8,
+     "to": 3756.6
+    },
+    {
+     "text": "the",
+     "from": 3757.2,
+     "to": 3762.0
+    },
+    {
+     "text": "motivation",
+     "from": 3762.0,
+     "to": 3776.4
+    },
+    {
+     "text": "is",
+     "from": 3776.4,
+     "to": 3785.4
+    },
+    {
+     "text": "to",
+     "from": 3785.4,
+     "to": 3790.2
+    }
+   ]
+  },
+  {
+   "from": 3790.2,
+   "to": 3874.8,
+   "words": [
+    {
+     "text": "buy",
+     "from": 3790.2,
+     "to": 3798.6
+    },
+    {
+     "text": "few",
+     "from": 3798.6,
+     "to": 3822.6
+    },
+    {
+     "text": "higher",
+     "from": 3826.8,
+     "to": 3837.0
+    },
+    {
+     "text": "value",
+     "from": 3837.0,
+     "to": 3846.6
+    },
+    {
+     "text": "fat",
+     "from": 3846.6,
+     "to": 3858.6
+    },
+    {
+     "text": "cat",
+     "from": 3858.6,
+     "to": 3862.2
+    },
+    {
+     "text": "pillows.",
+     "from": 3862.2,
+     "to": 3874.8
+    }
+   ]
+  },
+  {
+   "from": 3894.3,
+   "to": 3965.1,
+   "words": [
+    {
+     "text": "And",
+     "from": 3894.3,
+     "to": 3895.5
+    },
+    {
+     "text": "most",
+     "from": 3895.5,
+     "to": 3902.1
+    },
+    {
+     "text": "important",
+     "from": 3902.1,
+     "to": 3910.5
+    },
+    {
+     "text": "keyword",
+     "from": 3910.5,
+     "to": 3918.3
+    },
+    {
+     "text": "is",
+     "from": 3918.3,
+     "to": 3930.9
+    },
+    {
+     "text": "as",
+     "from": 3930.9,
+     "to": 3937.5
+    },
+    {
+     "text": "gifts,",
+     "from": 3937.5,
+     "to": 3947.1
+    },
+    {
+     "text": "right?",
+     "from": 3953.7,
+     "to": 3965.1
+    }
+   ]
+  },
+  {
+   "from": 3980.1,
+   "to": 4032.9,
+   "words": [
+    {
+     "text": "So",
+     "from": 3980.1,
+     "to": 3983.7
+    },
+    {
+     "text": "for",
+     "from": 3983.7,
+     "to": 3993.3
+    },
+    {
+     "text": "the",
+     "from": 3993.3,
+     "to": 3997.5
+    },
+    {
+     "text": "tone,",
+     "from": 3997.5,
+     "to": 4007.7
+    },
+    {
+     "text": "we",
+     "from": 4007.7,
+     "to": 4016.7
+    },
+    {
+     "text": "have",
+     "from": 4016.7,
+     "to": 4022.7
+    },
+    {
+     "text": "to",
+     "from": 4022.7,
+     "to": 4028.1
+    },
+    {
+     "text": "lead",
+     "from": 4028.1,
+     "to": 4032.9
+    }
+   ]
+  },
+  {
+   "from": 4032.9,
+   "to": 4088.7,
+   "words": [
+    {
+     "text": "with",
+     "from": 4032.9,
+     "to": 4040.7
+    },
+    {
+     "text": "gifting,",
+     "from": 4040.7,
+     "to": 4057.5
+    },
+    {
+     "text": "wrapping,",
+     "from": 4062.3,
+     "to": 4068.9
+    },
+    {
+     "text": "right?",
+     "from": 4083.9,
+     "to": 4088.7
+    }
+   ]
+  },
+  {
+   "from": 4107.0,
+   "to": 4155.6,
+   "words": [
+    {
+     "text": "And",
+     "from": 4107.0,
+     "to": 4114.2
+    },
+    {
+     "text": "of",
+     "from": 4114.2,
+     "to": 4125.0
+    },
+    {
+     "text": "course,",
+     "from": 4125.0,
+     "to": 4130.4
+    },
+    {
+     "text": "the",
+     "from": 4134.0,
+     "to": 4137.6
+    },
+    {
+     "text": "delivery",
+     "from": 4137.6,
+     "to": 4146.6
+    },
+    {
+     "text": "as",
+     "from": 4146.6,
+     "to": 4155.6
+    }
+   ]
+  },
+  {
+   "from": 4155.6,
+   "to": 4197.6,
+   "words": [
+    {
+     "text": "well",
+     "from": 4155.6,
+     "to": 4160.4
+    },
+    {
+     "text": "as",
+     "from": 4160.4,
+     "to": 4167.6
+    },
+    {
+     "text": "the",
+     "from": 4167.6,
+     "to": 4170.6
+    },
+    {
+     "text": "selling",
+     "from": 4170.6,
+     "to": 4178.4
+    },
+    {
+     "text": "point",
+     "from": 4178.4,
+     "to": 4186.8
+    },
+    {
+     "text": "of",
+     "from": 4186.8,
+     "to": 4191.0
+    },
+    {
+     "text": "it.",
+     "from": 4191.0,
+     "to": 4197.6
+    }
+   ]
+  },
+  {
+   "from": 4207.2,
+   "to": 4272.0,
+   "words": [
+    {
+     "text": "Okay,",
+     "from": 4207.2,
+     "to": 4210.2
+    },
+    {
+     "text": "next",
+     "from": 4210.2,
+     "to": 4216.2
+    },
+    {
+     "text": "we",
+     "from": 4216.2,
+     "to": 4221.6
+    },
+    {
+     "text": "can",
+     "from": 4221.6,
+     "to": 4226.4
+    },
+    {
+     "text": "go",
+     "from": 4226.4,
+     "to": 4231.8
+    },
+    {
+     "text": "to",
+     "from": 4231.8,
+     "to": 4241.4
+    },
+    {
+     "text": "the",
+     "from": 4241.4,
+     "to": 4251.0
+    },
+    {
+     "text": "creative",
+     "from": 4251.0,
+     "to": 4260.0
+    },
+    {
+     "text": "review.",
+     "from": 4260.0,
+     "to": 4272.0
+    }
+   ]
+  },
+  {
+   "from": 4287.6,
+   "to": 4349.4,
+   "words": [
+    {
+     "text": "So",
+     "from": 4287.6,
+     "to": 4293.0
+    },
+    {
+     "text": "this",
+     "from": 4293.0,
+     "to": 4299.6
+    },
+    {
+     "text": "is",
+     "from": 4299.6,
+     "to": 4303.8
+    },
+    {
+     "text": "our",
+     "from": 4303.8,
+     "to": 4311.0
+    },
+    {
+     "text": "second",
+     "from": 4311.0,
+     "to": 4322.4
+    },
+    {
+     "text": "agent",
+     "from": 4322.4,
+     "to": 4333.2
+    },
+    {
+     "text": "over",
+     "from": 4333.2,
+     "to": 4341.0
+    },
+    {
+     "text": "here.",
+     "from": 4341.0,
+     "to": 4349.4
+    }
+   ]
+  },
+  {
+   "from": 4356.6,
+   "to": 4412.4,
+   "words": [
+    {
+     "text": "Over",
+     "from": 4356.6,
+     "to": 4362.0
+    },
+    {
+     "text": "here,",
+     "from": 4362.0,
+     "to": 4372.8
+    },
+    {
+     "text": "we",
+     "from": 4374.6,
+     "to": 4381.2
+    },
+    {
+     "text": "are",
+     "from": 4381.2,
+     "to": 4384.2
+    },
+    {
+     "text": "able",
+     "from": 4384.2,
+     "to": 4393.2
+    },
+    {
+     "text": "to",
+     "from": 4393.2,
+     "to": 4412.4
+    }
+   ]
+  },
+  {
+   "from": 4412.4,
+   "to": 4484.7,
+   "words": [
+    {
+     "text": "upload",
+     "from": 4412.4,
+     "to": 4423.8
+    },
+    {
+     "text": "our",
+     "from": 4423.8,
+     "to": 4439.4
+    },
+    {
+     "text": "company",
+     "from": 4439.4,
+     "to": 4459.8
+    },
+    {
+     "text": "logo.",
+     "from": 4461.3,
+     "to": 4484.7
+    }
+   ]
+  },
+  {
+   "from": 4484.7,
+   "to": 4553.5,
+   "words": [
+    {
+     "text": "Yep,",
+     "from": 4484.7,
+     "to": 4505.1
+    },
+    {
+     "text": "so",
+     "from": 4518.7,
+     "to": 4526.5
+    },
+    {
+     "text": "you",
+     "from": 4526.5,
+     "to": 4530.7
+    },
+    {
+     "text": "can",
+     "from": 4530.7,
+     "to": 4535.5
+    },
+    {
+     "text": "see",
+     "from": 4535.5,
+     "to": 4543.9
+    },
+    {
+     "text": "here",
+     "from": 4543.9,
+     "to": 4553.5
+    }
+   ]
+  },
+  {
+   "from": 4553.5,
+   "to": 4605.7,
+   "words": [
+    {
+     "text": "I",
+     "from": 4553.5,
+     "to": 4557.1
+    },
+    {
+     "text": "can",
+     "from": 4557.1,
+     "to": 4561.3
+    },
+    {
+     "text": "upload",
+     "from": 4561.3,
+     "to": 4571.5
+    },
+    {
+     "text": "my",
+     "from": 4571.5,
+     "to": 4579.9
+    },
+    {
+     "text": "company",
+     "from": 4579.9,
+     "to": 4593.7
+    },
+    {
+     "text": "logo.",
+     "from": 4593.7,
+     "to": 4605.7
+    }
+   ]
+  },
+  {
+   "from": 4620.7,
+   "to": 4653.7,
+   "words": [
+    {
+     "text": "And",
+     "from": 4620.7,
+     "to": 4621.9
+    },
+    {
+     "text": "then",
+     "from": 4621.9,
+     "to": 4627.9
+    },
+    {
+     "text": "for",
+     "from": 4627.9,
+     "to": 4635.7
+    },
+    {
+     "text": "hero",
+     "from": 4635.7,
+     "to": 4644.7
+    },
+    {
+     "text": "image",
+     "from": 4644.7,
+     "to": 4653.7
+    }
+   ]
+  },
+  {
+   "from": 4656.1,
+   "to": 4710.7,
+   "words": [
+    {
+     "text": "same",
+     "from": 4656.1,
+     "to": 4666.3
+    },
+    {
+     "text": "thing",
+     "from": 4666.3,
+     "to": 4675.3
+    },
+    {
+     "text": "here,",
+     "from": 4675.3,
+     "to": 4683.1
+    },
+    {
+     "text": "I",
+     "from": 4686.1,
+     "to": 4687.3
+    },
+    {
+     "text": "can",
+     "from": 4687.3,
+     "to": 4691.5
+    },
+    {
+     "text": "upload",
+     "from": 4691.5,
+     "to": 4699.9
+    },
+    {
+     "text": "this.",
+     "from": 4699.9,
+     "to": 4710.7
+    }
+   ]
+  },
+  {
+   "from": 4723.8,
+   "to": 4825.2,
+   "words": [
+    {
+     "text": "So",
+     "from": 4723.8,
+     "to": 4729.2
+    },
+    {
+     "text": "we",
+     "from": 4729.2,
+     "to": 4732.2
+    },
+    {
+     "text": "can",
+     "from": 4732.2,
+     "to": 4735.8
+    },
+    {
+     "text": "also",
+     "from": 4735.8,
+     "to": 4740.6
+    },
+    {
+     "text": "choose",
+     "from": 4740.6,
+     "to": 4759.2
+    },
+    {
+     "text": "our",
+     "from": 4759.2,
+     "to": 4779.0
+    },
+    {
+     "text": "brand",
+     "from": 4779.0,
+     "to": 4812.0
+    },
+    {
+     "text": "palette.",
+     "from": 4815.6,
+     "to": 4825.2
+    }
+   ]
+  },
+  {
+   "from": 4833.6,
+   "to": 4866.0,
+   "words": [
+    {
+     "text": "So",
+     "from": 4833.6,
+     "to": 4835.4
+    },
+    {
+     "text": "let's",
+     "from": 4835.4,
+     "to": 4840.8
+    },
+    {
+     "text": "say",
+     "from": 4840.8,
+     "to": 4843.2
+    },
+    {
+     "text": "I'm",
+     "from": 4843.2,
+     "to": 4849.2
+    },
+    {
+     "text": "okay",
+     "from": 4849.2,
+     "to": 4853.4
+    },
+    {
+     "text": "with",
+     "from": 4853.4,
+     "to": 4860.0
+    },
+    {
+     "text": "this",
+     "from": 4860.0,
+     "to": 4866.0
+    }
+   ]
+  },
+  {
+   "from": 4869.6,
+   "to": 4891.2,
+   "words": [
+    {
+     "text": "I",
+     "from": 4869.6,
+     "to": 4870.8
+    },
+    {
+     "text": "can",
+     "from": 4870.8,
+     "to": 4875.0
+    },
+    {
+     "text": "click",
+     "from": 4875.0,
+     "to": 4881.6
+    },
+    {
+     "text": "save.",
+     "from": 4881.6,
+     "to": 4891.2
+    }
+   ]
+  },
+  {
+   "from": 4919.4,
+   "to": 4992.6,
+   "words": [
+    {
+     "text": "And",
+     "from": 4919.4,
+     "to": 4928.4
+    },
+    {
+     "text": "I",
+     "from": 4928.4,
+     "to": 4936.8
+    },
+    {
+     "text": "can",
+     "from": 4936.8,
+     "to": 4941.0
+    },
+    {
+     "text": "click",
+     "from": 4941.0,
+     "to": 4946.4
+    },
+    {
+     "text": "on",
+     "from": 4946.4,
+     "to": 4954.8
+    },
+    {
+     "text": "generate",
+     "from": 4954.8,
+     "to": 4972.2
+    },
+    {
+     "text": "direction.",
+     "from": 4972.2,
+     "to": 4992.6
+    }
+   ]
+  },
+  {
+   "from": 5005.2,
+   "to": 5055.6,
+   "words": [
+    {
+     "text": "So",
+     "from": 5005.2,
+     "to": 5009.4
+    },
+    {
+     "text": "what",
+     "from": 5009.4,
+     "to": 5013.6
+    },
+    {
+     "text": "this",
+     "from": 5013.6,
+     "to": 5018.4
+    },
+    {
+     "text": "will",
+     "from": 5018.4,
+     "to": 5024.4
+    },
+    {
+     "text": "do",
+     "from": 5024.4,
+     "to": 5031.6
+    },
+    {
+     "text": "is",
+     "from": 5031.6,
+     "to": 5041.2
+    },
+    {
+     "text": "it",
+     "from": 5041.2,
+     "to": 5050.8
+    },
+    {
+     "text": "will",
+     "from": 5050.8,
+     "to": 5055.6
+    }
+   ]
+  },
+  {
+   "from": 5055.6,
+   "to": 5115.6,
+   "words": [
+    {
+     "text": "create",
+     "from": 5055.6,
+     "to": 5067.6
+    },
+    {
+     "text": "a",
+     "from": 5067.6,
+     "to": 5077.2
+    },
+    {
+     "text": "creative",
+     "from": 5077.2,
+     "to": 5089.8
+    },
+    {
+     "text": "direction",
+     "from": 5089.8,
+     "to": 5104.8
+    },
+    {
+     "text": "for",
+     "from": 5104.8,
+     "to": 5115.6
+    }
+   ]
+  },
+  {
+   "from": 5115.6,
+   "to": 5175.0,
+   "words": [
+    {
+     "text": "each",
+     "from": 5115.6,
+     "to": 5125.2
+    },
+    {
+     "text": "of",
+     "from": 5125.2,
+     "to": 5136.0
+    },
+    {
+     "text": "the",
+     "from": 5136.0,
+     "to": 5140.8
+    },
+    {
+     "text": "segments",
+     "from": 5140.8,
+     "to": 5148.6
+    },
+    {
+     "text": "we",
+     "from": 5148.6,
+     "to": 5158.2
+    },
+    {
+     "text": "have",
+     "from": 5160.6,
+     "to": 5165.4
+    },
+    {
+     "text": "here.",
+     "from": 5165.4,
+     "to": 5175.0
+    }
+   ]
+  },
+  {
+   "from": 5184.1,
+   "to": 5236.3,
+   "words": [
+    {
+     "text": "In",
+     "from": 5184.1,
+     "to": 5193.7
+    },
+    {
+     "text": "the",
+     "from": 5193.7,
+     "to": 5200.9
+    },
+    {
+     "text": "creative",
+     "from": 5200.9,
+     "to": 5209.3
+    },
+    {
+     "text": "direction,",
+     "from": 5209.3,
+     "to": 5223.1
+    },
+    {
+     "text": "they",
+     "from": 5229.7,
+     "to": 5232.1
+    },
+    {
+     "text": "will",
+     "from": 5232.1,
+     "to": 5236.3
+    }
+   ]
+  },
+  {
+   "from": 5236.3,
+   "to": 5305.3,
+   "words": [
+    {
+     "text": "focus",
+     "from": 5236.3,
+     "to": 5246.5
+    },
+    {
+     "text": "of",
+     "from": 5246.5,
+     "to": 5256.7
+    },
+    {
+     "text": "course",
+     "from": 5256.7,
+     "to": 5263.9
+    },
+    {
+     "text": "on",
+     "from": 5263.9,
+     "to": 5269.3
+    },
+    {
+     "text": "the",
+     "from": 5269.3,
+     "to": 5274.7
+    },
+    {
+     "text": "tonality,",
+     "from": 5274.7,
+     "to": 5287.9
+    },
+    {
+     "text": "you",
+     "from": 5296.9,
+     "to": 5296.9
+    },
+    {
+     "text": "know",
+     "from": 5296.9,
+     "to": 5305.3
+    }
+   ]
+  },
+  {
+   "from": 5315.5,
+   "to": 5413.3,
+   "words": [
+    {
+     "text": "the",
+     "from": 5315.5,
+     "to": 5320.9
+    },
+    {
+     "text": "color",
+     "from": 5320.9,
+     "to": 5330.5
+    },
+    {
+     "text": "template",
+     "from": 5330.5,
+     "to": 5346.1
+    },
+    {
+     "text": "as",
+     "from": 5346.1,
+     "to": 5359.3
+    },
+    {
+     "text": "well",
+     "from": 5359.3,
+     "to": 5361.1
+    },
+    {
+     "text": "as",
+     "from": 5361.1,
+     "to": 5368.9
+    },
+    {
+     "text": "the",
+     "from": 5368.9,
+     "to": 5373.7
+    },
+    {
+     "text": "palettes",
+     "from": 5373.7,
+     "to": 5389.9
+    },
+    {
+     "text": "that",
+     "from": 5389.9,
+     "to": 5408.5
+    },
+    {
+     "text": "can",
+     "from": 5408.5,
+     "to": 5413.3
+    }
+   ]
+  },
+  {
+   "from": 5413.3,
+   "to": 5527.6,
+   "words": [
+    {
+     "text": "be",
+     "from": 5413.3,
+     "to": 5419.3
+    },
+    {
+     "text": "used",
+     "from": 5419.3,
+     "to": 5428.3
+    },
+    {
+     "text": "in",
+     "from": 5428.3,
+     "to": 5442.1
+    },
+    {
+     "text": "the",
+     "from": 5442.1,
+     "to": 5454.7
+    },
+    {
+     "text": "email",
+     "from": 5454.7,
+     "to": 5469.1
+    },
+    {
+     "text": "that",
+     "from": 5478.4,
+     "to": 5497.6
+    },
+    {
+     "text": "we",
+     "from": 5497.6,
+     "to": 5501.2
+    },
+    {
+     "text": "will",
+     "from": 5501.2,
+     "to": 5505.4
+    },
+    {
+     "text": "generate",
+     "from": 5505.4,
+     "to": 5513.8
+    },
+    {
+     "text": "later.",
+     "from": 5513.8,
+     "to": 5527.6
+    }
+   ]
+  },
+  {
+   "from": 5609.9,
+   "to": 5718.5,
+   "words": [
+    {
+     "text": "So",
+     "from": 5609.9,
+     "to": 5613.5
+    },
+    {
+     "text": "once",
+     "from": 5613.5,
+     "to": 5627.9
+    },
+    {
+     "text": "all",
+     "from": 5627.9,
+     "to": 5634.5
+    },
+    {
+     "text": "the",
+     "from": 5634.5,
+     "to": 5647.7
+    },
+    {
+     "text": "segments",
+     "from": 5647.7,
+     "to": 5669.9
+    },
+    {
+     "text": "are",
+     "from": 5669.9,
+     "to": 5690.9
+    },
+    {
+     "text": "generated,",
+     "from": 5690.9,
+     "to": 5703.5
+    },
+    {
+     "text": "we",
+     "from": 5709.5,
+     "to": 5713.1
+    },
+    {
+     "text": "can",
+     "from": 5713.1,
+     "to": 5718.5
+    }
+   ]
+  },
+  {
+   "from": 5718.5,
+   "to": 5804.9,
+   "words": [
+    {
+     "text": "take",
+     "from": 5718.5,
+     "to": 5724.5
+    },
+    {
+     "text": "a",
+     "from": 5724.5,
+     "to": 5729.9
+    },
+    {
+     "text": "look",
+     "from": 5729.9,
+     "to": 5734.1
+    },
+    {
+     "text": "at",
+     "from": 5734.1,
+     "to": 5743.1
+    },
+    {
+     "text": "our",
+     "from": 5743.1,
+     "to": 5754.5
+    },
+    {
+     "text": "Seasonal",
+     "from": 5754.5,
+     "to": 5774.9
+    },
+    {
+     "text": "Gift",
+     "from": 5774.9,
+     "to": 5780.3
+    },
+    {
+     "text": "Buyers",
+     "from": 5780.3,
+     "to": 5791.1
+    },
+    {
+     "text": "example.",
+     "from": 5791.1,
+     "to": 5804.9
+    }
+   ]
+  },
+  {
+   "from": 5822.9,
+   "to": 5861.9,
+   "words": [
+    {
+     "text": "So",
+     "from": 5822.9,
+     "to": 5829.5
+    },
+    {
+     "text": "we",
+     "from": 5829.5,
+     "to": 5831.9
+    },
+    {
+     "text": "can",
+     "from": 5831.9,
+     "to": 5836.7
+    },
+    {
+     "text": "see",
+     "from": 5836.7,
+     "to": 5840.9
+    },
+    {
+     "text": "that",
+     "from": 5840.9,
+     "to": 5845.1
+    },
+    {
+     "text": "the",
+     "from": 5845.1,
+     "to": 5849.9
+    },
+    {
+     "text": "tonality",
+     "from": 5849.9,
+     "to": 5861.9
+    }
+   ]
+  },
+  {
+   "from": 5861.9,
+   "to": 5914.4,
+   "words": [
+    {
+     "text": "should",
+     "from": 5861.9,
+     "to": 5869.7
+    },
+    {
+     "text": "be",
+     "from": 5869.7,
+     "to": 5876.9
+    },
+    {
+     "text": "warm,",
+     "from": 5876.9,
+     "to": 5885.9
+    },
+    {
+     "text": "gift-led",
+     "from": 5901.2,
+     "to": 5914.4
+    }
+   ]
+  },
+  {
+   "from": 5937.8,
+   "to": 5995.4,
+   "words": [
+    {
+     "text": "language-concise,",
+     "from": 5937.8,
+     "to": 5968.4
+    },
+    {
+     "text": "call",
+     "from": 5977.4,
+     "to": 5980.4
+    },
+    {
+     "text": "to",
+     "from": 5980.4,
+     "to": 5984.0
+    },
+    {
+     "text": "action.",
+     "from": 5984.0,
+     "to": 5995.4
+    }
+   ]
+  },
+  {
+   "from": 5998.4,
+   "to": 6034.4,
+   "words": [
+    {
+     "text": "This",
+     "from": 5998.4,
+     "to": 6004.4
+    },
+    {
+     "text": "is",
+     "from": 6004.4,
+     "to": 6008.0
+    },
+    {
+     "text": "the",
+     "from": 6008.0,
+     "to": 6011.6
+    },
+    {
+     "text": "most",
+     "from": 6011.6,
+     "to": 6015.8
+    },
+    {
+     "text": "important",
+     "from": 6015.8,
+     "to": 6024.2
+    },
+    {
+     "text": "one.",
+     "from": 6024.2,
+     "to": 6034.4
+    }
+   ]
+  },
+  {
+   "from": 6034.4,
+   "to": 6134.0,
+   "words": [
+    {
+     "text": "So",
+     "from": 6034.4,
+     "to": 6045.2
+    },
+    {
+     "text": "the",
+     "from": 6058.4,
+     "to": 6089.6
+    },
+    {
+     "text": "word",
+     "from": 6103.4,
+     "to": 6110.0
+    },
+    {
+     "text": "gift",
+     "from": 6110.0,
+     "to": 6119.0
+    },
+    {
+     "text": "should",
+     "from": 6119.0,
+     "to": 6129.2
+    },
+    {
+     "text": "be",
+     "from": 6129.2,
+     "to": 6134.0
+    }
+   ]
+  },
+  {
+   "from": 6134.0,
+   "to": 6199.4,
+   "words": [
+    {
+     "text": "inside",
+     "from": 6134.0,
+     "to": 6143.0
+    },
+    {
+     "text": "a",
+     "from": 6143.0,
+     "to": 6149.6
+    },
+    {
+     "text": "call",
+     "from": 6149.6,
+     "to": 6154.4
+    },
+    {
+     "text": "to",
+     "from": 6154.4,
+     "to": 6187.4
+    },
+    {
+     "text": "action.",
+     "from": 6189.8,
+     "to": 6199.4
+    }
+   ]
+  },
+  {
+   "from": 6212.1,
+   "to": 6271.5,
+   "words": [
+    {
+     "text": "So",
+     "from": 6212.1,
+     "to": 6215.1
+    },
+    {
+     "text": "design",
+     "from": 6215.1,
+     "to": 6225.3
+    },
+    {
+     "text": "shapes,",
+     "from": 6225.3,
+     "to": 6237.3
+    },
+    {
+     "text": "right,",
+     "from": 6245.1,
+     "to": 6245.1
+    },
+    {
+     "text": "we",
+     "from": 6247.5,
+     "to": 6249.9
+    },
+    {
+     "text": "need",
+     "from": 6249.9,
+     "to": 6256.5
+    },
+    {
+     "text": "to",
+     "from": 6256.5,
+     "to": 6259.5
+    },
+    {
+     "text": "have",
+     "from": 6259.5,
+     "to": 6264.9
+    },
+    {
+     "text": "some",
+     "from": 6264.9,
+     "to": 6271.5
+    }
+   ]
+  },
+  {
+   "from": 6271.5,
+   "to": 6332.7,
+   "words": [
+    {
+     "text": "gift",
+     "from": 6271.5,
+     "to": 6278.7
+    },
+    {
+     "text": "text,",
+     "from": 6278.7,
+     "to": 6287.7
+    },
+    {
+     "text": "clear",
+     "from": 6291.3,
+     "to": 6297.3
+    },
+    {
+     "text": "options,",
+     "from": 6297.3,
+     "to": 6306.9
+    },
+    {
+     "text": "so",
+     "from": 6311.7,
+     "to": 6315.3
+    },
+    {
+     "text": "and",
+     "from": 6315.3,
+     "to": 6320.1
+    },
+    {
+     "text": "so",
+     "from": 6320.1,
+     "to": 6324.3
+    },
+    {
+     "text": "forth.",
+     "from": 6324.3,
+     "to": 6332.7
+    }
+   ]
+  },
+  {
+   "from": 6349.8,
+   "to": 6404.4,
+   "words": [
+    {
+     "text": "Okay,",
+     "from": 6349.8,
+     "to": 6354.0
+    },
+    {
+     "text": "so",
+     "from": 6355.2,
+     "to": 6359.4
+    },
+    {
+     "text": "next",
+     "from": 6359.4,
+     "to": 6365.4
+    },
+    {
+     "text": "we",
+     "from": 6365.4,
+     "to": 6371.4
+    },
+    {
+     "text": "can",
+     "from": 6371.4,
+     "to": 6378.6
+    },
+    {
+     "text": "go",
+     "from": 6378.6,
+     "to": 6385.2
+    },
+    {
+     "text": "to",
+     "from": 6385.2,
+     "to": 6391.2
+    },
+    {
+     "text": "the",
+     "from": 6391.2,
+     "to": 6397.2
+    },
+    {
+     "text": "email",
+     "from": 6397.2,
+     "to": 6404.4
+    }
+   ]
+  },
+  {
+   "from": 6404.4,
+   "to": 6469.2,
+   "words": [
+    {
+     "text": "review",
+     "from": 6404.4,
+     "to": 6415.2
+    },
+    {
+     "text": "and",
+     "from": 6415.2,
+     "to": 6435.6
+    },
+    {
+     "text": "click",
+     "from": 6435.6,
+     "to": 6443.4
+    },
+    {
+     "text": "on",
+     "from": 6443.4,
+     "to": 6452.4
+    },
+    {
+     "text": "generate",
+     "from": 6452.4,
+     "to": 6459.6
+    },
+    {
+     "text": "emails.",
+     "from": 6459.6,
+     "to": 6469.2
+    }
+   ]
+  },
+  {
+   "from": 6500.4,
+   "to": 6570.6,
+   "words": [
+    {
+     "text": "So",
+     "from": 6500.4,
+     "to": 6507.0
+    },
+    {
+     "text": "what",
+     "from": 6507.0,
+     "to": 6514.2
+    },
+    {
+     "text": "this",
+     "from": 6514.2,
+     "to": 6522.0
+    },
+    {
+     "text": "will",
+     "from": 6522.0,
+     "to": 6528.0
+    },
+    {
+     "text": "do",
+     "from": 6528.0,
+     "to": 6533.4
+    },
+    {
+     "text": "is",
+     "from": 6533.4,
+     "to": 6541.2
+    },
+    {
+     "text": "it",
+     "from": 6541.2,
+     "to": 6548.4
+    },
+    {
+     "text": "will",
+     "from": 6548.4,
+     "to": 6553.8
+    },
+    {
+     "text": "read",
+     "from": 6553.8,
+     "to": 6561.0
+    },
+    {
+     "text": "the",
+     "from": 6561.0,
+     "to": 6570.6
+    }
+   ]
+  },
+  {
+   "from": 6570.6,
+   "to": 6626.4,
+   "words": [
+    {
+     "text": "creative",
+     "from": 6570.6,
+     "to": 6584.4
+    },
+    {
+     "text": "review",
+     "from": 6584.4,
+     "to": 6596.4
+    },
+    {
+     "text": "as",
+     "from": 6596.4,
+     "to": 6603.6
+    },
+    {
+     "text": "well",
+     "from": 6603.6,
+     "to": 6607.8
+    },
+    {
+     "text": "as",
+     "from": 6607.8,
+     "to": 6614.4
+    },
+    {
+     "text": "the",
+     "from": 6614.4,
+     "to": 6616.8
+    },
+    {
+     "text": "segments",
+     "from": 6616.8,
+     "to": 6626.4
+    }
+   ]
+  },
+  {
+   "from": 6647.1,
+   "to": 6701.1,
+   "words": [
+    {
+     "text": "as",
+     "from": 6647.1,
+     "to": 6673.5
+    },
+    {
+     "text": "context",
+     "from": 6673.5,
+     "to": 6688.5
+    },
+    {
+     "text": "input.",
+     "from": 6688.5,
+     "to": 6701.1
+    }
+   ]
+  },
+  {
+   "from": 6714.9,
+   "to": 6753.3,
+   "words": [
+    {
+     "text": "And",
+     "from": 6714.9,
+     "to": 6719.7
+    },
+    {
+     "text": "from",
+     "from": 6719.7,
+     "to": 6725.1
+    },
+    {
+     "text": "those",
+     "from": 6725.1,
+     "to": 6731.7
+    },
+    {
+     "text": "context",
+     "from": 6731.7,
+     "to": 6741.3
+    },
+    {
+     "text": "input",
+     "from": 6741.3,
+     "to": 6753.3
+    }
+   ]
+  },
+  {
+   "from": 6775.5,
+   "to": 6846.3,
+   "words": [
+    {
+     "text": "the",
+     "from": 6775.5,
+     "to": 6780.3
+    },
+    {
+     "text": "LLM",
+     "from": 6780.3,
+     "to": 6791.7
+    },
+    {
+     "text": "will",
+     "from": 6791.7,
+     "to": 6798.3
+    },
+    {
+     "text": "decide",
+     "from": 6798.3,
+     "to": 6811.5
+    },
+    {
+     "text": "on",
+     "from": 6811.5,
+     "to": 6821.1
+    },
+    {
+     "text": "what",
+     "from": 6826.5,
+     "to": 6830.7
+    },
+    {
+     "text": "kind",
+     "from": 6830.7,
+     "to": 6837.3
+    },
+    {
+     "text": "of",
+     "from": 6837.3,
+     "to": 6846.3
+    }
+   ]
+  },
+  {
+   "from": 6846.3,
+   "to": 6903.3,
+   "words": [
+    {
+     "text": "email",
+     "from": 6846.3,
+     "to": 6855.9
+    },
+    {
+     "text": "template",
+     "from": 6855.9,
+     "to": 6870.9
+    },
+    {
+     "text": "should",
+     "from": 6870.9,
+     "to": 6882.3
+    },
+    {
+     "text": "be",
+     "from": 6882.3,
+     "to": 6887.1
+    },
+    {
+     "text": "generated",
+     "from": 6887.1,
+     "to": 6903.3
+    }
+   ]
+  },
+  {
+   "from": 6903.3,
+   "to": 6966.9,
+   "words": [
+    {
+     "text": "for",
+     "from": 6903.3,
+     "to": 6921.9
+    },
+    {
+     "text": "each",
+     "from": 6926.1,
+     "to": 6937.5
+    },
+    {
+     "text": "of",
+     "from": 6937.5,
+     "to": 6947.7
+    },
+    {
+     "text": "those",
+     "from": 6947.7,
+     "to": 6954.3
+    },
+    {
+     "text": "sections.",
+     "from": 6954.3,
+     "to": 6966.9
+    }
+   ]
+  },
+  {
+   "from": 6966.9,
+   "to": 6984.9,
+   "words": [
+    {
+     "text": "Okay",
+     "from": 6966.9,
+     "to": 6984.9
+    }
+   ]
+  },
+  {
+   "from": 7065.1,
+   "to": 7165.9,
+   "words": [
+    {
+     "text": "so",
+     "from": 7065.1,
+     "to": 7074.1
+    },
+    {
+     "text": "once",
+     "from": 7074.1,
+     "to": 7087.9
+    },
+    {
+     "text": "all",
+     "from": 7087.9,
+     "to": 7103.5
+    },
+    {
+     "text": "of",
+     "from": 7103.5,
+     "to": 7107.7
+    },
+    {
+     "text": "the",
+     "from": 7107.7,
+     "to": 7111.9
+    },
+    {
+     "text": "emails",
+     "from": 7111.9,
+     "to": 7123.9
+    },
+    {
+     "text": "have",
+     "from": 7123.9,
+     "to": 7135.9
+    },
+    {
+     "text": "been",
+     "from": 7135.9,
+     "to": 7148.5
+    },
+    {
+     "text": "generated",
+     "from": 7148.5,
+     "to": 7165.9
+    }
+   ]
+  },
+  {
+   "from": 7165.9,
+   "to": 7277.2,
+   "words": [
+    {
+     "text": "we",
+     "from": 7165.9,
+     "to": 7183.3
+    },
+    {
+     "text": "can",
+     "from": 7199.2,
+     "to": 7204.6
+    },
+    {
+     "text": "look",
+     "from": 7204.6,
+     "to": 7213.0
+    },
+    {
+     "text": "at",
+     "from": 7213.0,
+     "to": 7222.0
+    },
+    {
+     "text": "our",
+     "from": 7222.0,
+     "to": 7234.6
+    },
+    {
+     "text": "Seasonal",
+     "from": 7234.6,
+     "to": 7254.4
+    },
+    {
+     "text": "Gift",
+     "from": 7254.4,
+     "to": 7258.6
+    },
+    {
+     "text": "Buyer",
+     "from": 7258.6,
+     "to": 7272.4
+    },
+    {
+     "text": "email.",
+     "from": 7272.4,
+     "to": 7277.2
+    }
+   ]
+  },
+  {
+   "from": 7282.0,
+   "to": 7326.4,
+   "words": [
+    {
+     "text": "So",
+     "from": 7282.0,
+     "to": 7296.4
+    },
+    {
+     "text": "let's",
+     "from": 7296.4,
+     "to": 7307.2
+    },
+    {
+     "text": "click",
+     "from": 7307.2,
+     "to": 7312.6
+    },
+    {
+     "text": "on",
+     "from": 7312.6,
+     "to": 7317.4
+    },
+    {
+     "text": "the",
+     "from": 7317.4,
+     "to": 7321.6
+    },
+    {
+     "text": "edit.",
+     "from": 7321.6,
+     "to": 7326.4
+    }
+   ]
+  },
+  {
+   "from": 7337.9,
+   "to": 7380.5,
+   "words": [
+    {
+     "text": "So",
+     "from": 7337.9,
+     "to": 7342.1
+    },
+    {
+     "text": "you",
+     "from": 7342.1,
+     "to": 7344.5
+    },
+    {
+     "text": "can",
+     "from": 7344.5,
+     "to": 7348.1
+    },
+    {
+     "text": "see",
+     "from": 7348.1,
+     "to": 7353.5
+    },
+    {
+     "text": "here",
+     "from": 7353.5,
+     "to": 7357.7
+    },
+    {
+     "text": "this",
+     "from": 7357.7,
+     "to": 7361.9
+    },
+    {
+     "text": "is",
+     "from": 7361.9,
+     "to": 7367.9
+    },
+    {
+     "text": "quite",
+     "from": 7367.9,
+     "to": 7372.1
+    },
+    {
+     "text": "a",
+     "from": 7372.1,
+     "to": 7380.5
+    }
+   ]
+  },
+  {
+   "from": 7380.5,
+   "to": 7459.1,
+   "words": [
+    {
+     "text": "comprehensive",
+     "from": 7380.5,
+     "to": 7396.7
+    },
+    {
+     "text": "email",
+     "from": 7396.7,
+     "to": 7417.1
+    },
+    {
+     "text": "editor",
+     "from": 7417.1,
+     "to": 7429.7
+    },
+    {
+     "text": "because",
+     "from": 7429.7,
+     "to": 7446.5
+    },
+    {
+     "text": "you",
+     "from": 7446.5,
+     "to": 7453.1
+    },
+    {
+     "text": "have",
+     "from": 7453.1,
+     "to": 7459.1
+    }
+   ]
+  },
+  {
+   "from": 7459.1,
+   "to": 7526.3,
+   "words": [
+    {
+     "text": "so",
+     "from": 7459.1,
+     "to": 7467.5
+    },
+    {
+     "text": "many",
+     "from": 7467.5,
+     "to": 7476.5
+    },
+    {
+     "text": "blocks",
+     "from": 7476.5,
+     "to": 7488.5
+    },
+    {
+     "text": "that",
+     "from": 7488.5,
+     "to": 7499.9
+    },
+    {
+     "text": "you",
+     "from": 7499.9,
+     "to": 7503.5
+    },
+    {
+     "text": "are",
+     "from": 7503.5,
+     "to": 7506.5
+    },
+    {
+     "text": "able",
+     "from": 7506.5,
+     "to": 7512.5
+    },
+    {
+     "text": "to",
+     "from": 7512.5,
+     "to": 7519.7
+    },
+    {
+     "text": "add.",
+     "from": 7519.7,
+     "to": 7526.3
+    }
+   ]
+  },
+  {
+   "from": 7534.6,
+   "to": 7595.2,
+   "words": [
+    {
+     "text": "You",
+     "from": 7534.6,
+     "to": 7537.6
+    },
+    {
+     "text": "can",
+     "from": 7537.6,
+     "to": 7542.4
+    },
+    {
+     "text": "add",
+     "from": 7542.4,
+     "to": 7548.4
+    },
+    {
+     "text": "logo,",
+     "from": 7548.4,
+     "to": 7561.0
+    },
+    {
+     "text": "countdown,",
+     "from": 7568.8,
+     "to": 7578.4
+    },
+    {
+     "text": "coupon",
+     "from": 7587.4,
+     "to": 7595.2
+    }
+   ]
+  },
+  {
+   "from": 7618.0,
+   "to": 7636.0,
+   "words": [
+    {
+     "text": "accordions",
+     "from": 7618.0,
+     "to": 7636.0
+    }
+   ]
+  },
+  {
+   "from": 7654.6,
+   "to": 7702.0,
+   "words": [
+    {
+     "text": "hero",
+     "from": 7654.6,
+     "to": 7658.2
+    },
+    {
+     "text": "image",
+     "from": 7658.2,
+     "to": 7664.8
+    },
+    {
+     "text": "and",
+     "from": 7664.8,
+     "to": 7681.0
+    },
+    {
+     "text": "more.",
+     "from": 7681.0,
+     "to": 7702.0
+    }
+   ]
+  },
+  {
+   "from": 7712.7,
+   "to": 7773.3,
+   "words": [
+    {
+     "text": "So",
+     "from": 7712.7,
+     "to": 7716.3
+    },
+    {
+     "text": "over",
+     "from": 7716.3,
+     "to": 7721.1
+    },
+    {
+     "text": "here,",
+     "from": 7721.1,
+     "to": 7730.7
+    },
+    {
+     "text": "it's",
+     "from": 7734.9,
+     "to": 7747.5
+    },
+    {
+     "text": "also",
+     "from": 7747.5,
+     "to": 7752.9
+    },
+    {
+     "text": "very",
+     "from": 7752.9,
+     "to": 7758.9
+    },
+    {
+     "text": "flexible.",
+     "from": 7758.9,
+     "to": 7773.3
+    }
+   ]
+  },
+  {
+   "from": 7781.7,
+   "to": 7829.7,
+   "words": [
+    {
+     "text": "It",
+     "from": 7781.7,
+     "to": 7781.7
+    },
+    {
+     "text": "means",
+     "from": 7781.7,
+     "to": 7786.5
+    },
+    {
+     "text": "like",
+     "from": 7786.5,
+     "to": 7794.3
+    },
+    {
+     "text": "you",
+     "from": 7794.3,
+     "to": 7797.3
+    },
+    {
+     "text": "can",
+     "from": 7797.3,
+     "to": 7801.5
+    },
+    {
+     "text": "just",
+     "from": 7801.5,
+     "to": 7806.3
+    },
+    {
+     "text": "drag",
+     "from": 7806.3,
+     "to": 7812.3
+    },
+    {
+     "text": "and",
+     "from": 7812.3,
+     "to": 7817.7
+    },
+    {
+     "text": "drop",
+     "from": 7817.7,
+     "to": 7829.7
+    }
+   ]
+  },
+  {
+   "from": 7831.2,
+   "to": 7926.0,
+   "words": [
+    {
+     "text": "the",
+     "from": 7831.2,
+     "to": 7837.8
+    },
+    {
+     "text": "bars",
+     "from": 7837.8,
+     "to": 7848.0
+    },
+    {
+     "text": "to",
+     "from": 7848.0,
+     "to": 7861.2
+    },
+    {
+     "text": "whichever",
+     "from": 7861.2,
+     "to": 7884.0
+    },
+    {
+     "text": "format",
+     "from": 7899.6,
+     "to": 7911.6
+    },
+    {
+     "text": "you",
+     "from": 7911.6,
+     "to": 7918.8
+    },
+    {
+     "text": "want.",
+     "from": 7918.8,
+     "to": 7926.0
+    }
+   ]
+  },
+  {
+   "from": 7931.4,
+   "to": 8003.4,
+   "words": [
+    {
+     "text": "Okay,",
+     "from": 7931.4,
+     "to": 7945.8
+    },
+    {
+     "text": "so",
+     "from": 7946.4,
+     "to": 7951.8
+    },
+    {
+     "text": "you",
+     "from": 7951.8,
+     "to": 7954.8
+    },
+    {
+     "text": "can",
+     "from": 7954.8,
+     "to": 7957.8
+    },
+    {
+     "text": "see",
+     "from": 7957.8,
+     "to": 7962.6
+    },
+    {
+     "text": "over",
+     "from": 7962.6,
+     "to": 7966.8
+    },
+    {
+     "text": "here,",
+     "from": 7966.8,
+     "to": 7970.4
+    },
+    {
+     "text": "this",
+     "from": 7971.0,
+     "to": 7974.6
+    },
+    {
+     "text": "is",
+     "from": 7974.6,
+     "to": 7979.4
+    },
+    {
+     "text": "our",
+     "from": 7979.4,
+     "to": 7986.6
+    },
+    {
+     "text": "FCP",
+     "from": 7986.6,
+     "to": 8003.4
+    }
+   ]
+  },
+  {
+   "from": 8023.2,
+   "to": 8076.4,
+   "words": [
+    {
+     "text": "our",
+     "from": 8023.2,
+     "to": 8023.2
+    },
+    {
+     "text": "hero",
+     "from": 8023.2,
+     "to": 8029.8
+    },
+    {
+     "text": "image,",
+     "from": 8029.8,
+     "to": 8043.0
+    },
+    {
+     "text": "the",
+     "from": 8060.8,
+     "to": 8066.0
+    },
+    {
+     "text": "Early",
+     "from": 8066.0,
+     "to": 8071.2
+    },
+    {
+     "text": "Bird",
+     "from": 8071.2,
+     "to": 8076.4
+    }
+   ]
+  },
+  {
+   "from": 8090.2,
+   "to": 8145.4,
+   "words": [
+    {
+     "text": "call",
+     "from": 8090.2,
+     "to": 8101.0
+    },
+    {
+     "text": "to",
+     "from": 8101.0,
+     "to": 8104.6
+    },
+    {
+     "text": "action,",
+     "from": 8104.6,
+     "to": 8115.4
+    },
+    {
+     "text": "choose",
+     "from": 8122.0,
+     "to": 8131.6
+    },
+    {
+     "text": "your",
+     "from": 8131.6,
+     "to": 8140.6
+    },
+    {
+     "text": "pillow",
+     "from": 8140.6,
+     "to": 8145.4
+    }
+   ]
+  },
+  {
+   "from": 8160.0,
+   "to": 8241.3,
+   "words": [
+    {
+     "text": "next",
+     "from": 8160.0,
+     "to": 8187.0
+    },
+    {
+     "text": "festive",
+     "from": 8187.0,
+     "to": 8203.8
+    },
+    {
+     "text": "gift,",
+     "from": 8203.8,
+     "to": 8213.4
+    },
+    {
+     "text": "so",
+     "from": 8222.1,
+     "to": 8224.5
+    },
+    {
+     "text": "and",
+     "from": 8224.5,
+     "to": 8228.7
+    },
+    {
+     "text": "so",
+     "from": 8228.7,
+     "to": 8234.1
+    },
+    {
+     "text": "forth.",
+     "from": 8234.1,
+     "to": 8241.3
+    }
+   ]
+  },
+  {
+   "from": 8244.3,
+   "to": 8292.3,
+   "words": [
+    {
+     "text": "So",
+     "from": 8244.3,
+     "to": 8246.7
+    },
+    {
+     "text": "if",
+     "from": 8246.7,
+     "to": 8252.1
+    },
+    {
+     "text": "we",
+     "from": 8252.1,
+     "to": 8256.3
+    },
+    {
+     "text": "like",
+     "from": 8256.3,
+     "to": 8261.1
+    },
+    {
+     "text": "this,",
+     "from": 8261.1,
+     "to": 8273.7
+    },
+    {
+     "text": "you",
+     "from": 8273.7,
+     "to": 8286.9
+    },
+    {
+     "text": "know",
+     "from": 8286.9,
+     "to": 8292.3
+    }
+   ]
+  },
+  {
+   "from": 8293.5,
+   "to": 8342.1,
+   "words": [
+    {
+     "text": "we",
+     "from": 8293.5,
+     "to": 8297.1
+    },
+    {
+     "text": "can",
+     "from": 8297.1,
+     "to": 8301.9
+    },
+    {
+     "text": "quickly",
+     "from": 8301.9,
+     "to": 8313.3
+    },
+    {
+     "text": "click",
+     "from": 8313.3,
+     "to": 8322.3
+    },
+    {
+     "text": "on",
+     "from": 8322.3,
+     "to": 8331.3
+    },
+    {
+     "text": "save",
+     "from": 8331.3,
+     "to": 8342.1
+    }
+   ]
+  },
+  {
+   "from": 8366.7,
+   "to": 8451.3,
+   "words": [
+    {
+     "text": "and",
+     "from": 8366.7,
+     "to": 8390.7
+    },
+    {
+     "text": "go",
+     "from": 8390.7,
+     "to": 8399.7
+    },
+    {
+     "text": "on",
+     "from": 8399.7,
+     "to": 8405.1
+    },
+    {
+     "text": "to",
+     "from": 8405.1,
+     "to": 8412.9
+    },
+    {
+     "text": "our",
+     "from": 8412.9,
+     "to": 8425.5
+    },
+    {
+     "text": "next",
+     "from": 8425.5,
+     "to": 8437.5
+    },
+    {
+     "text": "section.",
+     "from": 8437.5,
+     "to": 8451.3
+    }
+   ]
+  },
+  {
+   "from": 8471.1,
+   "to": 8541.9,
+   "words": [
+    {
+     "text": "So",
+     "from": 8471.1,
+     "to": 8472.3
+    },
+    {
+     "text": "this",
+     "from": 8472.3,
+     "to": 8478.3
+    },
+    {
+     "text": "is",
+     "from": 8478.3,
+     "to": 8482.5
+    },
+    {
+     "text": "where",
+     "from": 8482.5,
+     "to": 8487.3
+    },
+    {
+     "text": "our",
+     "from": 8487.3,
+     "to": 8496.3
+    },
+    {
+     "text": "Guardian",
+     "from": 8496.3,
+     "to": 8503.5
+    },
+    {
+     "text": "agent",
+     "from": 8503.5,
+     "to": 8512.5
+    },
+    {
+     "text": "is",
+     "from": 8512.5,
+     "to": 8528.7
+    },
+    {
+     "text": "working.",
+     "from": 8528.7,
+     "to": 8541.9
+    }
+   ]
+  },
+  {
+   "from": 8552.8,
+   "to": 8601.4,
+   "words": [
+    {
+     "text": "So",
+     "from": 8552.8,
+     "to": 8554.6
+    },
+    {
+     "text": "over",
+     "from": 8554.6,
+     "to": 8560.0
+    },
+    {
+     "text": "here,",
+     "from": 8560.0,
+     "to": 8564.8
+    },
+    {
+     "text": "we",
+     "from": 8567.2,
+     "to": 8569.0
+    },
+    {
+     "text": "can",
+     "from": 8569.0,
+     "to": 8572.6
+    },
+    {
+     "text": "get",
+     "from": 8572.6,
+     "to": 8577.4
+    },
+    {
+     "text": "the",
+     "from": 8577.4,
+     "to": 8582.8
+    },
+    {
+     "text": "model",
+     "from": 8582.8,
+     "to": 8588.2
+    },
+    {
+     "text": "scores.",
+     "from": 8588.2,
+     "to": 8601.4
+    }
+   ]
+  },
+  {
+   "from": 8618.8,
+   "to": 8736.1,
+   "words": [
+    {
+     "text": "We",
+     "from": 8618.8,
+     "to": 8629.6
+    },
+    {
+     "text": "can",
+     "from": 8629.6,
+     "to": 8632.6
+    },
+    {
+     "text": "also",
+     "from": 8632.6,
+     "to": 8641.0
+    },
+    {
+     "text": "look",
+     "from": 8641.0,
+     "to": 8650.6
+    },
+    {
+     "text": "at",
+     "from": 8650.6,
+     "to": 8662.0
+    },
+    {
+     "text": "the",
+     "from": 8662.0,
+     "to": 8673.4
+    },
+    {
+     "text": "different",
+     "from": 8677.6,
+     "to": 8696.2
+    },
+    {
+     "text": "sections",
+     "from": 8709.1,
+     "to": 8736.1
+    }
+   ]
+  },
+  {
+   "from": 8736.1,
+   "to": 8798.5,
+   "words": [
+    {
+     "text": "that",
+     "from": 8736.1,
+     "to": 8745.7
+    },
+    {
+     "text": "we,",
+     "from": 8745.7,
+     "to": 8750.5
+    },
+    {
+     "text": "or",
+     "from": 8758.3,
+     "to": 8758.3
+    },
+    {
+     "text": "sorry,",
+     "from": 8758.3,
+     "to": 8763.1
+    },
+    {
+     "text": "segments",
+     "from": 8764.3,
+     "to": 8776.9
+    },
+    {
+     "text": "that",
+     "from": 8776.9,
+     "to": 8783.5
+    },
+    {
+     "text": "we",
+     "from": 8783.5,
+     "to": 8790.7
+    },
+    {
+     "text": "have.",
+     "from": 8790.7,
+     "to": 8798.5
+    }
+   ]
+  },
+  {
+   "from": 8802.7,
+   "to": 8889.7,
+   "words": [
+    {
+     "text": "So",
+     "from": 8802.7,
+     "to": 8818.3
+    },
+    {
+     "text": "over",
+     "from": 8818.3,
+     "to": 8823.7
+    },
+    {
+     "text": "here,",
+     "from": 8823.7,
+     "to": 8830.9
+    },
+    {
+     "text": "we",
+     "from": 8830.9,
+     "to": 8837.5
+    },
+    {
+     "text": "have",
+     "from": 8837.5,
+     "to": 8847.7
+    },
+    {
+     "text": "our",
+     "from": 8847.7,
+     "to": 8860.3
+    },
+    {
+     "text": "Seasonal",
+     "from": 8860.3,
+     "to": 8877.1
+    },
+    {
+     "text": "Gift",
+     "from": 8877.1,
+     "to": 8880.1
+    },
+    {
+     "text": "Buyer",
+     "from": 8880.1,
+     "to": 8889.7
+    }
+   ]
+  },
+  {
+   "from": 8889.7,
+   "to": 8938.3,
+   "words": [
+    {
+     "text": "and",
+     "from": 8889.7,
+     "to": 8895.1
+    },
+    {
+     "text": "you",
+     "from": 8895.1,
+     "to": 8898.1
+    },
+    {
+     "text": "can",
+     "from": 8898.1,
+     "to": 8901.7
+    },
+    {
+     "text": "see",
+     "from": 8901.7,
+     "to": 8908.3
+    },
+    {
+     "text": "that",
+     "from": 8908.3,
+     "to": 8913.1
+    },
+    {
+     "text": "it's",
+     "from": 8913.1,
+     "to": 8919.1
+    },
+    {
+     "text": "ready",
+     "from": 8919.1,
+     "to": 8925.7
+    },
+    {
+     "text": "to",
+     "from": 8925.7,
+     "to": 8931.7
+    },
+    {
+     "text": "send.",
+     "from": 8931.7,
+     "to": 8938.3
+    }
+   ]
+  },
+  {
+   "from": 8950.5,
+   "to": 9021.9,
+   "words": [
+    {
+     "text": "In",
+     "from": 8950.5,
+     "to": 8951.7
+    },
+    {
+     "text": "fact,",
+     "from": 8951.7,
+     "to": 8955.9
+    },
+    {
+     "text": "all",
+     "from": 8957.7,
+     "to": 8961.3
+    },
+    {
+     "text": "the",
+     "from": 8961.3,
+     "to": 8968.5
+    },
+    {
+     "text": "sections",
+     "from": 8968.5,
+     "to": 8979.9
+    },
+    {
+     "text": "are",
+     "from": 8979.9,
+     "to": 8987.1
+    },
+    {
+     "text": "actually",
+     "from": 8987.1,
+     "to": 8998.5
+    },
+    {
+     "text": "ready",
+     "from": 8998.5,
+     "to": 9016.5
+    },
+    {
+     "text": "to",
+     "from": 9016.5,
+     "to": 9021.9
+    }
+   ]
+  },
+  {
+   "from": 9021.9,
+   "to": 9121.2,
+   "words": [
+    {
+     "text": "send",
+     "from": 9021.9,
+     "to": 9027.9
+    },
+    {
+     "text": "except",
+     "from": 9027.9,
+     "to": 9037.5
+    },
+    {
+     "text": "for",
+     "from": 9037.5,
+     "to": 9047.7
+    },
+    {
+     "text": "the",
+     "from": 9047.7,
+     "to": 9064.5
+    },
+    {
+     "text": "Frequent",
+     "from": 9080.4,
+     "to": 9096.6
+    },
+    {
+     "text": "Full-Price",
+     "from": 9096.6,
+     "to": 9109.8
+    },
+    {
+     "text": "Buyer.",
+     "from": 9109.8,
+     "to": 9121.2
+    }
+   ]
+  },
+  {
+   "from": 9123.6,
+   "to": 9197.4,
+   "words": [
+    {
+     "text": "That",
+     "from": 9123.6,
+     "to": 9125.4
+    },
+    {
+     "text": "needs",
+     "from": 9125.4,
+     "to": 9129.6
+    },
+    {
+     "text": "some",
+     "from": 9129.6,
+     "to": 9137.4
+    },
+    {
+     "text": "attention",
+     "from": 9137.4,
+     "to": 9152.4
+    },
+    {
+     "text": "on",
+     "from": 9152.4,
+     "to": 9160.8
+    },
+    {
+     "text": "the",
+     "from": 9160.8,
+     "to": 9173.4
+    },
+    {
+     "text": "attribute.",
+     "from": 9182.4,
+     "to": 9197.4
+    }
+   ]
+  },
+  {
+   "from": 9214.2,
+   "to": 9280.5,
+   "words": [
+    {
+     "text": "Basically,",
+     "from": 9214.2,
+     "to": 9222.0
+    },
+    {
+     "text": "this",
+     "from": 9226.8,
+     "to": 9229.2
+    },
+    {
+     "text": "is",
+     "from": 9229.2,
+     "to": 9234.0
+    },
+    {
+     "text": "telling",
+     "from": 9234.0,
+     "to": 9239.4
+    },
+    {
+     "text": "us",
+     "from": 9239.4,
+     "to": 9249.0
+    },
+    {
+     "text": "that",
+     "from": 9249.0,
+     "to": 9259.5
+    },
+    {
+     "text": "the",
+     "from": 9259.5,
+     "to": 9270.0
+    },
+    {
+     "text": "age",
+     "from": 9270.0,
+     "to": 9280.5
+    }
+   ]
+  },
+  {
+   "from": 9280.5,
+   "to": 9384.0,
+   "words": [
+    {
+     "text": "attribute",
+     "from": 9280.5,
+     "to": 9291.0
+    },
+    {
+     "text": "has",
+     "from": 9291.0,
+     "to": 9306.6
+    },
+    {
+     "text": "quite",
+     "from": 9313.8,
+     "to": 9337.2
+    },
+    {
+     "text": "a",
+     "from": 9337.2,
+     "to": 9341.4
+    },
+    {
+     "text": "bit",
+     "from": 9341.4,
+     "to": 9346.8
+    },
+    {
+     "text": "of",
+     "from": 9346.8,
+     "to": 9355.2
+    },
+    {
+     "text": "bias",
+     "from": 9355.2,
+     "to": 9363.6
+    },
+    {
+     "text": "in",
+     "from": 9363.6,
+     "to": 9371.4
+    },
+    {
+     "text": "it.",
+     "from": 9371.4,
+     "to": 9384.0
+    }
+   ]
+  },
+  {
+   "from": 9396.0,
+   "to": 9458.4,
+   "words": [
+    {
+     "text": "So",
+     "from": 9396.0,
+     "to": 9400.8
+    },
+    {
+     "text": "maybe",
+     "from": 9400.8,
+     "to": 9418.2
+    },
+    {
+     "text": "we",
+     "from": 9418.2,
+     "to": 9422.4
+    },
+    {
+     "text": "can",
+     "from": 9422.4,
+     "to": 9426.6
+    },
+    {
+     "text": "take",
+     "from": 9426.6,
+     "to": 9430.8
+    },
+    {
+     "text": "a",
+     "from": 9430.8,
+     "to": 9434.4
+    },
+    {
+     "text": "look",
+     "from": 9434.4,
+     "to": 9437.4
+    },
+    {
+     "text": "at",
+     "from": 9437.4,
+     "to": 9441.0
+    },
+    {
+     "text": "it.",
+     "from": 9441.0,
+     "to": 9458.4
+    }
+   ]
+  },
+  {
+   "from": 9460.8,
+   "to": 9532.2,
+   "words": [
+    {
+     "text": "But",
+     "from": 9460.8,
+     "to": 9474.6
+    },
+    {
+     "text": "in",
+     "from": 9474.6,
+     "to": 9477.6
+    },
+    {
+     "text": "this",
+     "from": 9477.6,
+     "to": 9483.6
+    },
+    {
+     "text": "case,",
+     "from": 9483.6,
+     "to": 9488.4
+    },
+    {
+     "text": "since",
+     "from": 9492.6,
+     "to": 9496.2
+    },
+    {
+     "text": "we",
+     "from": 9496.2,
+     "to": 9501.0
+    },
+    {
+     "text": "are",
+     "from": 9501.0,
+     "to": 9517.2
+    },
+    {
+     "text": "focusing",
+     "from": 9517.2,
+     "to": 9532.2
+    }
+   ]
+  },
+  {
+   "from": 9532.2,
+   "to": 9597.0,
+   "words": [
+    {
+     "text": "on",
+     "from": 9532.2,
+     "to": 9542.4
+    },
+    {
+     "text": "Seasonal",
+     "from": 9542.4,
+     "to": 9555.6
+    },
+    {
+     "text": "Buyer,",
+     "from": 9555.6,
+     "to": 9565.2
+    },
+    {
+     "text": "so",
+     "from": 9571.2,
+     "to": 9573.0
+    },
+    {
+     "text": "once,",
+     "from": 9573.0,
+     "to": 9582.6
+    },
+    {
+     "text": "you",
+     "from": 9586.2,
+     "to": 9591.0
+    },
+    {
+     "text": "know",
+     "from": 9591.0,
+     "to": 9597.0
+    }
+   ]
+  },
+  {
+   "from": 9600.6,
+   "to": 9670.2,
+   "words": [
+    {
+     "text": "every",
+     "from": 9600.6,
+     "to": 9608.4
+    },
+    {
+     "text": "single",
+     "from": 9608.4,
+     "to": 9621.0
+    },
+    {
+     "text": "compliance",
+     "from": 9621.0,
+     "to": 9636.6
+    },
+    {
+     "text": "check",
+     "from": 9636.6,
+     "to": 9648.0
+    },
+    {
+     "text": "is",
+     "from": 9648.0,
+     "to": 9653.4
+    },
+    {
+     "text": "being",
+     "from": 9653.4,
+     "to": 9659.4
+    },
+    {
+     "text": "done",
+     "from": 9659.4,
+     "to": 9670.2
+    }
+   ]
+  },
+  {
+   "from": 9687.0,
+   "to": 9750.0,
+   "words": [
+    {
+     "text": "we",
+     "from": 9687.0,
+     "to": 9692.4
+    },
+    {
+     "text": "can",
+     "from": 9692.4,
+     "to": 9696.6
+    },
+    {
+     "text": "preview",
+     "from": 9696.6,
+     "to": 9707.4
+    },
+    {
+     "text": "what",
+     "from": 9707.4,
+     "to": 9714.0
+    },
+    {
+     "text": "the",
+     "from": 9714.0,
+     "to": 9720.0
+    },
+    {
+     "text": "recipient",
+     "from": 9720.0,
+     "to": 9732.0
+    },
+    {
+     "text": "will",
+     "from": 9732.0,
+     "to": 9741.6
+    },
+    {
+     "text": "see.",
+     "from": 9741.6,
+     "to": 9750.0
+    }
+   ]
+  },
+  {
+   "from": 9759.2,
+   "to": 9838.4,
+   "words": [
+    {
+     "text": "Okay,",
+     "from": 9759.2,
+     "to": 9762.8
+    },
+    {
+     "text": "so",
+     "from": 9774.2,
+     "to": 9782.6
+    },
+    {
+     "text": "this",
+     "from": 9782.6,
+     "to": 9789.2
+    },
+    {
+     "text": "is",
+     "from": 9789.2,
+     "to": 9804.8
+    },
+    {
+     "text": "what",
+     "from": 9804.8,
+     "to": 9812.0
+    },
+    {
+     "text": "the",
+     "from": 9812.0,
+     "to": 9822.2
+    },
+    {
+     "text": "recipient",
+     "from": 9822.2,
+     "to": 9833.0
+    },
+    {
+     "text": "will",
+     "from": 9833.0,
+     "to": 9838.4
+    }
+   ]
+  },
+  {
+   "from": 9838.4,
+   "to": 9894.8,
+   "words": [
+    {
+     "text": "see",
+     "from": 9838.4,
+     "to": 9845.0
+    },
+    {
+     "text": "and",
+     "from": 9845.0,
+     "to": 9851.6
+    },
+    {
+     "text": "then",
+     "from": 9851.6,
+     "to": 9855.8
+    },
+    {
+     "text": "we",
+     "from": 9855.8,
+     "to": 9859.4
+    },
+    {
+     "text": "can",
+     "from": 9859.4,
+     "to": 9864.2
+    },
+    {
+     "text": "move",
+     "from": 9864.2,
+     "to": 9869.6
+    },
+    {
+     "text": "on",
+     "from": 9869.6,
+     "to": 9875.0
+    },
+    {
+     "text": "to",
+     "from": 9875.0,
+     "to": 9881.0
+    },
+    {
+     "text": "the",
+     "from": 9881.0,
+     "to": 9884.6
+    },
+    {
+     "text": "dispatch.",
+     "from": 9884.6,
+     "to": 9894.8
+    }
+   ]
+  },
+  {
+   "from": 9912.8,
+   "to": 9974.6,
+   "words": [
+    {
+     "text": "So",
+     "from": 9912.8,
+     "to": 9917.0
+    },
+    {
+     "text": "I'll",
+     "from": 9917.0,
+     "to": 9923.6
+    },
+    {
+     "text": "click",
+     "from": 9923.6,
+     "to": 9930.8
+    },
+    {
+     "text": "send",
+     "from": 9930.8,
+     "to": 9937.4
+    },
+    {
+     "text": "here",
+     "from": 9937.4,
+     "to": 9951.8
+    },
+    {
+     "text": "and",
+     "from": 9951.8,
+     "to": 9974.6
+    }
+   ]
+  },
+  {
+   "from": 9974.6,
+   "to": 9998.0,
+   "words": [
+    {
+     "text": "then",
+     "from": 9974.6,
+     "to": 9978.8
+    },
+    {
+     "text": "you'll",
+     "from": 9978.8,
+     "to": 9984.8
+    },
+    {
+     "text": "send",
+     "from": 9984.8,
+     "to": 9989.0
+    },
+    {
+     "text": "an",
+     "from": 9989.0,
+     "to": 9993.2
+    },
+    {
+     "text": "email.",
+     "from": 9993.2,
+     "to": 9998.0
+    }
+   ]
+  },
+  {
+   "from": 10049.8,
+   "to": 10090.0,
+   "words": [
+    {
+     "text": "Okay,",
+     "from": 10049.8,
+     "to": 10057.0
+    },
+    {
+     "text": "so",
+     "from": 10059.4,
+     "to": 10064.8
+    },
+    {
+     "text": "you",
+     "from": 10064.8,
+     "to": 10067.2
+    },
+    {
+     "text": "can",
+     "from": 10067.2,
+     "to": 10070.8
+    },
+    {
+     "text": "see",
+     "from": 10070.8,
+     "to": 10076.2
+    },
+    {
+     "text": "that",
+     "from": 10076.2,
+     "to": 10084.0
+    },
+    {
+     "text": "it",
+     "from": 10084.0,
+     "to": 10090.0
+    }
+   ]
+  },
+  {
+   "from": 10090.0,
+   "to": 10140.4,
+   "words": [
+    {
+     "text": "has",
+     "from": 10090.0,
+     "to": 10092.4
+    },
+    {
+     "text": "been",
+     "from": 10092.4,
+     "to": 10098.4
+    },
+    {
+     "text": "sent",
+     "from": 10098.4,
+     "to": 10105.0
+    },
+    {
+     "text": "to",
+     "from": 10105.0,
+     "to": 10118.2
+    },
+    {
+     "text": "my",
+     "from": 10118.2,
+     "to": 10132.0
+    },
+    {
+     "text": "email.",
+     "from": 10132.0,
+     "to": 10140.4
+    }
+   ]
+  },
+  {
+   "from": 10153.2,
+   "to": 10196.4,
+   "words": [
+    {
+     "text": "So",
+     "from": 10153.2,
+     "to": 10160.4
+    },
+    {
+     "text": "let's",
+     "from": 10160.4,
+     "to": 10174.2
+    },
+    {
+     "text": "give",
+     "from": 10174.2,
+     "to": 10179.0
+    },
+    {
+     "text": "it",
+     "from": 10179.0,
+     "to": 10182.6
+    },
+    {
+     "text": "a",
+     "from": 10182.6,
+     "to": 10189.2
+    },
+    {
+     "text": "while.",
+     "from": 10189.2,
+     "to": 10196.4
+    }
+   ]
+  },
+  {
+   "from": 10216.2,
+   "to": 10260.6,
+   "words": [
+    {
+     "text": "You",
+     "from": 10216.2,
+     "to": 10218.6
+    },
+    {
+     "text": "also",
+     "from": 10218.6,
+     "to": 10224.6
+    },
+    {
+     "text": "see",
+     "from": 10224.6,
+     "to": 10233.0
+    },
+    {
+     "text": "the",
+     "from": 10233.0,
+     "to": 10239.6
+    },
+    {
+     "text": "delivery",
+     "from": 10239.6,
+     "to": 10245.6
+    },
+    {
+     "text": "history.",
+     "from": 10245.6,
+     "to": 10260.6
+    }
+   ]
+  },
+  {
+   "from": 10275.6,
+   "to": 10328.4,
+   "words": [
+    {
+     "text": "So",
+     "from": 10275.6,
+     "to": 10282.2
+    },
+    {
+     "text": "if",
+     "from": 10282.2,
+     "to": 10287.6
+    },
+    {
+     "text": "I",
+     "from": 10287.6,
+     "to": 10291.2
+    },
+    {
+     "text": "go",
+     "from": 10291.2,
+     "to": 10296.6
+    },
+    {
+     "text": "to",
+     "from": 10296.6,
+     "to": 10307.4
+    },
+    {
+     "text": "my",
+     "from": 10307.4,
+     "to": 10318.2
+    },
+    {
+     "text": "email",
+     "from": 10318.2,
+     "to": 10328.4
+    }
+   ]
+  },
+  {
+   "from": 10333.8,
+   "to": 10388.4,
+   "words": [
+    {
+     "text": "I",
+     "from": 10333.8,
+     "to": 10339.8
+    },
+    {
+     "text": "will",
+     "from": 10339.8,
+     "to": 10344.6
+    },
+    {
+     "text": "be",
+     "from": 10344.6,
+     "to": 10349.4
+    },
+    {
+     "text": "able",
+     "from": 10349.4,
+     "to": 10354.8
+    },
+    {
+     "text": "to",
+     "from": 10354.8,
+     "to": 10360.2
+    },
+    {
+     "text": "see",
+     "from": 10360.2,
+     "to": 10365.6
+    },
+    {
+     "text": "from",
+     "from": 10365.6,
+     "to": 10371.0
+    },
+    {
+     "text": "the",
+     "from": 10371.0,
+     "to": 10375.8
+    },
+    {
+     "text": "inbox.",
+     "from": 10375.8,
+     "to": 10388.4
+    }
+   ]
+  },
+  {
+   "from": 10410.6,
+   "to": 10459.4,
+   "words": [
+    {
+     "text": "So",
+     "from": 10410.6,
+     "to": 10414.8
+    },
+    {
+     "text": "that's",
+     "from": 10414.8,
+     "to": 10425.6
+    },
+    {
+     "text": "what",
+     "from": 10434.8,
+     "to": 10439.6
+    },
+    {
+     "text": "we",
+     "from": 10439.6,
+     "to": 10446.2
+    },
+    {
+     "text": "have.",
+     "from": 10446.2,
+     "to": 10459.4
+    }
+   ]
+  },
+  {
+   "from": 10520.8,
+   "to": 10607.8,
+   "words": [
+    {
+     "text": "To",
+     "from": 10520.8,
+     "to": 10536.4
+    },
+    {
+     "text": "conclude",
+     "from": 10544.2,
+     "to": 10556.2
+    },
+    {
+     "text": "everything,",
+     "from": 10556.2,
+     "to": 10569.4
+    },
+    {
+     "text": "let's",
+     "from": 10573.0,
+     "to": 10579.0
+    },
+    {
+     "text": "move",
+     "from": 10579.0,
+     "to": 10584.4
+    },
+    {
+     "text": "on",
+     "from": 10584.4,
+     "to": 10592.2
+    },
+    {
+     "text": "to",
+     "from": 10592.2,
+     "to": 10600.0
+    },
+    {
+     "text": "the",
+     "from": 10600.0,
+     "to": 10607.8
+    }
+   ]
+  },
+  {
+   "from": 10607.8,
+   "to": 10717.0,
+   "words": [
+    {
+     "text": "last",
+     "from": 10607.8,
+     "to": 10618.6
+    },
+    {
+     "text": "part",
+     "from": 10618.6,
+     "to": 10632.4
+    },
+    {
+     "text": "of",
+     "from": 10632.4,
+     "to": 10641.4
+    },
+    {
+     "text": "our",
+     "from": 10641.4,
+     "to": 10652.8
+    },
+    {
+     "text": "section,",
+     "from": 10652.8,
+     "to": 10676.2
+    },
+    {
+     "text": "which",
+     "from": 10682.2,
+     "to": 10683.4
+    },
+    {
+     "text": "is",
+     "from": 10683.4,
+     "to": 10691.2
+    },
+    {
+     "text": "the",
+     "from": 10691.2,
+     "to": 10707.4
+    },
+    {
+     "text": "logs.",
+     "from": 10707.4,
+     "to": 10717.0
+    }
+   ]
+  },
+  {
+   "from": 10732.0,
+   "to": 10816.0,
+   "words": [
+    {
+     "text": "So",
+     "from": 10732.0,
+     "to": 10734.4
+    },
+    {
+     "text": "you",
+     "from": 10734.4,
+     "to": 10737.4
+    },
+    {
+     "text": "can",
+     "from": 10737.4,
+     "to": 10741.6
+    },
+    {
+     "text": "see",
+     "from": 10741.6,
+     "to": 10748.8
+    },
+    {
+     "text": "that",
+     "from": 10748.8,
+     "to": 10756.6
+    },
+    {
+     "text": "in",
+     "from": 10756.6,
+     "to": 10787.2
+    },
+    {
+     "text": "this",
+     "from": 10787.2,
+     "to": 10793.8
+    },
+    {
+     "text": "log",
+     "from": 10793.8,
+     "to": 10802.2
+    },
+    {
+     "text": "section",
+     "from": 10802.2,
+     "to": 10816.0
+    }
+   ]
+  },
+  {
+   "from": 10822.0,
+   "to": 10924.3,
+   "words": [
+    {
+     "text": "we",
+     "from": 10822.0,
+     "to": 10823.2
+    },
+    {
+     "text": "are",
+     "from": 10823.2,
+     "to": 10825.6
+    },
+    {
+     "text": "able",
+     "from": 10825.6,
+     "to": 10831.6
+    },
+    {
+     "text": "to",
+     "from": 10831.6,
+     "to": 10837.0
+    },
+    {
+     "text": "see",
+     "from": 10837.0,
+     "to": 10841.8
+    },
+    {
+     "text": "every",
+     "from": 10841.8,
+     "to": 10849.0
+    },
+    {
+     "text": "single",
+     "from": 10849.0,
+     "to": 10859.2
+    },
+    {
+     "text": "action",
+     "from": 10859.2,
+     "to": 10869.4
+    },
+    {
+     "text": "done",
+     "from": 10880.5,
+     "to": 10901.5
+    },
+    {
+     "text": "by",
+     "from": 10901.5,
+     "to": 10917.1
+    },
+    {
+     "text": "the",
+     "from": 10917.1,
+     "to": 10924.3
+    }
+   ]
+  },
+  {
+   "from": 10924.3,
+   "to": 11002.9,
+   "words": [
+    {
+     "text": "agents",
+     "from": 10924.3,
+     "to": 10933.3
+    },
+    {
+     "text": "as",
+     "from": 10933.3,
+     "to": 10941.7
+    },
+    {
+     "text": "well",
+     "from": 10941.7,
+     "to": 10947.1
+    },
+    {
+     "text": "as",
+     "from": 10947.1,
+     "to": 10954.9
+    },
+    {
+     "text": "the",
+     "from": 10954.9,
+     "to": 10960.9
+    },
+    {
+     "text": "operator,",
+     "from": 10960.9,
+     "to": 10975.9
+    },
+    {
+     "text": "which",
+     "from": 10975.9,
+     "to": 10987.3
+    },
+    {
+     "text": "is",
+     "from": 10987.3,
+     "to": 10992.7
+    },
+    {
+     "text": "by",
+     "from": 10992.7,
+     "to": 10997.5
+    },
+    {
+     "text": "me.",
+     "from": 10997.5,
+     "to": 11002.9
+    }
+   ]
+  },
+  {
+   "from": 11015.8,
+   "to": 11050.6,
+   "words": [
+    {
+     "text": "So",
+     "from": 11015.8,
+     "to": 11022.4
+    },
+    {
+     "text": "you",
+     "from": 11022.4,
+     "to": 11024.2
+    },
+    {
+     "text": "can",
+     "from": 11024.2,
+     "to": 11027.8
+    },
+    {
+     "text": "see",
+     "from": 11027.8,
+     "to": 11032.0
+    },
+    {
+     "text": "what",
+     "from": 11032.0,
+     "to": 11038.0
+    },
+    {
+     "text": "I",
+     "from": 11038.0,
+     "to": 11042.8
+    },
+    {
+     "text": "did",
+     "from": 11042.8,
+     "to": 11050.6
+    }
+   ]
+  },
+  {
+   "from": 11050.6,
+   "to": 11096.8,
+   "words": [
+    {
+     "text": "and",
+     "from": 11050.6,
+     "to": 11068.6
+    },
+    {
+     "text": "what",
+     "from": 11068.6,
+     "to": 11075.8
+    },
+    {
+     "text": "the",
+     "from": 11075.8,
+     "to": 11080.0
+    },
+    {
+     "text": "agents",
+     "from": 11080.0,
+     "to": 11086.6
+    },
+    {
+     "text": "did.",
+     "from": 11086.6,
+     "to": 11096.8
+    }
+   ]
+  },
+  {
+   "from": 11105.0,
+   "to": 11152.4,
+   "words": [
+    {
+     "text": "So",
+     "from": 11105.0,
+     "to": 11108.0
+    },
+    {
+     "text": "this",
+     "from": 11108.0,
+     "to": 11114.0
+    },
+    {
+     "text": "is",
+     "from": 11114.0,
+     "to": 11118.8
+    },
+    {
+     "text": "to",
+     "from": 11118.8,
+     "to": 11123.6
+    },
+    {
+     "text": "ensure",
+     "from": 11123.6,
+     "to": 11130.2
+    },
+    {
+     "text": "that",
+     "from": 11130.2,
+     "to": 11136.8
+    },
+    {
+     "text": "every",
+     "from": 11136.8,
+     "to": 11143.4
+    },
+    {
+     "text": "single",
+     "from": 11143.4,
+     "to": 11152.4
+    }
+   ]
+  },
+  {
+   "from": 11152.4,
+   "to": 11208.8,
+   "words": [
+    {
+     "text": "action",
+     "from": 11152.4,
+     "to": 11163.2
+    },
+    {
+     "text": "is",
+     "from": 11163.2,
+     "to": 11173.4
+    },
+    {
+     "text": "being",
+     "from": 11173.4,
+     "to": 11181.2
+    },
+    {
+     "text": "logged",
+     "from": 11181.2,
+     "to": 11190.8
+    },
+    {
+     "text": "and",
+     "from": 11190.8,
+     "to": 11199.2
+    },
+    {
+     "text": "audited.",
+     "from": 11199.2,
+     "to": 11208.8
+    }
+   ]
+  },
+  {
+   "from": 11219.9,
+   "to": 11260.1,
+   "words": [
+    {
+     "text": "And",
+     "from": 11219.9,
+     "to": 11232.5
+    },
+    {
+     "text": "with",
+     "from": 11232.5,
+     "to": 11236.7
+    },
+    {
+     "text": "that,",
+     "from": 11236.7,
+     "to": 11243.3
+    },
+    {
+     "text": "we'd",
+     "from": 11245.7,
+     "to": 11247.5
+    },
+    {
+     "text": "like",
+     "from": 11247.5,
+     "to": 11250.5
+    },
+    {
+     "text": "to",
+     "from": 11250.5,
+     "to": 11254.7
+    },
+    {
+     "text": "end",
+     "from": 11254.7,
+     "to": 11260.1
+    }
+   ]
+  },
+  {
+   "from": 11260.1,
+   "to": 11314.1,
+   "words": [
+    {
+     "text": "off",
+     "from": 11260.1,
+     "to": 11265.5
+    },
+    {
+     "text": "our",
+     "from": 11265.5,
+     "to": 11270.3
+    },
+    {
+     "text": "presentation",
+     "from": 11270.3,
+     "to": 11291.3
+    },
+    {
+     "text": "on",
+     "from": 11291.3,
+     "to": 11307.5
+    },
+    {
+     "text": "MOSAIC.",
+     "from": 11307.5,
+     "to": 11314.1
+    }
+   ]
+  },
+  {
+   "from": 11350.1,
+   "to": 11419.1,
+   "words": [
+    {
+     "text": "And",
+     "from": 11350.1,
+     "to": 11359.7
+    },
+    {
+     "text": "we",
+     "from": 11359.7,
+     "to": 11373.5
+    },
+    {
+     "text": "hope",
+     "from": 11373.5,
+     "to": 11378.3
+    },
+    {
+     "text": "that",
+     "from": 11378.3,
+     "to": 11387.3
+    },
+    {
+     "text": "you",
+     "from": 11387.3,
+     "to": 11395.1
+    },
+    {
+     "text": "enjoy",
+     "from": 11395.1,
+     "to": 11403.5
+    },
+    {
+     "text": "the",
+     "from": 11403.5,
+     "to": 11407.7
+    },
+    {
+     "text": "walkthrough",
+     "from": 11407.7,
+     "to": 11419.1
+    }
+   ]
+  },
+  {
+   "from": 11421.5,
+   "to": 11477.9,
+   "words": [
+    {
+     "text": "and",
+     "from": 11421.5,
+     "to": 11439.5
+    },
+    {
+     "text": "thank",
+     "from": 11439.5,
+     "to": 11446.7
+    },
+    {
+     "text": "you",
+     "from": 11446.7,
+     "to": 11450.3
+    },
+    {
+     "text": "so",
+     "from": 11450.3,
+     "to": 11453.9
+    },
+    {
+     "text": "much",
+     "from": 11453.9,
+     "to": 11461.7
+    },
+    {
+     "text": "for",
+     "from": 11461.7,
+     "to": 11470.1
+    },
+    {
+     "text": "your",
+     "from": 11470.1,
+     "to": 11473.7
+    },
+    {
+     "text": "time.",
+     "from": 11473.7,
+     "to": 11477.9
+    }
+   ]
+  }
+ ]
+}
